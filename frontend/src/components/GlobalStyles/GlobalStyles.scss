@@ -1,15 +1,80 @@
 @import 'normalize.css';
 
+@font-face {
+    font-family: 'SVN Gotham Regular';
+    src: url('@/assets/fonts/SVN-Gotham\ Regular.otf');
+}
+
+@font-face {
+    font-family: 'SVN Gotham Bold';
+    src: url('@/assets/fonts/SVN-Gotham\ Bold.ttf');
+}
+
+@font-face {
+    font-family: 'SVN Gotham Book';
+    src: url('@/assets/fonts/SVN-Gotham\ Book.otf');
+}
+
+@font-face {
+    font-family: 'SVN Gotham Book Italic';
+    src: url('@/assets/fonts/SVN-Gotham\ Book\ Italic.otf');
+}
+
+@font-face {
+    font-family: 'SVN Gotham Black';
+    src: url('@/assets/fonts/SVN-Gotham\ Black.otf');
+}
+
+@font-face {
+    font-family: 'SVN Gotham Thin';
+    src: url('@/assets/fonts/SVN-Gotham\ Thin.otf');
+}
+
+@font-face {
+    font-family: 'SVN Gotham Light';
+    src: url('@/assets/fonts/SVN-Gotham\ Light.ttf');
+}
+
+@font-face {
+    font-family: 'Fira Sans Regular';
+    src: url('@/assets/fonts/FiraSans-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Fira Sans Bold';
+    src: url('@/assets/fonts/FiraSans-Bold.ttf');
+}
+
+:root {
+    --color-black: #343439;
+    --sub-orange: #ff7600;
+    --sub-blue: #1e69a2;
+    --main-white: #ffffff;
+    --main-mint-1: #04c4d9;
+    --main-mint-2: #ebf9fb;
+    --main-black: #1f1f26;
+    --SVN-Gotham-83: 83px 'SVN Gotham Regular';
+    --Fira-Sans-24: 24px 'Fira Sans Regular';
+    --Fira-Sans-35: 35px 'Fira Sans Regular';
+    --Fira-Sans-54: 54px 'Fira Sans Bold';
+    --Fira-Sans-65: 65px 'Fira Sans Bold';
+    --Noto-Sans-30: 30px 'Noto Sans';
+}
+
 html {
     font-size: 62.5%;
 }
 
 body {
     font-size: 1.6rem;
+    font-family: 'SVN Gotham Regular';
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
