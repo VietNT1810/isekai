@@ -8,7 +8,7 @@ function ShopLayout({ children, banner }) {
             <div className="banner">
                 <img src={banner} alt="Error image" />
             </div>
-            <div class="container">
+            <div className="container">
                 <FilterSidebar />
                 <div className="content">
                     {children}

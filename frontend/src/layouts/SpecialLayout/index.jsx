@@ -7,7 +7,7 @@ function SpecialLayout({ children }) {
         <>
             <Header />
             <div className="banner">
-                <img src={banner} alt="Error image" />
+                <img src="" alt="Error image" />
             </div>
             <div className="content">{children}</div>
         </>
