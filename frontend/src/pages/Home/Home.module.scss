@@ -2,6 +2,7 @@
     width: 100%;
     margin: 0 auto;
     margin-top: var(--header-height);
+    background-color: var(--main-mint-2);
 }
 
 .banner {
@@ -14,27 +15,46 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.inner {
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: var(--main-mint-2);
-    .welcome {
-        font-size: 60px;
-        // font-family: 'SVN Gotham Light';
-        img {
-            margin-left: 20px;
+    .inner {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: var(--main-mint-2);
+        .welcome {
+            font-size: 60px;
+            // font-family: 'SVN Gotham Light';
+            img {
+                margin-left: 20px;
+            }
+        }
+        .description {
+            width: 80%;
+            margin-top: 80px;
+            margin-bottom: 120px;
+            text-align: center;
+            font-size: 2rem;
         }
     }
-    .description {
-        width: 80%;
-        margin-top: 80px;
-        margin-bottom: 120px;
-        text-align: center;
+}
+
+.block {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--primary);
+    .title {
         font-size: 2rem;
     }
+    .description {
+    }
+    .tabs {
+        width: 100%;
+    }
+}
+
+.product {
 }
