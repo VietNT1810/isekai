@@ -46,11 +46,12 @@
 }
 
 :root {
+    //color
     --color-black: #343439;
     --sub-orange: #ff7600;
     --sub-blue: #1e69a2;
     --main-white: #ffffff;
-    --main-mint-1: #04c4d9;
+    --primary: #04c4d9;
     --main-mint-2: #ebf9fb;
     --main-black: #1f1f26;
     --SVN-Gotham-83: 83px 'SVN Gotham Regular';
@@ -59,6 +60,9 @@
     --Fira-Sans-54: 54px 'Fira Sans Bold';
     --Fira-Sans-65: 65px 'Fira Sans Bold';
     --Noto-Sans-30: 30px 'Noto Sans';
+
+    //header
+    --header-height: 80px;
 }
 
 html {
@@ -77,4 +81,9 @@ body {
     padding: 0;
     box-sizing: border-box;
     
+}
+
+a {
+    color: var(--main-black);
+    text-decoration: none;
 }
