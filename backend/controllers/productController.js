@@ -23,29 +23,33 @@ const getSingleProduct = async (req, res) => {
 //create new product
 const createProduct = async (req, res) => {
   const {
+    productImage,
     name,
     fabric,
     size,
     description,
     detail,
     rating,
-    oldPrice,
-    currentPrice,
+    price,
+    discount,
     quantity,
+    productType,
   } = req.body;
 
   //add doc to db
   try {
     const product = await Product.create({
+      productImage,
       name,
       fabric,
       size,
       description,
       detail,
       rating,
-      oldPrice,
-      currentPrice,
+      price,
+      discount,
       quantity,
+      productType,
     });
 
     res.status(200).json(product);
