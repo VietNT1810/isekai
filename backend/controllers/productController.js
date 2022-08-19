@@ -1,9 +1,15 @@
 const Product = require("../models/productModel");
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 //get all product
 const getProducts = async (req, res) => {
-  const products = await Product.find({});
+  const { productType, limit } = req.query;
+  const page = req.query.page - 1;
+  const filter = {};
+  productType ? (filter.productType = productType) : false;
+  const products = await Product.find(filter)
+    .limit(limit)
+    .skip(page * limit);
   res.status(200).json(products);
 };
 
@@ -11,11 +17,11 @@ const getProducts = async (req, res) => {
 const getSingleProduct = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({error: "No such product here!"})
+    return res.status(404).json({ error: "No such product here!" });
   }
   const product = await Product.findById(id);
   if (!product) {
-    return res.status(404).json({error: "No such product here!"})
+    return res.status(404).json({ error: "No such product here!" });
   }
   res.status(200).json(product);
 };
@@ -62,28 +68,37 @@ const createProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({error: "No such product here!"})
+    return res.status(404).json({ error: "No such product here!" });
   }
-  const product = await Product.findOneAndDelete({_id: id});
+  const product = await Product.findOneAndDelete({ _id: id });
   if (!product) {
-    return res.status(404).json({message: "No such product here!"})
+    return res.status(404).json({ message: "No such product here!" });
   }
-  res.status(200).json({message: "Delete product successful"});
+  res.status(200).json({ message: "Delete product successful" });
 };
 
 //update a product
 const updateProduct = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({error: "No such product here!"})
+    return res.status(404).json({ error: "No such product here!" });
   }
-  const product = await Product.findOneAndUpdate({_id: id}, {
-    ...req.body
-  });
+  const product = await Product.findOneAndUpdate(
+    { _id: id },
+    {
+      ...req.body,
+    }
+  );
   if (!product) {
-    return res.status(404).json({message: "No such product here!"})
+    return res.status(404).json({ message: "No such product here!" });
   }
-  res.status(200).json({message: "Update product successful"});
+  res.status(200).json({ message: "Update product successful" });
 };
 
-module.exports = { createProduct, getProducts, getSingleProduct, deleteProduct, updateProduct };
+module.exports = {
+  createProduct,
+  getProducts,
+  getSingleProduct,
+  deleteProduct,
+  updateProduct,
+};

@@ -4,13 +4,16 @@ const {
   getProducts,
   getSingleProduct,
   deleteProduct,
-  updateProduct
+  updateProduct,
 } = require("../controllers/productController");
 
 const router = express.Router();
 
 //GET all products
 router.get("/", getProducts);
+
+//GET all products by type
+// router.get("/search", getTypeProduct);
 
 //GET a single product
 router.get("/detail/:id", getSingleProduct);
