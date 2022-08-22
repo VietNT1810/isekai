@@ -3,14 +3,39 @@ const mongoose = require("mongoose");
 
 //get all product
 const getProducts = async (req, res) => {
-  const { productType, limit } = req.query;
-  const page = req.query.page - 1;
+  const { productType } = req.query;
+  let limit = Math.abs(req.query.limit) || 10;
+  let page = (Math.abs(req.query.page) || 1) - 1;
   const filter = {};
   productType ? (filter.productType = productType) : false;
+
+  //get database data
   const products = await Product.find(filter)
     .limit(limit)
     .skip(page * limit);
-  res.status(200).json(products);
+  const totalElement = await Product.find(filter).count();
+  const numberOfElements = await Product.find(filter).limit(limit).count();
+
+  //check total page 
+  let totalPage = Math.ceil(totalElement / limit);
+
+  //response
+  if (!products) {
+    return res.status(404).json({ error: "No such product here!" });
+  }
+  res.status(200).json({
+    status: "SUCCESS",
+    statusCode: 200,
+    message: "Get products success",
+    data: {
+      content: products,
+      pagination: {
+        totalElement,
+        totalPage,
+        numberOfElements,
+      },
+    },
+  });
 };
 
 //get a single product
