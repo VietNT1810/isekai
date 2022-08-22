@@ -20,7 +20,13 @@ function TabsProduct({ clothes, outfit, wig }) {
 
     return (
         <>
-            <Tabs value={index} onChange={handleChange} className={cx('tabs')} textColor="inherit">
+            <Tabs
+                value={index}
+                onChange={handleChange}
+                className={cx('tabs')}
+                textColor="inherit"
+                TabIndicatorProps={{ style: { background: '#04C4D9' } }}
+            >
                 <Tab className={cx('title')} label="Quần áo" />
                 <Tab className={cx('title')} label="Trang phục" />
                 <Tab className={cx('title')} label="Wig" />

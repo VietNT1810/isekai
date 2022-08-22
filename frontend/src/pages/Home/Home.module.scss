@@ -5,6 +5,11 @@
     background-color: var(--main-mint-2);
 }
 
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
 .banner {
     width: 100%;
     height: calc(100vh - 80px);
@@ -51,11 +56,48 @@
         font-size: 2rem;
     }
     .description {
+        text-align: center;
     }
     .tabs {
         width: 100%;
     }
 }
 
-.product {
+.site-info {
+    background-color: var(--primary);
+    padding: 50px 0;
+    .inner {
+        display: flex;
+        justify-content: center;
+        .info {
+            flex: 1;
+            text-align: center;
+            .number {
+                font-size: 4rem;
+            }
+            .title {
+                font-size: 2rem;
+            }
+        }
+    }
+}
+
+.info-image {
+    width: 100%;
+    img {
+        width: 100%;
+    }
+}
+
+.idea-poster {
+    display: flex;
+    .poster {
+        flex: 1;
+        img {
+            display: block;
+            width: 100%;
+            object-fit: cover;
+            aspect-ratio: 1 / 1;
+        }
+    }
 }
