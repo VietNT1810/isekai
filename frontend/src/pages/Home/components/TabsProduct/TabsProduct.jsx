@@ -7,7 +7,7 @@ import styles from './TabsProduct.module.scss';
 
 const cx = classNames.bind(styles);
 
-function TabsProduct(props) {
+function TabsProduct({ clothes, outfit, wig }) {
     const [index, setIndex] = useState(0);
 
     const handleChange = (event, value) => {
@@ -26,9 +26,27 @@ function TabsProduct(props) {
                 <Tab className={cx('title')} label="Wig" />
             </Tabs>
             <SwipeableViews index={index} onChangeIndex={handleChangeIndex}>
-                <div className={cx('tab-content')}>slide n°1</div>
-                <div className={cx('tab-content')}>slide n°2</div>
-                <div className={cx('tab-content')}>slide n°3</div>
+                <div className={cx('tab-content')}>
+                    {clothes.map((item) => (
+                        <div className={cx('tab-image')}>
+                            <img src={item.productImage} alt="Error image :(" key={item._id} />
+                        </div>
+                    ))}
+                </div>
+                <div className={cx('tab-content')}>
+                    {outfit.map((item) => (
+                        <div className={cx('tab-image')}>
+                            <img src={item.productImage} alt="Error image :(" key={item._id} />
+                        </div>
+                    ))}
+                </div>
+                <div className={cx('tab-content')}>
+                    {wig.map((item) => (
+                        <div className={cx('tab-image')}>
+                            <img src={item.productImage} alt="Error image :(" key={item._id} />
+                        </div>
+                    ))}
+                </div>
             </SwipeableViews>
         </>
     );
