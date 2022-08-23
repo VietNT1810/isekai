@@ -139,26 +139,59 @@ function Home(props) {
                         và thế giới.
                     </p>
                 </div>
-                <div className="container">
-                    <div className="news-box">
-                        <div className="inner">
-                            <div className="caption">
-                                Một loạt lễ hội văn hóa nhật bản được sắp được tổ chức hàng loạt sau khi hết cách ly
-                                COVID-19 được rất nhiều các cosplayer mong chờ
+                <div className={cx('news-box')}>
+                    <div className={cx('inner')}>
+                        <div className={cx('caption')}>
+                            Một loạt lễ hội văn hóa nhật bản được sắp được tổ chức hàng loạt sau khi hết cách ly
+                            COVID-19 được rất nhiều các cosplayer mong chờ
+                        </div>
+                        <Divider />
+                        <div className={cx('user')}>
+                            <div className={cx('avatar')}>
+                                <img src={images.homeAvatar01} alt="No image here :(" />
                             </div>
-                            <Divider />
-                            <div className="user">
-                                <div className="avatar">
-                                    <img src={images.homeAvatar01} alt="No image here :(" />
-                                </div>
-                                <div className="info">
-                                    <p className="username">Someone</p>
-                                    <span className="time">5 hour ago</span>
-                                </div>
+                            <div className={cx('info')}>
+                                <p className={cx('username')}>Someone</p>
+                                <span className={cx('time')}>5 hour ago</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={cx('inner')}>
+                        <div className={cx('caption')}>
+                            Một thanh niên người Trung Quốc sinh sống ở Vũ Hán đã đăng lên mạng một đoạn phim chứng minh
+                            mình có thể thi triển hơi thở của nước (Kimetsu no Yaiba) bằng cách lắp vòi nước vào thanh
+                            kiếm katana tự chế của mình.
+                        </div>
+                        <Divider />
+                        <div className={cx('user')}>
+                            <div className={cx('avatar')}>
+                                <img src={images.homeAvatar02} alt="No image here :(" />
+                            </div>
+                            <div className={cx('info')}>
+                                <p className={cx('username')}>Someone</p>
+                                <span className={cx('time')}>5 hour ago</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={cx('inner')}>
+                        <div className={cx('caption')}>
+                            Cuộc thi Nhật phục 2021: Mahou no Kontesuto là cuộc thi giải trí do FJC - CLB tiếng Nhật
+                            trường Đại học Ngoại thương cơ sở II tổ chức với hình thức low - cost cosplay sẽ chính thức
+                            khai mạc vào ngày 12/9/2021 với thể thức 2 vòng thi.
+                        </div>
+                        <Divider />
+                        <div className={cx('user')}>
+                            <div className={cx('avatar')}>
+                                <img src={images.homeAvatar03} alt="No image here :(" />
+                            </div>
+                            <div className={cx('info')}>
+                                <p className={cx('username')}>Someone</p>
+                                <span className={cx('time')}>5 hour ago</span>
                             </div>
                         </div>
                     </div>
                 </div>
+                <Button primary>Xem thêm</Button>
             </section>
         </main>
     );
