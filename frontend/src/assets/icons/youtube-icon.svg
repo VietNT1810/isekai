@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32">
+  <g id="Icon_" data-name="Icon " transform="translate(-0.001)">
+    <g id="Area_ICON:feather_youtube_SIZE:MEDIUM_STATE:DEFAULT_STYLE:STYLE3_" data-name="Area [ICON:feather/youtube][SIZE:MEDIUM][STATE:DEFAULT][STYLE:STYLE3]" transform="translate(0.001)" fill="rgba(253,73,198,0.35)" stroke="#fd49c6" stroke-width="1" opacity="0">
+      <rect width="33" height="32" stroke="none"/>
+      <rect x="0.5" y="0.5" width="32" height="31" fill="none"/>
+    </g>
+    <g id="Icon" transform="translate(2.06 3.869)">
+      <path id="Path" d="M29.663,6.573a3.72,3.72,0,0,0-2.6-2.677c-2.3-.562-11.511-.562-11.511-.562s-9.208,0-11.511.617a3.718,3.718,0,0,0-2.6,2.676,38.779,38.779,0,0,0-.617,7.081A38.759,38.759,0,0,0,1.45,20.84a3.72,3.72,0,0,0,2.6,2.57c2.3.617,11.511.617,11.511.617s9.208,0,11.511-.617a3.718,3.718,0,0,0,2.6-2.676,38.756,38.756,0,0,0,.617-7.027A38.776,38.776,0,0,0,29.663,6.573Z" transform="translate(-0.833 -3.333)" fill="#1f1f26"/>
+      <path id="Path-2" data-name="Path" d="M8.125,15.82l7.7-4.377-7.7-4.377Z" transform="translate(3.587 -1.07)" fill="#ffffff"/>
+    </g>
+  </g>
+</svg>
