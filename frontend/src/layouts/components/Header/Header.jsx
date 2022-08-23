@@ -2,18 +2,18 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
-import images from '@/assets/images';
+import assets from '@/assets';
 import styles from './Header.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Header(props) {
+function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('container')}>
                 <div className={cx('brand')}>
                     <NavLink to="/">
-                        <img src={images.logoWhite} alt="Error image" />
+                        <img src={assets.images.logoWhite} alt="Error image" />
                     </NavLink>
                 </div>
                 <div className={cx('nav')}>
