@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 
-import images from '@/assets/images';
+import assets from '@/assets';
 import Button from '@/components/Button';
 import styles from './Home.module.scss';
 import TabsProduct from './components/TabsProduct';
@@ -43,7 +43,7 @@ function Home(props) {
                     <div className={cx('welcome')}>
                         <span>
                             Welcome to
-                            <img src={images.logoWhite} alt="" />
+                            <img src={assets.images.logoWhite} alt="" />
                         </span>
                     </div>
                     <div className={cx('description')}>
@@ -59,7 +59,7 @@ function Home(props) {
             </section>
 
             <section>
-                <div className={cx('product', { block: 'block' })}>
+                <div className={cx('product', 'block')}>
                     <div className={cx('title')}>
                         <h1>Sản phẩm</h1>
                     </div>
@@ -99,10 +99,10 @@ function Home(props) {
             </section>
 
             <section className={cx('info-image')}>
-                <img src={images.homeImage} alt="" />
+                <img src={assets.images.homeImage} alt="" />
             </section>
 
-            <section className={cx('idea', { block: 'block' })}>
+            <section className={cx('idea', 'block')}>
                 <div className={cx('title')}>
                     <h1>Ý tưởng</h1>
                 </div>
@@ -116,20 +116,20 @@ function Home(props) {
 
             <section className={cx('idea-poster')}>
                 <div className={cx('poster')}>
-                    <img src={images.homePoster01} alt="Error image :(" />
+                    <img src={assets.images.homePoster01} alt="Error image :(" />
                 </div>
                 <div className={cx('poster')}>
-                    <img src={images.homePoster02} alt="Error image :(" />
+                    <img src={assets.images.homePoster02} alt="Error image :(" />
                 </div>
                 <div className={cx('poster')}>
-                    <img src={images.homePoster03} alt="Error image :(" />
+                    <img src={assets.images.homePoster03} alt="Error image :(" />
                 </div>
                 <div className={cx('poster')}>
-                    <img src={images.homePoster04} alt="Error image :(" />
+                    <img src={assets.images.homePoster04} alt="Error image :(" />
                 </div>
             </section>
 
-            <section className={cx('news', { block: 'block' })}>
+            <section className={cx('news', 'block')}>
                 <div className={cx('title')}>
                     <h1>Bản tin Wibu</h1>
                 </div>
@@ -148,7 +148,7 @@ function Home(props) {
                         <Divider />
                         <div className={cx('user')}>
                             <div className={cx('avatar')}>
-                                <img src={images.homeAvatar01} alt="No image here :(" />
+                                <img src={assets.images.homeAvatar01} alt="No image here :(" />
                             </div>
                             <div className={cx('info')}>
                                 <p className={cx('username')}>Someone</p>
@@ -165,7 +165,7 @@ function Home(props) {
                         <Divider />
                         <div className={cx('user')}>
                             <div className={cx('avatar')}>
-                                <img src={images.homeAvatar02} alt="No image here :(" />
+                                <img src={assets.images.homeAvatar02} alt="No image here :(" />
                             </div>
                             <div className={cx('info')}>
                                 <p className={cx('username')}>Someone</p>
@@ -182,7 +182,7 @@ function Home(props) {
                         <Divider />
                         <div className={cx('user')}>
                             <div className={cx('avatar')}>
-                                <img src={images.homeAvatar03} alt="No image here :(" />
+                                <img src={assets.images.homeAvatar03} alt="No image here :(" />
                             </div>
                             <div className={cx('info')}>
                                 <p className={cx('username')}>Someone</p>
