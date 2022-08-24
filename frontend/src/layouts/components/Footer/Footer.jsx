@@ -6,12 +6,12 @@ import styles from './Footer.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Footer({ contact, primary }) {
+function Footer({ contact }) {
     return (
         <footer>
             {contact && (
                 <div className={cx('wrapper')}>
-                    <div className={cx('contact', 'block')}>
+                    <div className={cx('contact-info', 'block')}>
                         <h2>Contact Us</h2>
                         <small>Hỗ trợ khách hàng</small>
                         <div className={cx('social')}>
@@ -35,7 +35,12 @@ function Footer({ contact, primary }) {
                     </div>
                 </div>
             )}
-            <div className={cx('')}></div>
+            <div className={cx('sub-footer', { contact })}>
+                <div className={cx('container')}>
+                    <span className={cx('copyright')}>© 2022 Isekai. All Rights Reserved.</span>
+                    <div className={cx('tos')}>Terms of Service</div>
+                </div>
+            </div>
         </footer>
     );
 }
