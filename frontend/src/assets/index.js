@@ -10,6 +10,7 @@ import homeAvatar03 from '@/assets/images/ava/003.png';
 import iconFacebook from '@/assets/icons/facebook-icon.svg';
 import iconTwitter from '@/assets/icons/twitter-icon.svg';
 import iconYoutube from '@/assets/icons/youtube-icon.svg';
+import loginImage from '@/assets/images/bg-login.png'
 
 const images = {
     logoWhite,
@@ -21,6 +22,7 @@ const images = {
     homeAvatar01,
     homeAvatar02,
     homeAvatar03,
+    loginImage,
 };
 
 const icons = {
