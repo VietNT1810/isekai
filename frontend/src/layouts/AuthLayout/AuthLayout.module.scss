@@ -1,0 +1,20 @@
+.wrapper {
+    width: 100%;
+}
+
+.close {
+    position: absolute !important;
+    top: 5%;
+    right: 5%;
+    background-color: var(--primary) !important;
+    &-icon {
+        color: var(--main-mint-2);
+    }
+}
+
+.login {
+    background-color: var(--main-mint-2) !important;
+    .close-icon {
+        color: var(--primary);
+    }
+}
