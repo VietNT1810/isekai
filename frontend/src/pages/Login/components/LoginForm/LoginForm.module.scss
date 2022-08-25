@@ -1,3 +1,13 @@
 .login-form {
     flex: 1;
+    h1 {
+        text-align: center;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        small {
+            align-self: flex-end;
+        }
+    }
 }
