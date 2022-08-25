@@ -6,28 +6,40 @@ import { FilledInput, FormControl, FormHelperText, InputLabel } from '@mui/mater
 
 const cx = classNames.bind(styles);
 
-function InputField({ variant, label, helperText, fullWidth, error, name }) {
+function InputField({
+    variant,
+    label,
+    helperText,
+    fullWidth,
+    error,
+    name,
+    type,
+    register,
+    required,
+    id,
+    ...passProps
+}) {
     return (
-        // <TextField
-        //     variant="filled"
-        //     fullWidth
-        //     label={label}
-        //     margin="dense"
-        //     InputProps={{ style: { fontSize: 16 } }}
-        //     InputLabelProps={{ style: { fontSize: 16 } }}
-        // />
         <FormControl
             fullWidth={fullWidth}
             variant={variant}
             error={error}
+            margin="dense"
             sx={{
-                backgroundColor: '#ebf9fb'
+                backgroundColor: '#ebf9fb',
             }}
         >
-            <InputLabel htmlFor="component-filled" sx={{ fontSize: 16 }}>
+            <InputLabel htmlFor={id} sx={{ fontSize: 16 }}>
                 {label}
             </InputLabel>
-            <FilledInput id="component-filled" name={name} sx={{ fontSize: 16 }} />
+            <FilledInput
+                id={id}
+                name={name}
+                type={type || 'text'}
+                sx={{ fontSize: 16 }}
+                {...register(name, { required })}
+                {...passProps}
+            />
             {helperText && <FormHelperText id="component-error-text">{helperText}</FormHelperText>}
         </FormControl>
     );
