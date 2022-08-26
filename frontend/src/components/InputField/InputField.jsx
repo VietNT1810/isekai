@@ -37,7 +37,7 @@ function InputField({
                 name={name}
                 type={type || 'text'}
                 sx={{ fontSize: 16 }}
-                {...register(name, { required })}
+                {...register(name, { required: required })}
                 {...passProps}
             />
             {helperText && <FormHelperText id="component-error-text">{helperText}</FormHelperText>}
