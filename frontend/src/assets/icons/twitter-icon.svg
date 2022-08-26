@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32">
-  <g id="Icon_" data-name="Icon " transform="translate(-0.001)">
-    <rect id="Area_ICON:feather_twitter_SIZE:MEDIUM_STATE:DEFAULT_STYLE:STYLE3_" data-name="Area [ICON:feather/twitter][SIZE:MEDIUM][STATE:DEFAULT][STYLE:STYLE3]" width="33" height="32" transform="translate(0.001)" fill="#1f1f26" opacity="0"/>
-    <g id="Icon" transform="translate(1.479 2.517)">
-      <path id="Path" d="M30.279,2.505a14.607,14.607,0,0,1-4.2,2.048,6,6,0,0,0-10.52,4.015V9.906A14.269,14.269,0,0,1,3.51,3.843s-5.353,12.046,6.693,17.4A15.576,15.576,0,0,1,.833,23.92C12.879,30.612,27.6,23.92,27.6,8.528a6.006,6.006,0,0,0-.108-1.111A10.322,10.322,0,0,0,30.279,2.505Z" transform="translate(-0.833 -2.491)" fill="#1f1f26"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="28.037" height="28" viewBox="0 0 28.037 28">
+  <g id="Icon_" data-name="Icon " transform="translate(-0.338 -0.5)">
+    <rect id="Area_ICON:feather_twitter_SIZE:MEDIUM_STATE:DEFAULT_STYLE:STYLE2_" data-name="Area [ICON:feather/twitter][SIZE:MEDIUM][STATE:DEFAULT][STYLE:STYLE2]" width="28" height="28" transform="translate(0.375 0.5)" fill="rgba(253,73,198,0.35)" opacity="0"/>
+    <g id="Icon" transform="translate(1.171 3.503)">
+      <path id="Path" d="M26.615,2.5A12.789,12.789,0,0,1,22.935,4.3a5.25,5.25,0,0,0-9.211,3.516V8.984A12.493,12.493,0,0,1,3.177,3.675S-1.51,14.222,9.037,18.91a13.638,13.638,0,0,1-8.2,2.343c10.547,5.86,23.438,0,23.438-13.476a5.258,5.258,0,0,0-.094-.973A9.038,9.038,0,0,0,26.615,2.5Z" transform="translate(-0.833 -2.491)" fill="none" stroke="#04c4d9" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667"/>
     </g>
   </g>
 </svg>

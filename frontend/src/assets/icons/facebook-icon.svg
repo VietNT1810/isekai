@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-  <g id="Icon_" data-name="Icon " transform="translate(0)">
-    <rect id="Area_ICON:feather_facebook_SIZE:MEDIUM_STATE:DEFAULT_STYLE:STYLE3_" data-name="Area [ICON:feather/facebook][SIZE:MEDIUM][STATE:DEFAULT][STYLE:STYLE3]" width="32" height="32" transform="translate(0)" fill="#1f1f26" opacity="0"/>
-    <g id="Icon" transform="translate(9.718 1.193)">
-      <path id="Path" d="M20.556,1.667H16.541A6.692,6.692,0,0,0,9.848,8.358v4.015H5.833v5.355H9.848V28.434H15.2V17.728h4.015l1.338-5.355H15.2V8.358A1.338,1.338,0,0,1,16.541,7.02h4.015Z" transform="translate(-5.833 -1.667)" fill="#1f1f26"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+  <g id="Icon_" data-name="Icon " transform="translate(-0.375 -0.5)">
+    <rect id="Area_ICON:feather_facebook_SIZE:MEDIUM_STATE:DEFAULT_STYLE:STYLE2_" data-name="Area [ICON:feather/facebook][SIZE:MEDIUM][STATE:DEFAULT][STYLE:STYLE2]" width="28" height="28" transform="translate(0.375 0.5)" fill="rgba(253,73,198,0.35)" opacity="0"/>
+    <g id="Icon" transform="translate(8.203 2.344)">
+      <path id="Path" d="M18.724,1.667H15.208a5.859,5.859,0,0,0-5.86,5.858v3.516H5.833V15.73H9.349V25.1h4.688V15.73h3.516l1.171-4.688H14.037V7.525a1.172,1.172,0,0,1,1.171-1.171h3.516Z" transform="translate(-5.833 -1.667)" fill="none" stroke="#04c4d9" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667"/>
     </g>
   </g>
 </svg>
