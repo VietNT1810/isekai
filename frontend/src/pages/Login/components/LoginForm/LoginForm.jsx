@@ -1,16 +1,32 @@
-import React from 'react';
 import classNames from 'classnames/bind';
-
-import styles from './LoginForm.module.scss';
-import InputField from '@/components/InputField';
+import { Controller, useForm } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
-import { useForm, Controller } from 'react-hook-form';
-import { Checkbox, FormControlLabel, Typography } from '@mui/material';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+import CheckboxField from '@/components/CheckboxField';
+import InputField from '@/components/InputField';
+import styles from './LoginForm.module.scss';
+import Button from '@/components/Button';
+import assets from '@/assets';
 
 const cx = classNames.bind(styles);
+const schema = yup
+    .object({
+        email: yup.string().email('Invalid email address').required('Email is required'),
+        password: yup.string().required('Password is required'),
+    })
+    .required();
 
 function LoginForm(props) {
-    const { register, control, handleSubmit } = useForm();
+    const {
+        register,
+        control,
+        formState: { errors },
+        handleSubmit,
+    } = useForm({
+        resolver: yupResolver(schema),
+    });
 
     const onSubmit = (data) => {
         console.log(data);
@@ -18,13 +34,23 @@ function LoginForm(props) {
 
     return (
         <div className={cx('login-form')}>
-            <h1>Đăng nhập</h1>
-            <h4>
+            <h1 className={cx('title')}>Đăng nhập</h1>
+            <small>
                 Người mới?
                 <NavLink to="/register">Tạo tài khoản ở đây</NavLink>
-            </h4>
+            </small>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <InputField variant="filled" id="email" label="Email" name="email" fullWidth register={register} />
+                <InputField
+                    variant="filled"
+                    id="email"
+                    label="Email"
+                    name="email"
+                    fullWidth
+                    register={register}
+                    required
+                    error={Boolean(errors.email)}
+                    helperText={errors.email?.message}
+                />
                 <InputField
                     variant="filled"
                     id="password"
@@ -34,6 +60,8 @@ function LoginForm(props) {
                     fullWidth
                     register={register}
                     autoComplete="on"
+                    error={Boolean(errors.password)}
+                    helperText={errors.password?.message}
                 />
                 <small>
                     <NavLink to="/register">Quên mật khẩu ?</NavLink>
@@ -42,26 +70,31 @@ function LoginForm(props) {
                     name="remember"
                     control={control}
                     rules={{ required: false }}
-                    render={({ field }) => (
-                        <FormControlLabel
-                            label={<Typography sx={{ fontSize: 16, fontWeight: "bold" }}>Giữ tôi luôn đăng nhập</Typography>}
-                            control={
-                                <Checkbox
-                                    {...field}
-                                    sx={{
-                                        '& .MuiSvgIcon-root': { fontSize: 28 },
-                                        color: '#ebf9fb',
-                                        '&.Mui-checked': {
-                                            color: '#ebf9fb',
-                                        },
-                                    }}
-                                />
-                            }
-                        />
-                    )}
+                    render={({ field }) => <CheckboxField label="Giữ tôi luôn đăng nhập" field={field} />}
                 />
-                <button type="submit">Submit</button>
+                <Button action type="submit">
+                    Đăng nhập
+                </Button>
             </form>
+            <div className={cx('login-choice')}>
+                <span></span>
+                <p>Hoặc đăng nhập với</p>
+                <span></span>
+            </div>
+            <div className={cx('login-social')}>
+                <div className={cx('action-social')}>
+                    <img src={assets.icons.iconGoogle} alt="No image here" />
+                </div>
+                <div className={cx('action-social')}>
+                    <img src={assets.icons.iconFacebook} alt="No image here" />
+                </div>
+                <div className={cx('action-social')}>
+                    <img src={assets.icons.iconLinkedin} alt="No image here" />
+                </div>
+                <div className={cx('action-social')}>
+                    <img src={assets.icons.iconTwitter} alt="No image here" />
+                </div>
+            </div>
         </div>
     );
 }
