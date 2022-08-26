@@ -10,7 +10,9 @@ import homeAvatar03 from '@/assets/images/ava/003.png';
 import iconFacebook from '@/assets/icons/facebook-icon.svg';
 import iconTwitter from '@/assets/icons/twitter-icon.svg';
 import iconYoutube from '@/assets/icons/youtube-icon.svg';
-import loginImage from '@/assets/images/bg-login.png'
+import iconLinkedin from '@/assets/icons/linkedin-icon.svg';
+import iconGoogle from '@/assets/icons/google-icon.svg';
+import loginImage from '@/assets/images/bg-login.png';
 
 const images = {
     logoWhite,
@@ -29,6 +31,8 @@ const icons = {
     iconFacebook,
     iconTwitter,
     iconYoutube,
+    iconLinkedin,
+    iconGoogle,
 };
 
 export default { images, icons };
