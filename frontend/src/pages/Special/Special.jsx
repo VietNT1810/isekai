@@ -16,11 +16,11 @@ function Special() {
 
             <section className={cx('content')}>
                 <div className={cx('container')}>
-                    <div className={cx('block', 'left')}>
+                    <div className={cx('block')}>
                         <div className={cx('inner')}>
                             <div className={cx('image')}>
                                 <img src={assets.images.specialCard01} alt="" />
-                                <div className={cx('border')}>
+                                <div className={cx('image-border')}>
                                     <img src={assets.images.logoWhite} alt="" />
                                 </div>
                             </div>
@@ -31,13 +31,13 @@ function Special() {
                                 </p>
                             </div>
                         </div>
-                        <Button>Xem thêm</Button>
+                        <Button special>Xem thêm</Button>
                     </div>
-                    <div className={cx('block', 'left')}>
+                    <div className={cx('block')}>
                         <div className={cx('inner')}>
                             <div className={cx('image')}>
                                 <img src={assets.images.specialCard02} alt="" />
-                                <div className={cx('border')}>
+                                <div className={cx('image-border')}>
                                     <img src={assets.images.logoWhite} alt="" />
                                 </div>
                             </div>
@@ -48,13 +48,13 @@ function Special() {
                                 </p>
                             </div>
                         </div>
-                        <Button>Xem thêm</Button>
+                        <Button special>Xem thêm</Button>
                     </div>
-                    <div className={cx('block', 'left')}>
+                    <div className={cx('block')}>
                         <div className={cx('inner')}>
                             <div className={cx('image')}>
                                 <img src={assets.images.specialCard03} alt="" />
-                                <div className={cx('border')}>
+                                <div className={cx('image-border')}>
                                     <img src={assets.images.logoWhite} alt="" />
                                 </div>
                             </div>
@@ -65,13 +65,13 @@ function Special() {
                                 </p>
                             </div>
                         </div>
-                        <Button>Xem thêm</Button>
+                        <Button special>Xem thêm</Button>
                     </div>
-                    <div className={cx('block', 'left')}>
+                    <div className={cx('block')}>
                         <div className={cx('inner')}>
                             <div className={cx('image')}>
                                 <img src={assets.images.specialCard04} alt="" />
-                                <div className={cx('border')}>
+                                <div className={cx('image-border')}>
                                     <img src={assets.images.logoWhite} alt="" />
                                 </div>
                             </div>
@@ -82,13 +82,13 @@ function Special() {
                                 </p>
                             </div>
                         </div>
-                        <Button>Xem thêm</Button>
+                        <Button special>Xem thêm</Button>
                     </div>
-                    <div className={cx('block', 'left')}>
+                    <div className={cx('block')}>
                         <div className={cx('inner')}>
                             <div className={cx('image')}>
                                 <img src={assets.images.specialCard05} alt="" />
-                                <div className={cx('border')}>
+                                <div className={cx('image-border')}>
                                     <img src={assets.images.logoWhite} alt="" />
                                 </div>
                             </div>
@@ -99,7 +99,7 @@ function Special() {
                                 </p>
                             </div>
                         </div>
-                        <Button>Xem thêm</Button>
+                        <Button special>Xem thêm</Button>
                     </div>
                 </div>
             </section>

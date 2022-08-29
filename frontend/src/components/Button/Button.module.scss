@@ -39,3 +39,13 @@
         color: var(--main-mint-2);
     }
 }
+
+.special {
+    width: 200px;
+    border-radius: 0;
+    background-color: var(--sub-orange);
+    box-shadow: -5px -5px var(--sub-blue);
+    .title {
+        color: var(--main-white);
+    }
+}
