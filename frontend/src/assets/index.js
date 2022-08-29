@@ -13,6 +13,7 @@ import iconYoutube from '@/assets/icons/youtube-icon.svg';
 import iconLinkedin from '@/assets/icons/linkedin-icon.svg';
 import iconGoogle from '@/assets/icons/google-icon.svg';
 import loginImage from '@/assets/images/bg-login.png';
+import registerImage from '@/assets/images/img-register.png'
 
 const images = {
     logoWhite,
@@ -25,6 +26,7 @@ const images = {
     homeAvatar02,
     homeAvatar03,
     loginImage,
+    registerImage,
 };
 
 const icons = {

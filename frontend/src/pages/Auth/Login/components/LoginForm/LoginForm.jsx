@@ -64,7 +64,7 @@ function LoginForm(props) {
                     helperText={errors.password?.message}
                 />
                 <small>
-                    <NavLink to="/register">Quên mật khẩu ?</NavLink>
+                    <NavLink to="/login/identify">Quên mật khẩu ?</NavLink>
                 </small>
                 <Controller
                     name="remember"

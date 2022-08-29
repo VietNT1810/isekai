@@ -26,13 +26,16 @@ function InputField({
             error={error}
             margin="dense"
             sx={{
-                backgroundColor: '#ebf9fb',
+                backgroundColor: '#ffffff',
+                borderRadius: '5px',
+                border: '2px solid #1e69a2'
             }}
         >
             <InputLabel htmlFor={id} sx={{ fontSize: 16 }}>
                 {label}
             </InputLabel>
             <FilledInput
+                disableUnderline
                 id={id}
                 name={name}
                 type={type || 'text'}

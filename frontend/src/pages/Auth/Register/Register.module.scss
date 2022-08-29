@@ -1,6 +1,10 @@
 .wrapper {
     width: 100%;
-    background-color: var(--primary);
+    background-color: var(--main-mint-2);
+    background-image: url('@/assets/images/bg-login-pattern.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     .container {
         width: 80%;
         height: 100vh;
@@ -9,8 +13,7 @@
         display: flex;
         gap: 20px;
         color: var(--main-mint-2);
-        .login-image {
-            // flex-basis: 45%;
+        .register-image {
             flex: 1;
             align-self: center;
             img {
