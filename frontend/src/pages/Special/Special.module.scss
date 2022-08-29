@@ -1,0 +1,70 @@
+.wrapper {
+    background-color: var(--main-mint-2);
+    background-image: url('@/assets/images/bg-shop.png');
+    background-size: contain;
+    background-position: center;
+    .banner {
+        width: 100%;
+    }
+    .content {
+        width: 100%;
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .block {
+            border: 1px solid black;
+            text-align: center;
+            padding: 50px 0;
+            .inner {
+                width: 70%;
+                margin: 20px auto;
+                display: flex;
+                align-items: flex-end;
+                gap: 24px;
+                .image {
+                    flex: 1;
+                    line-height: 0;
+                    position: relative;
+                    .border {
+                        width: 94%;
+                        height: 94%;
+                        position: absolute;
+                        border: 2px solid white;
+                        position: absolute;
+                        top: 3%;
+                        left: 3%;
+                        img {
+                            width: 80px;
+                            height: auto;
+                            position: absolute;
+                            top: 4%;
+                            left: 4%;
+                        }
+                    }
+                }
+                .info {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    margin-bottom: 24px;
+                    .title {
+                        text-align: start;
+                        color: var(--sub-orange);
+                        font-size: 3rem;
+                    }
+                    .description {
+                        text-align: start;
+                        color: var(--sub-blue);
+                    }
+                }
+            }
+        }
+    }
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

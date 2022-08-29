@@ -8,7 +8,7 @@ function DefaultLayout({ children }) {
         <>
             <Header />
             {children}
-            <Footer/>
+            <Footer contact/>
         </>
     );
 }

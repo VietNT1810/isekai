@@ -13,7 +13,13 @@ import iconYoutube from '@/assets/icons/youtube-icon.svg';
 import iconLinkedin from '@/assets/icons/linkedin-icon.svg';
 import iconGoogle from '@/assets/icons/google-icon.svg';
 import loginImage from '@/assets/images/bg-login.png';
-import registerImage from '@/assets/images/img-register.png'
+import registerImage from '@/assets/images/img-register.png';
+import specialBanner from '@/assets/images/banner/banner-special.png';
+import specialCard01 from '@/assets/images/card-1.png';
+import specialCard02 from '@/assets/images/card-2.png';
+import specialCard03 from '@/assets/images/card-3.png';
+import specialCard04 from '@/assets/images/card-4.png';
+import specialCard05 from '@/assets/images/card-5.png'; 
 
 const images = {
     logoWhite,
@@ -27,6 +33,12 @@ const images = {
     homeAvatar03,
     loginImage,
     registerImage,
+    specialBanner,
+    specialCard01,
+    specialCard02,
+    specialCard03,
+    specialCard04,
+    specialCard05,
 };
 
 const icons = {
