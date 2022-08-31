@@ -36,15 +36,16 @@ const signupUser = async (req, res) => {
     const accessToken = createToken(
       user._id,
       process.env.ACCESS_TOKEN_SECRET,
-      "20s"
-    ); //expires in 20s
-    const refreshToken = createToken(
-      user._id,
-      process.env.REFRESH_TOKEN_SECRET,
-      "1h"
-    ); //expires in 1h
+      process.env.ACCESS_TOKEN_EXPIRE
+    );
+    
+    // const refreshToken = createToken(
+    //   user._id,
+    //   process.env.REFRESH_TOKEN_SECRET,
+    //   "1h"
+    // ); //expires in 1h
 
-    res.status(200).json({ email, accessToken, refreshToken });
+    res.status(200).json({ email, accessToken });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
