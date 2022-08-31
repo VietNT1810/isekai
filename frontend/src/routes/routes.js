@@ -13,8 +13,17 @@ import ForgotPassword from '@/pages/Auth/ForgotPassword';
 
 const publicRoute = [
     { path: '/', component: Home, layout: HomeLayout },
-    { path: '/shop', component: Shop, layout: ShopLayout },
     { path: '/special', component: Special, layout: DefaultLayout },
+
+    //Shop
+    { path: '/shop', component: Shop, layout: ShopLayout },
+    { path: '/weapon', component: Shop, layout: ShopLayout },
+    { path: '/wig', component: Shop, layout: ShopLayout },
+    { path: '/outfit', component: Shop, layout: ShopLayout },
+    { path: '/lolita', component: Shop, layout: ShopLayout }, 
+    { path: '/accessory', component: Shop, layout: ShopLayout },  
+
+    //Auth
     { path: '/login', component: Login, layout: AuthLayout },
     { path: '/login/identify', component: ForgotPassword, layout: AuthLayout },
     { path: '/register', component: Register, layout: AuthLayout },
