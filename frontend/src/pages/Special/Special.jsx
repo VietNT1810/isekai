@@ -31,7 +31,7 @@ function Special() {
                                 </p>
                             </div>
                         </div>
-                        <Button special>Xem thêm</Button>
+                        <Button special to="/weapon">Xem thêm</Button>
                     </div>
                     <div className={cx('block')}>
                         <div className={cx('inner')}>
@@ -48,7 +48,7 @@ function Special() {
                                 </p>
                             </div>
                         </div>
-                        <Button special>Xem thêm</Button>
+                        <Button special to="/wig">Xem thêm</Button>
                     </div>
                     <div className={cx('block')}>
                         <div className={cx('inner')}>
@@ -65,7 +65,7 @@ function Special() {
                                 </p>
                             </div>
                         </div>
-                        <Button special>Xem thêm</Button>
+                        <Button special to="/outfit">Xem thêm</Button>
                     </div>
                     <div className={cx('block')}>
                         <div className={cx('inner')}>
@@ -82,7 +82,7 @@ function Special() {
                                 </p>
                             </div>
                         </div>
-                        <Button special>Xem thêm</Button>
+                        <Button special to="/lolita">Xem thêm</Button>
                     </div>
                     <div className={cx('block')}>
                         <div className={cx('inner')}>
@@ -99,7 +99,7 @@ function Special() {
                                 </p>
                             </div>
                         </div>
-                        <Button special>Xem thêm</Button>
+                        <Button special to="/accessory">Xem thêm</Button>
                     </div>
                 </div>
             </section>
