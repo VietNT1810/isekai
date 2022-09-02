@@ -18,7 +18,7 @@ const schema = yup
     })
     .required();
 
-function LoginForm(props) {
+function LoginForm({ submitForm }) {
     const {
         register,
         control,
@@ -39,7 +39,11 @@ function LoginForm(props) {
                 Người mới?
                 <NavLink to="/register">Tạo tài khoản ở đây</NavLink>
             </small>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form
+                onSubmit={handleSubmit((data) => {
+                    submitForm(data);
+                })}
+            >
                 <InputField
                     variant="filled"
                     id="email"

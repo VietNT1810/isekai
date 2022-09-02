@@ -16,10 +16,11 @@ const schema = yup
         username: yup.string().required('Username is required'),
         email: yup.string().email('Invalid email address').required('Email is required'),
         password: yup.string().required('Password is required'),
+        confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match'),
     })
     .required();
 
-function RegisterForm(props) {
+function RegisterForm({ submitForm }) {
     const {
         register,
         control,
@@ -29,10 +30,6 @@ function RegisterForm(props) {
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = (data) => {
-        console.log(data);
-    };
-
     return (
         <div className={cx('register-form')}>
             <h1 className={cx('title')}>Đăng ký</h1>
@@ -40,7 +37,11 @@ function RegisterForm(props) {
                 Bạn đã có tài khoản?
                 <NavLink to="/login">Đăng nhập</NavLink>
             </small>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form
+                onSubmit={handleSubmit((data) => {
+                    submitForm(data);
+                })}
+            >
                 <InputField
                     variant="filled"
                     id="username"
@@ -74,6 +75,17 @@ function RegisterForm(props) {
                     autoComplete="on"
                     error={Boolean(errors.password)}
                     helperText={errors.password?.message}
+                />
+                <InputField
+                    variant="filled"
+                    id="confirmPassword"
+                    type="password"
+                    label="Confirm Password"
+                    name="confirmPassword"
+                    fullWidth
+                    register={register}
+                    error={Boolean(errors.confirmPassword)}
+                    helperText={errors.confirmPassword?.message}
                 />
                 <Button action type="submit">
                     Đăng ký
