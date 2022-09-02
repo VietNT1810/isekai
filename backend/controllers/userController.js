@@ -51,4 +51,22 @@ const signupUser = async (req, res) => {
   }
 };
 
-module.exports = { loginUser, signupUser };
+//user info
+const getUserInfo = async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    const { _id, username, email } = user;
+    res.status(200).json({
+      userInfo: {
+        _id,
+        username,
+        email,
+      },
+    });
+  } else {
+    res.status(400).json({ message: "User not found" });
+  }
+};
+
+module.exports = { loginUser, signupUser, getUserInfo };
