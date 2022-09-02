@@ -1,4 +1,4 @@
-import { loginUser, registerUser } from '@/actions/userAction';
+import { getUserProfile, loginUser, registerUser } from '@/actions/userAction';
 import { createSlice } from '@reduxjs/toolkit';
 
 //get user token from local storage
@@ -44,6 +44,21 @@ const userSlice = createSlice({
             console.log('action', action);
         },
         [loginUser.rejected]: (state, { payload }) => {
+            state.loading = false;
+            state.error = payload;
+        },
+
+        //get user info
+        [getUserProfile.pending]: (state) => {
+            state.loading = true;
+            state.error = null;
+        },
+        [getUserProfile.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.userInfo = action.payload.userInfo;
+            state.success = true;
+        },
+        [getUserProfile.rejected]: (state, { payload }) => {
             state.loading = false;
             state.error = payload;
         },
