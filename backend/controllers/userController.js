@@ -27,10 +27,10 @@ const loginUser = async (req, res) => {
 
 //signup user
 const signupUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { username, email, password } = req.body;
 
   try {
-    const user = await User.signup(email, password);
+    const user = await User.signup(username, email, password);
 
     //create token
     const accessToken = createToken(
@@ -38,7 +38,7 @@ const signupUser = async (req, res) => {
       process.env.ACCESS_TOKEN_SECRET,
       process.env.ACCESS_TOKEN_EXPIRE
     );
-    
+
     // const refreshToken = createToken(
     //   user._id,
     //   process.env.REFRESH_TOKEN_SECRET,

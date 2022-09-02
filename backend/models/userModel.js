@@ -6,6 +6,10 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
+    username: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
@@ -20,11 +24,11 @@ const userSchema = new Schema(
 );
 
 // static signup method
-userSchema.statics.signup = async function (email, password) {
+userSchema.statics.signup = async function (username, email, password) {
   const exists = await this.findOne({ email });
 
   //validate
-  if (!email || !password) {
+  if (!username || !email || !password) {
     throw Error("All field is required");
   }
 
@@ -43,7 +47,7 @@ userSchema.statics.signup = async function (email, password) {
   //hash password
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
-  const user = this.create({ email, password: hash });
+  const user = this.create({ username, email, password: hash });
   return user;
 };
 
