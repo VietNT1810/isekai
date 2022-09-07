@@ -10,6 +10,7 @@ import Shop from '@/pages/Shop';
 import Login from '@/pages/Auth/Login';
 import Register from '@/pages/Auth/Register';
 import ForgotPassword from '@/pages/Auth/ForgotPassword';
+import Profile from '@/pages/Profile';
 
 const publicRoute = [
     { path: '/', component: Home, layout: HomeLayout },
@@ -20,13 +21,16 @@ const publicRoute = [
     { path: '/weapon', component: Shop, layout: ShopLayout },
     { path: '/wig', component: Shop, layout: ShopLayout },
     { path: '/outfit', component: Shop, layout: ShopLayout },
-    { path: '/lolita', component: Shop, layout: ShopLayout }, 
-    { path: '/accessory', component: Shop, layout: ShopLayout },  
+    { path: '/lolita', component: Shop, layout: ShopLayout },
+    { path: '/accessory', component: Shop, layout: ShopLayout },
 
     //Auth
     { path: '/login', component: Login, layout: AuthLayout },
     { path: '/login/identify', component: ForgotPassword, layout: AuthLayout },
     { path: '/register', component: Register, layout: AuthLayout },
+
+    //User
+    { path: '/user/account/profile', component: Profile, layout: DefaultLayout },
 ];
 
 export { publicRoute };

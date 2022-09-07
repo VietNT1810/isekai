@@ -55,12 +55,12 @@ function Header() {
                         Đặc biệt
                     </NavLink>
                 </div>
-                {true ? (
+                {userInfo ? (
                     <div className={cx('user-info')}>
                         <div className={cx('avatar')}>
                             <AvatarMenu
-                                username="Something nice"
-                                userAvatar="https://picsum.photos/200"
+                                username="asd asd"
+                                userAvatar={userInfo ? userInfo?.avatar : null}
                                 onClickProfile={handleClickProfile}
                                 onClickLogout={handleClickLogout}
                             />

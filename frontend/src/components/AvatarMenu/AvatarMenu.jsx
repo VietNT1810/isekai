@@ -82,7 +82,7 @@ function AvatarMenu({ username, userAvatar, onClickProfile, onClickLogout }) {
                 aria-haspopup="true"
                 onClick={handleToggle}
             >
-                {false ? <AvatarMui {...stringAvatar(username)} /> : <AvatarMui src={userAvatar} />}
+                {userAvatar ? <AvatarMui src={userAvatar} /> : <AvatarMui {...stringAvatar(username)} />}
             </IconButton>
             <Popper
                 open={open}
@@ -116,7 +116,7 @@ function AvatarMenu({ username, userAvatar, onClickProfile, onClickLogout }) {
                                         <ListItemIcon>
                                             <AccountCircle fontSize="large" />
                                         </ListItemIcon>
-                                        Profile
+                                        Tài khoản của tôi
                                     </MenuItem>
                                     <MenuItem
                                         onClick={() => {
@@ -127,7 +127,7 @@ function AvatarMenu({ username, userAvatar, onClickProfile, onClickLogout }) {
                                         <ListItemIcon>
                                             <Logout fontSize="large" />
                                         </ListItemIcon>
-                                        Logout
+                                        Đăng xuất
                                     </MenuItem>
                                 </MenuList>
                             </ClickAwayListener>
