@@ -56,10 +56,11 @@ const getUserInfo = async (req, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
-    const { _id, username, email } = user;
+    const { _id, username, email, avatar } = user;
     res.status(200).json({
       userInfo: {
         _id,
+        avatar,
         username,
         email,
       },
