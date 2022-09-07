@@ -6,7 +6,7 @@ const userToken = localStorage.getItem('access-token') ? localStorage.getItem('a
 
 const initialState = {
     loading: false,
-    userInfo: {},
+    userInfo: null,
     userToken,
     error: null,
     success: false,
@@ -15,7 +15,16 @@ const initialState = {
 const userSlice = createSlice({
     name: 'user',
     initialState,
-    reducers: {},
+    reducers: {
+        logoutUser: (state) => {
+            localStorage.removeItem('access-token');
+            state.loading = false;
+            state.userInfo = null;
+            state.userToken = null;
+            state.error = null;
+            state.success = false;
+        },
+    },
     extraReducers: {
         // register user
         [registerUser.pending]: (state) => {
@@ -65,4 +74,5 @@ const userSlice = createSlice({
     },
 });
 
+export const { logoutUser } = userSlice.actions;
 export default userSlice.reducer;
