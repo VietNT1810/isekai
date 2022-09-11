@@ -6,10 +6,13 @@ import LoginForm from './components/LoginForm';
 import assets from '@/assets';
 import { loginUser } from '@/actions/userAction';
 import { useNavigate } from 'react-router-dom';
+import { Alert, Snackbar } from '@mui/material';
+import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
 function Login(props) {
+    const [open, setOpen] = useState(false);
     const { loading, userInfo, error, success } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -19,11 +22,19 @@ function Login(props) {
         dispatch(loginUser(data))
             .unwrap()
             .then(() => {
-                navigate('/user/account/profile');
+                setOpen(true);
+                setTimeout(() => {
+                    navigate('/');
+                }, 2000);
             })
             .catch((error) => {
                 console.log('error', error);
+                setOpen(true);
             });
+    };
+
+    const handleClose = () => {
+        setOpen(false);
     };
 
     return (
@@ -34,6 +45,20 @@ function Login(props) {
                     <img src={assets.images.loginImage} alt="Something wrong" />
                 </div>
             </div>
+            <Snackbar
+                open={open}
+                autoHideDuration={10000}
+                onClose={handleClose}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            >
+                <Alert
+                    variant="filled"
+                    severity={success ? 'success' : 'error'}
+                    sx={{ width: '400px', fontSize: '14px', fontFamily: 'SVN Gotham Regular', alignItems: 'center' }}
+                >
+                    {success ? 'Đăng nhập thành công! Đang về trang chủ...' : error}
+                </Alert>
+            </Snackbar>
         </div>
     );
 }
