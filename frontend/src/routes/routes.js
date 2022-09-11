@@ -11,6 +11,7 @@ import Login from '@/pages/Auth/Login';
 import Register from '@/pages/Auth/Register';
 import ForgotPassword from '@/pages/Auth/ForgotPassword';
 import Profile from '@/pages/Profile';
+import ChangePassword from '@/pages/ChangePassword';
 
 const publicRoute = [
     { path: '/', component: Home, layout: HomeLayout },
@@ -31,6 +32,7 @@ const publicRoute = [
 
     //User
     { path: '/user/account/profile', component: Profile, layout: DefaultLayout },
+    { path: 'user/account/change-password', component: ChangePassword, layout: DefaultLayout },
 ];
 
 export { publicRoute };

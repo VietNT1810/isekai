@@ -77,7 +77,7 @@ function Profile(props) {
                                 <label htmlFor="address">Địa chỉ:</label>
                                 <textarea name="address" id="address" rows="3" placeholder="Nhập địa chỉ của bạn" />
                             </div>
-                            <NavLink to="/" className={cx('change-password')}>
+                            <NavLink to="/user/account/change-password" className={cx('change-password')}>
                                 <small>Đổi mật khẩu?</small>
                             </NavLink>
                             <Button primary>Lưu</Button>

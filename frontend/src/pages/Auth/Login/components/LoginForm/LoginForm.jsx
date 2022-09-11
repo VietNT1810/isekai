@@ -28,10 +28,6 @@ function LoginForm({ submitForm }) {
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = (data) => {
-        console.log(data);
-    };
-
     return (
         <div className={cx('login-form')}>
             <h1 className={cx('title')}>Đăng nhập</h1>
