@@ -16,8 +16,8 @@ const loginUser = async (req, res) => {
     const accessToken = createToken(
       user._id,
       process.env.ACCESS_TOKEN_SECRET,
-      "20s"
-    ); //expires in 20s
+      process.env.ACCESS_TOKEN_EXPIRE
+    );
 
     res.status(200).json({ email, accessToken });
   } catch (error) {
