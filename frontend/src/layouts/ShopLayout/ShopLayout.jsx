@@ -6,6 +6,7 @@ import styles from './ShopLayout.module.scss';
 import FilterSidebar from '../components/FilterSidebar';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import ShopToolbar from '../components/ShopToolbar';
 
 const cx = classNames.bind(styles);
 
@@ -35,17 +36,7 @@ function ShopLayout({ children }) {
                 <div className={cx('container')}>
                     <FilterSidebar />
                     <div className={cx('content')}>
-                        <div className={cx('shop-toolbar')}>
-                            <div className={cx('search-bar')}></div>
-                            <div className={cx('sort-bar')}>
-                                <div className={cx('title')}>Sort by</div>
-                                <div className={cx('select-box')}>
-                                    <select name="Newest" id="">
-                                        <option value="1">Newest First</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                        <ShopToolbar />
                         {children}
                     </div>
                 </div>
