@@ -1,0 +1,14 @@
+.filter-card {
+    background-color: var(--main-white);
+    border: 1px solid var(--sub-blue);
+    border-radius: 5px;
+    .title {
+        font-size: 16px;
+        padding: 16px 24px;
+        border-bottom: 1px solid var(--sub-blue);
+        background-color: #04c4d91c;
+    }
+    .slider {
+        padding: 16px 24px;
+    }
+}
