@@ -13,7 +13,7 @@ function FilterSidebar(props) {
     return (
         <div className={cx('filter-sidebar')}>
             <FilterCard title="Price" slider />
-            <FilterCard title="Rating" rating />
+            <FilterCard title="Rating" ratingSlider />
         </div>
     );
 }

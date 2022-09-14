@@ -1,31 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
-import { Slider } from '@mui/material';
+import { Rating, Slider } from '@mui/material';
 
 import styles from './FilterCard.module.scss';
 import { formatVND } from '@/helpers/number';
 
 const cx = classNames.bind(styles);
 
-const marks = [
+const priceMarks = [
     { value: 100000, label: formatVND(100000) },
     { value: 1000000, label: formatVND(1000000) },
+];
+
+const ratingMarks = [
+    { value: 0, label: 'Any' },
+    { value: 5, label: '5' },
 ];
 
 function valuetext(value) {
     return formatVND(value);
 }
 
-function FilterCard({ title, slider, rating }) {
-    const [range, setRange] = useState([100000, 500000]);
+function FilterCard({ title, slider, ratingSlider }) {
+    const [priceRange, setPriceRange] = useState([100000, 500000]);
     const [value, setValue] = useState([100000, 500000]);
+    const [ratingValue, setRatingValue] = useState(3);
 
     const handleChange = (event, newValue) => {
-        setRange(newValue);
+        setPriceRange(newValue);
     };
 
+    const handleRatingChange = (event, newValue) => {
+        setRatingValue(newValue);
+    };
     const setVal = () => {
-        setValue(range);
+        setValue(priceRange);
     };
 
     useEffect(() => {
@@ -33,8 +42,10 @@ function FilterCard({ title, slider, rating }) {
             min: value[0],
             max: value[1],
         };
+        let rating = ratingValue;
         console.log('price:', price);
-    }, [value]);
+        console.log('rating:', rating);
+    }, [value, ratingValue]);
 
     return (
         <div className={cx('filter-card')}>
@@ -43,16 +54,31 @@ function FilterCard({ title, slider, rating }) {
                 {slider && (
                     <Slider
                         getAriaLabel={() => 'Price range'}
-                        value={range}
+                        value={priceRange}
                         min={100000}
                         max={1000000}
                         step={100000}
-                        marks={marks}
+                        marks={priceMarks}
                         onChange={handleChange}
                         onChangeCommitted={setVal}
                         valueLabelDisplay="auto"
                         getAriaValueText={valuetext}
                         valueLabelFormat={valuetext}
+                    />
+                )}
+                {ratingSlider && (
+                    <Rating
+                        name="simple-controlled"
+                        value={ratingValue}
+                        onChange={handleRatingChange}
+                        size="large"
+                        color="primary"
+                        sx={{
+                            fontSize: '4rem',
+                            '& .MuiRating-iconFilled': {
+                                color: '#04c4d9',
+                            },
+                        }}
                     />
                 )}
             </div>
