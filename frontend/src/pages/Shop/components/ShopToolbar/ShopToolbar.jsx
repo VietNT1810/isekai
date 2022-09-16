@@ -18,17 +18,11 @@ function ShopToolbar(props) {
     return (
         <div className={cx('shop-toolbar')}>
             <div className={cx('search-bar')}>
-                {/* <input type="text" placeholder="Search Products" /> */}
                 <OutlinedInput placeholder="Search product" sx={{ fontSize: 16, height: 40 }} />
             </div>
             <div className={cx('sort-bar')}>
                 <div className={cx('title')}>Sort by</div>
                 <div className={cx('select-box')}>
-                    {/* <select name="sortBy">
-                        <option value="newest">Newest First</option>
-                        <option value="newest">Price Low to High</option>
-                        <option value="newest">Price High to Low</option>
-                    </select> */}
                     <FormControl sx={{ minWidth: 200 }}>
                         <Select
                             value={sortBy}

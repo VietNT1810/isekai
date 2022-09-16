@@ -1,12 +1,10 @@
 import assets from '@/assets';
-import { useLocation } from 'react-router-dom';
 import classNames from 'classnames/bind';
+import { useLocation } from 'react-router-dom';
 
-import styles from './ShopLayout.module.scss';
-import FilterSidebar from '../components/FilterSidebar';
-import Header from '../components/Header';
 import Footer from '../components/Footer';
-import ShopToolbar from '../components/ShopToolbar';
+import Header from '../components/Header';
+import styles from './ShopLayout.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -33,13 +31,7 @@ function ShopLayout({ children }) {
                 <div className={cx('banner')}>
                     <img src={getBanner()} alt="Error image" />
                 </div>
-                <div className={cx('container')}>
-                    <FilterSidebar />
-                    <div className={cx('content')}>
-                        <ShopToolbar />
-                        {children}
-                    </div>
-                </div>
+                <div className={cx('container')}>{children}</div>
             </div>
             <Footer />
         </>
