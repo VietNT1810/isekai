@@ -1,5 +1,6 @@
 const Product = require("../models/productModel");
 const mongoose = require("mongoose");
+const crypto = require("crypto");
 
 //get all product
 const getProducts = async (req, res) => {
@@ -16,7 +17,7 @@ const getProducts = async (req, res) => {
   const totalElement = await Product.find(filter).count();
   const numberOfElements = await Product.find(filter).limit(limit).count();
 
-  //check total page 
+  //check total page
   let totalPage = Math.ceil(totalElement / limit);
 
   //response
@@ -66,6 +67,7 @@ const createProduct = async (req, res) => {
     quantity,
     productType,
   } = req.body;
+  const slugUniqueId = crypto.randomBytes(5).toString("hex");
 
   //add doc to db
   try {
@@ -81,6 +83,7 @@ const createProduct = async (req, res) => {
       discount,
       quantity,
       productType,
+      slug: name.split(" ").concat(slugUniqueId).join("-"),
     });
 
     res.status(200).json(product);
