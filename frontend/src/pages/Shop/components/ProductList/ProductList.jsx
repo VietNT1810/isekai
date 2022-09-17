@@ -5,6 +5,7 @@ import styles from './ProductList.module.scss';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Star } from '@mui/icons-material';
 import { formatVND } from '@/helpers/number';
+import { NavLink } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -88,28 +89,31 @@ function ProductList(props) {
             <Grid container spacing={2}>
                 {products.map((product) => (
                     <Grid xs={12} sm={6} lg={4} key={product._id}>
-                        <div className={cx('product-item')}>
-                            <div className={cx('product-image-container')}>
-                                <div className={cx('product-image-box')}>
-                                    <img
-                                        src={product.productImage}
-                                        alt="No image"
-                                        width="100"
-                                        className={cx('product-image')}
-                                    />
+                        <NavLink to={`/product/${product._id}`}>
+                            <div className={cx('product-item')}>
+                                <div className={cx('product-image-container')}>
+                                    <div className={cx('product-image-box')}>
+                                        <img
+                                            src={product.productImage}
+                                            alt="No image"
+                                            width="100"
+                                            className={cx('product-image')}
+                                        />
+                                    </div>
+                                </div>
+                                <div className={cx('product-body')}>
+                                    <h3 className={cx('product-name')}>{product.name}</h3>
+                                    <p className={cx('product-description')}>{product.description}</p>
+                                </div>
+                                <div className={cx('product-footer')}>
+                                    <div className={cx('price')}>{formatVND(product.price)}</div>
+                                    <div className={cx('rating')}>
+                                        <span>{product.rating}</span>
+                                        <Star color="primary" />
+                                    </div>
                                 </div>
                             </div>
-                            <div className={cx('product-body')}>
-                                <h3 className={cx('product-name')}>{product.name}</h3>
-                                <p className={cx('product-description')}>{product.description}</p>
-                            </div>
-                            <div className={cx('product-footer')}>
-                                <div className={cx('price')}>{formatVND(product.price)}</div>
-                                <div className={cx('rating')}>
-                                    {product.rating} <Star color="primary" />
-                                </div>
-                            </div>
-                        </div>
+                        </NavLink>
                     </Grid>
                 ))}
             </Grid>

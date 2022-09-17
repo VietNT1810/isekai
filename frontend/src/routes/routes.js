@@ -12,6 +12,7 @@ import Register from '@/pages/Auth/Register';
 import ForgotPassword from '@/pages/Auth/ForgotPassword';
 import Profile from '@/pages/Profile';
 import ChangePassword from '@/pages/ChangePassword';
+import ProductPage from '@/pages/ProductPage';
 
 const publicRoute = [
     { path: '/', component: Home, layout: HomeLayout },
@@ -33,6 +34,9 @@ const publicRoute = [
     //User
     { path: '/user/account/profile', component: Profile, layout: DefaultLayout },
     { path: 'user/account/change-password', component: ChangePassword, layout: DefaultLayout },
+
+    //Product
+    { path: '/product/:productId', component: ProductPage, layout: DefaultLayout },
 ];
 
 export { publicRoute };
