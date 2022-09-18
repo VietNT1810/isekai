@@ -16,7 +16,7 @@ router.get("/", getProducts);
 // router.get("/search", getTypeProduct);
 
 //GET a single product
-router.get("/detail/:id", getSingleProduct);
+router.get("/detail/:slug", getSingleProduct);
 
 //POST a new product
 router.post("/create", createProduct);
