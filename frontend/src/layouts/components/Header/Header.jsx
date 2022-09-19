@@ -65,7 +65,7 @@ function Header() {
                                 onClickLogout={handleClickLogout}
                             />
                             <IconButton aria-label="cart">
-                                <Badge badgeContent={2} color="primary">
+                                <Badge badgeContent={2} color="secondary">
                                     <ShoppingCart sx={{ fontSize: '24px', color: '#1f1f26' }} />
                                 </Badge>
                             </IconButton>
