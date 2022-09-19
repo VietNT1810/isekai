@@ -22,7 +22,6 @@ function ProductList({ products }) {
                                         <img
                                             src={product.productImage}
                                             alt="No image"
-                                            width="100"
                                             className={cx('product-image')}
                                         />
                                     </div>
