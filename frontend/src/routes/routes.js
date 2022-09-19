@@ -36,7 +36,7 @@ const publicRoute = [
     { path: 'user/account/change-password', component: ChangePassword, layout: DefaultLayout },
 
     //Product
-    { path: '/product/:productId', component: ProductPage, layout: DefaultLayout },
+    { path: '/product/:slug', component: ProductPage, layout: DefaultLayout },
 ];
 
 export { publicRoute };
