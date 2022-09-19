@@ -6,7 +6,21 @@ import styles from './Button.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Button({ to, href, children, primary, outline, contained, action, special, onClick, ...passProps }) {
+function Button({
+    to,
+    href,
+    children,
+    primary,
+    outline,
+    contained,
+    action,
+    special,
+    onClick,
+    className,
+    leftIcon,
+    rightIcon,
+    ...passProps
+}) {
     let Component = 'button';
     const props = {
         onClick,
@@ -22,16 +36,19 @@ function Button({ to, href, children, primary, outline, contained, action, speci
     }
 
     let classes = cx('wrapper', {
+        [className]: className,
         primary,
         outline,
         contained,
         action,
-        special
+        special,
     });
 
     return (
         <Component className={classes} {...props}>
+            {leftIcon && <span className={cx('icon')}>{leftIcon}</span>}
             <span className={cx('title')}>{children}</span>
+            {rightIcon && <span className={cx('icon')}>{rightIcon}</span>}
         </Component>
     );
 }
