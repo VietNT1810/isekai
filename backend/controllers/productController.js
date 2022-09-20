@@ -5,7 +5,7 @@ const crypto = require("crypto");
 //get all product
 const getProducts = async (req, res) => {
   const { productType } = req.query;
-  let limit = Math.abs(req.query.limit) || 10;
+  let limit = Math.abs(req.query.limit) || 20;
   let page = (Math.abs(req.query.page) || 1) - 1;
   const filter = {};
   productType ? (filter.productType = productType) : false;
