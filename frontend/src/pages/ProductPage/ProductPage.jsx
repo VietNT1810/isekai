@@ -7,7 +7,7 @@ import assets from '@/assets';
 import Button from '@/components/Button';
 import { formatVND } from '@/helpers/number';
 import * as productsService from '@/services/productsService';
-import { AddShoppingCart } from '@mui/icons-material';
+import { Add, AddShoppingCart, Remove } from '@mui/icons-material';
 import styles from './ProductPage.module.scss';
 
 const cx = classNames.bind(styles);
@@ -35,15 +35,13 @@ function ProductPage(props) {
             {console.log(product)}
             <div className={cx('container')}>
                 <div className={cx('product')}>
-                    <div className="product-image-container">
+                    <div className={cx('product-image-container')}>
                         <div className={cx('product-image-box')}>
-                            <img src={product.productImage} alt="Error image" />
+                            <img src={product.productImage} className={cx('product-image')} alt="Error image" />
                         </div>
                     </div>
                     <div className={cx('product-info')}>
-                        <div className={cx('product-name')}>
-                            <p>{product.name}</p>
-                        </div>
+                        <span className={cx('product-name')}>{product.name}</span>
                         <div className={cx('product-group')}>
                             <p className={cx('label')}>Đánh giá:</p>
                             <Rating
@@ -51,22 +49,31 @@ function ProductPage(props) {
                                 name="read-only"
                                 value={product.rating || 0}
                                 size="large"
+                                sx={{
+                                    '& .MuiRating-iconFilled': {
+                                        color: '#04c4d9',
+                                    },
+                                }}
                                 readOnly
                             />
                         </div>
 
                         <div className={cx('product-group')}>
                             <p className={cx('label')}>Giá:</p>
-                            <h1 className={cx('price')}>{formatVND(product.price)}</h1>
+                            <span className={cx('price')}>{formatVND(product.price)}</span>
                         </div>
 
                         <div className={cx('product-group')}>
-                            <p className={cx('label')}>Số lượng</p>
+                            <p className={cx('label')}>Số lượng:</p>
                             <div className={cx('quantity')}>
                                 <div className={cx('cart-quantity')}>
-                                    <button>-</button>
-                                    <input type="number" width="30" />
-                                    <button>+</button>
+                                    <button>
+                                        <Remove />
+                                    </button>
+                                    <input type="text" value="1" />
+                                    <button>
+                                        <Add />
+                                    </button>
                                 </div>
                                 <span>{product.quantity} sản phẩm có sẵn</span>
                             </div>
