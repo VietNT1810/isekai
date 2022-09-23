@@ -28,10 +28,6 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
-    rating: {
-      type: Number,
-      required: true,
-    },
     price: {
       type: Number,
       required: true,
@@ -51,6 +47,7 @@ const productSchema = new Schema(
     slug: {
       type: String,
       required: true,
+      unique: true,
     },
   },
   { timestamps: true }
