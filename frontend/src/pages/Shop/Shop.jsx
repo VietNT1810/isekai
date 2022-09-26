@@ -6,21 +6,20 @@ import FilterSidebar from './components/FilterSidebar';
 import ShopToolbar from './components/ShopToolbar';
 import ProductList from './components/ProductList';
 import * as productService from '@/services/productsService';
+import { useSearchParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function Shop(props) {
     const [products, setProducts] = useState([]);
-
-    // for (const entry of searchParams.entries()) {
-    //     console.log(entry);
-    // }
+    const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
         const fetchProducts = async () => {
-            let query = {};
+            const params = Object.fromEntries([...searchParams]);
+
             await productService
-                .getProducts({})
+                .getProducts(params)
                 .then((res) => {
                     setProducts(res.data.content);
                 })
@@ -29,7 +28,7 @@ function Shop(props) {
                 });
         };
         fetchProducts();
-    }, []);
+    }, [searchParams]);
 
     return (
         <>

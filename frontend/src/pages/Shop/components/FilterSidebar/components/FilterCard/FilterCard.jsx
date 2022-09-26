@@ -48,6 +48,7 @@ function FilterCard({ title, slider, ratingSlider }) {
                     <Slider
                         getAriaLabel={() => 'Price range'}
                         value={priceRange}
+                        defaultValue={[100000, 500000]}
                         min={100000}
                         max={1000000}
                         step={100000}
@@ -62,6 +63,7 @@ function FilterCard({ title, slider, ratingSlider }) {
                 {ratingSlider && (
                     <Slider
                         value={ratingValue}
+                        defaultValue={0}
                         step={1}
                         min={0}
                         max={5}

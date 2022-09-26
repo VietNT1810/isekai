@@ -29,10 +29,10 @@ function ProductPage(props) {
         };
         fetchProduct();
     }, []);
+    console.log(product);
 
     return (
         <div className={cx('wrapper')}>
-            {console.log(product)}
             <div className={cx('container')}>
                 <div className={cx('product')}>
                     <div className={cx('product-image-container')}>
@@ -47,7 +47,7 @@ function ProductPage(props) {
                             <Rating
                                 className={cx('rating')}
                                 name="read-only"
-                                value={product.rating || 0}
+                                defaultValue={product.rating || 0}
                                 size="large"
                                 sx={{
                                     '& .MuiRating-iconFilled': {
@@ -70,7 +70,13 @@ function ProductPage(props) {
                                     <button>
                                         <Remove />
                                     </button>
-                                    <input type="text" value="1" />
+                                    <input
+                                        type="text"
+                                        value="1"
+                                        onChange={() => {
+                                            console.log();
+                                        }}
+                                    />
                                     <button>
                                         <Add />
                                     </button>
