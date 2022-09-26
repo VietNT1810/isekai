@@ -33,7 +33,7 @@ function ProductList({ products }) {
                                 <div className={cx('product-footer')}>
                                     <div className={cx('price')}>{formatVND(product.price)}</div>
                                     <div className={cx('rating')}>
-                                        <span>{product.rating}</span>
+                                        <span>{product.averageRating}</span>
                                         <Star color="primary" />
                                     </div>
                                 </div>
