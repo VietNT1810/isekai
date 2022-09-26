@@ -1,51 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
-import { Rating, Slider } from '@mui/material';
+import { Slider } from '@mui/material';
+import { useSearchParams } from 'react-router-dom';
 
 import styles from './FilterCard.module.scss';
 import { formatVND } from '@/helpers/number';
+import { PRICE_MARKS, RATING_MARKS } from '@/constants';
 
 const cx = classNames.bind(styles);
-
-const priceMarks = [
-    { value: 100000, label: formatVND(100000) },
-    { value: 1000000, label: formatVND(1000000) },
-];
-
-const ratingMarks = [
-    { value: 0, label: 'Any' },
-    { value: 5, label: '5' },
-];
 
 function valuetext(value) {
     return formatVND(value);
 }
 
 function FilterCard({ title, slider, ratingSlider }) {
+    const [searchParams, setSearchParams] = useSearchParams();
     const [priceRange, setPriceRange] = useState([100000, 500000]);
-    const [value, setValue] = useState([100000, 500000]);
-    const [ratingValue, setRatingValue] = useState(3);
+    const [priceValue, setPriceValue] = useState([100000, 500000]);
+    const [ratingValue, setRatingValue] = useState(0);
 
-    const handleChange = (event, newValue) => {
+    const handlePriceChange = (event, newValue) => {
         setPriceRange(newValue);
     };
 
     const handleRatingChange = (event, newValue) => {
         setRatingValue(newValue);
+        searchParams.set('rating', newValue);
+        setSearchParams(searchParams);
     };
     const setVal = () => {
-        setValue(priceRange);
+        setPriceValue(priceRange);
+        let [min, max] = priceRange;
+        searchParams.set('min', min);
+        searchParams.set('max', max);
+        setSearchParams(searchParams);
     };
 
     useEffect(() => {
-        let price = {
-            min: value[0],
-            max: value[1],
-        };
-        let rating = ratingValue;
-        console.log('price:', price);
-        console.log('rating:', rating);
-    }, [value, ratingValue]);
+        setSearchParams({ min: priceValue[0], max: priceValue[1], rating: ratingValue });
+    }, [priceValue, ratingValue]);
 
     return (
         <div className={cx('filter-card')}>
@@ -58,8 +51,8 @@ function FilterCard({ title, slider, ratingSlider }) {
                         min={100000}
                         max={1000000}
                         step={100000}
-                        marks={priceMarks}
-                        onChange={handleChange}
+                        marks={PRICE_MARKS}
+                        onChange={handlePriceChange}
                         onChangeCommitted={setVal}
                         valueLabelDisplay="auto"
                         getAriaValueText={valuetext}
@@ -67,16 +60,16 @@ function FilterCard({ title, slider, ratingSlider }) {
                     />
                 )}
                 {ratingSlider && (
-                    <Rating
-                        name="simple-controlled"
+                    <Slider
                         value={ratingValue}
+                        step={1}
+                        min={0}
+                        max={5}
+                        marks={RATING_MARKS}
                         onChange={handleRatingChange}
-                        size="large"
-                        color="primary"
                         sx={{
-                            fontSize: '4rem',
-                            '& .MuiRating-iconFilled': {
-                                color: '#04c4d9',
+                            '.MuiSlider-markLabel': {
+                                fontSize: '12px',
                             },
                         }}
                     />

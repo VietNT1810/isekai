@@ -8,8 +8,6 @@ import FilterCard from './components/FilterCard';
 const cx = classNames.bind(styles);
 
 function FilterSidebar(props) {
-    const [searchParams, setSearchParams] = useSearchParams();
-
     return (
         <div className={cx('filter-sidebar')}>
             <FilterCard title="Filter by Price" slider />

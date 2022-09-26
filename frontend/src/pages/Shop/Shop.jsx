@@ -12,11 +12,13 @@ const cx = classNames.bind(styles);
 function Shop(props) {
     const [products, setProducts] = useState([]);
 
+    // for (const entry of searchParams.entries()) {
+    //     console.log(entry);
+    // }
+
     useEffect(() => {
         const fetchProducts = async () => {
-            // let query = {
-
-            // }
+            let query = {};
             await productService
                 .getProducts({})
                 .then((res) => {
