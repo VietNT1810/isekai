@@ -94,7 +94,40 @@ const getProducts = async (req, res) => {
 //get a single product
 const getSingleProduct = async (req, res) => {
   const { slug } = req.params;
-  const product = await Product.findOne({ slug });
+  const product = await Product.aggregate([
+    //calculate rating by review
+    {
+      $lookup: {
+        from: "reviews",
+        localField: "_id",
+        foreignField: "product",
+        as: "reviews",
+      },
+    },
+    {
+      $addFields: {
+        totalRatings: { $sum: "$reviews.rating" },
+        totalReviews: { $size: "$reviews" },
+      },
+    },
+    {
+      $addFields: {
+        averageRating: {
+          $cond: [
+            { $eq: ["$totalReviews", 0] },
+            0,
+            { $round: [{ $divide: ["$totalRatings", "$totalReviews"] }, 1] },
+          ],
+        },
+      },
+    },
+    { $unset: "reviews" },
+
+    //query
+    {
+      $match: { slug },
+    },
+  ]);
 
   if (!product) {
     return res.status(404).json({ error: "No such product here!" });

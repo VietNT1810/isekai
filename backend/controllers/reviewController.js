@@ -37,7 +37,14 @@ const getReview = async (req, res) => {
       select: ["username", "avatar"],
     });
 
-    res.status(200).json({ reviews });
+    res.status(200).json({
+      status: "SUCCESS",
+      statusCode: 200,
+      message: "Get product success",
+      data: {
+        content: reviews,
+      },
+    });
   } catch (error) {}
 };
 
