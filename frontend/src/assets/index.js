@@ -28,6 +28,7 @@ import iconYoutube from '@/assets/icons/youtube-icon.svg';
 import iconLinkedin from '@/assets/icons/linkedin-icon.svg';
 import iconGoogle from '@/assets/icons/google-icon.svg';
 import iconShipping from '@/assets/icons/shipping-icon.svg';
+import iconCamera from '@/assets/icons/camera-icon.svg';
 
 const images = {
     logoWhite,
@@ -62,6 +63,7 @@ const icons = {
     iconLinkedin,
     iconGoogle,
     iconShipping,
+    iconCamera,
 };
 
 export default { images, icons };
