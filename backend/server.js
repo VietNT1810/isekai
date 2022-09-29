@@ -6,20 +6,19 @@ const mongoose = require("mongoose");
 const productsRouter = require("./routes/product");
 const usersRouter = require("./routes/user");
 const reviewRouter = require("./routes/review");
+const { urlencoded } = require("express");
 
 //express app
 const app = express();
+
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 //cors
 app.use(cors());
 
 //middleware
 app.use(express.json());
-
-app.use((req, res, next) => {
-  console.log(req.path, req.method);
-  next();
-});
 
 //routes
 app.use("/api/products", productsRouter);

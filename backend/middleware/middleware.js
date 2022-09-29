@@ -12,7 +12,6 @@ const requireAuth = async (req, res, next) => {
 
       //decode token
       const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-      console.log(">>>decoded", decoded);
 
       //find user by id and sign to req.user
       req.user = await User.findById(decoded._id).select("-password"); //.select("--password"): get all field except password field

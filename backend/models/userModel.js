@@ -23,6 +23,21 @@ const userSchema = new Schema(
       type: String,
       required: false,
     },
+    fullName: {
+      type: String,
+      required: false,
+      default: "",
+    },
+    address: {
+      type: String,
+      required: false,
+      default: "",
+    },
+    gender: {
+      type: String,
+      required: false,
+      default: "",
+    },
   },
   { timestamps: true }
 );

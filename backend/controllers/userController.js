@@ -1,5 +1,6 @@
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
+const { cloudinary } = require("../utils/cloudinary");
 
 const createToken = (_id, secret, expiresIn) => {
   return jwt.sign({ _id }, secret, { expiresIn: expiresIn });
@@ -53,21 +54,39 @@ const signupUser = async (req, res) => {
 
 //user info
 const getUserInfo = async (req, res) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.user._id).select("-password");
 
   if (user) {
-    const { _id, username, email, avatar } = user;
-    res.status(200).json({
-      userInfo: {
-        _id,
-        avatar,
-        username,
-        email,
-      },
-    });
+    res.status(200).json({ user });
   } else {
     res.status(400).json({ message: "User not found" });
   }
 };
 
-module.exports = { loginUser, signupUser, getUserInfo };
+//Update user info
+const updateUserInfo = async (req, res) => {
+  const { fullName, address, fileString } = req.body;
+
+  try {
+    // upload avatar to cloud
+    const uploadedResponse = await cloudinary.uploader.upload(fileString, {
+      upload_preset: "isekai_avatar",
+    });
+
+    //update profile to db
+    const user = await User.findOneAndUpdate(
+      req.user._id,
+      {
+        fullName: fullName,
+        address: address,
+        avatar: uploadedResponse.url,
+      },
+      { new: true }
+    );
+    res.status(200).json({ user });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+module.exports = { loginUser, signupUser, getUserInfo, updateUserInfo };
