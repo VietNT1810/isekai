@@ -31,7 +31,12 @@ export const loginUser = createAsyncThunk('user/login', async ({ email, password
 export const getUserProfile = createAsyncThunk('user/profile', async (arg, { getState, rejectWithValue }) => {
     try {
         const { user } = getState();
-        const data = await getUserInfo();
+        const config = {
+            headers: {
+                Authorization: `Bearer ${user.userToken}`,
+            },
+        };
+        const data = await getUserInfo(config);
         return data;
     } catch (error) {
         if (error.response && error.response.data.message) {
