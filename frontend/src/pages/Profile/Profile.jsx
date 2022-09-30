@@ -1,22 +1,27 @@
 import { Divider } from '@mui/material';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import Button from '@/components/Button';
 import { hidePhone } from '@/helpers/number';
 import { hideEmail } from '@/helpers/string';
 
+import { updateUserProfile } from '@/actions/userAction';
 import assets from '@/assets';
 import styles from './Profile.module.scss';
 
 const cx = classNames.bind(styles);
 
 function Profile(props) {
+    //state
     const { loading, userInfo } = useSelector((state) => state.user);
     const [fileInputState, setFileInputState] = useState('');
     const [previewAvatar, setPreviewAvatar] = useState('');
+    const [form, setForm] = useState({});
+
+    const dispatch = useDispatch();
 
     let phone = '0868402367';
     //handle file
@@ -31,6 +36,22 @@ function Profile(props) {
         reader.onloadend = () => {
             setPreviewAvatar(reader.result);
         };
+    };
+
+    //handle form++
+    const handleFormChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value });
+    };
+
+    const handleSaveProfile = async (e) => {
+        e.preventDefault();
+        console.log(form);
+        let formData = {
+            ...form,
+            fileString: previewAvatar,
+        };
+        console.log('formData', formData);
+        dispatch(updateUserProfile(formData));
     };
 
     // console.log('userInfo:', userInfo);
@@ -72,14 +93,20 @@ function Profile(props) {
                         <form className={cx('form')}>
                             <div className={cx('form-group')}>
                                 <label htmlFor="username">Username:</label>
-                                <span>admin</span>
+                                <span>{userInfo?.username}</span>
                             </div>
                             <div className={cx('form-group')}>
-                                <label htmlFor="name">Tên:</label>
-                                {false ? (
-                                    <span>Admin123</span>
+                                <label htmlFor="fullName">Tên:</label>
+                                {userInfo?.fullName ? (
+                                    <span>{userInfo.fullName}</span>
                                 ) : (
-                                    <input type="text" id="name" placeholder="Nhập tên của bạn" />
+                                    <input
+                                        type="text"
+                                        id="fullName"
+                                        name="fullName"
+                                        placeholder="Nhập tên của bạn"
+                                        onChange={handleFormChange}
+                                    />
                                 )}
                             </div>
                             <div className={cx('form-group')}>
@@ -90,15 +117,33 @@ function Profile(props) {
                                 <label htmlFor="gender">Giới tính:</label>
                                 <div className={cx('form-checkbox')}>
                                     <label htmlFor="male">Nam</label>
-                                    <input type="radio" id="male" name="gender" value="male" defaultChecked />
+                                    <input
+                                        type="radio"
+                                        id="male"
+                                        name="gender"
+                                        value="male"
+                                        onChange={handleFormChange}
+                                    />
                                 </div>
                                 <div className={cx('form-checkbox')}>
                                     <label htmlFor="female">Nữ</label>
-                                    <input type="radio" id="female" name="gender" value="female" />
+                                    <input
+                                        type="radio"
+                                        id="female"
+                                        name="gender"
+                                        value="female"
+                                        onChange={handleFormChange}
+                                    />
                                 </div>
                                 <div className={cx('form-checkbox')}>
                                     <label htmlFor="other">Khác</label>
-                                    <input type="radio" id="other" name="gender" value="other" />
+                                    <input
+                                        type="radio"
+                                        id="other"
+                                        name="gender"
+                                        value="other"
+                                        onChange={handleFormChange}
+                                    />
                                 </div>
                             </div>
                             <div className={cx('form-group')}>
@@ -107,12 +152,24 @@ function Profile(props) {
                             </div>
                             <div className={cx('form-group')}>
                                 <label htmlFor="address">Địa chỉ:</label>
-                                <textarea name="address" id="address" rows="3" placeholder="Nhập địa chỉ của bạn" />
+                                {userInfo?.address ? (
+                                    <span>{userInfo.address}</span>
+                                ) : (
+                                    <textarea
+                                        name="address"
+                                        id="address"
+                                        rows="3"
+                                        placeholder="Nhập địa chỉ của bạn"
+                                        onChange={handleFormChange}
+                                    />
+                                )}
                             </div>
                             <NavLink to="/user/account/change-password" className={cx('change-password')}>
                                 <small>Đổi mật khẩu?</small>
                             </NavLink>
-                            <Button primary>Lưu</Button>
+                            <Button primary onClick={handleSaveProfile}>
+                                Lưu
+                            </Button>
                         </form>
                     </div>
                 </div>
