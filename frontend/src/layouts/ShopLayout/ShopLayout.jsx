@@ -1,6 +1,6 @@
 import assets from '@/assets';
 import classNames from 'classnames/bind';
-import { useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -31,7 +31,9 @@ function ShopLayout({ children }) {
                 <div className={cx('banner')}>
                     <img src={getBanner()} alt="Error image" />
                 </div>
-                <div className={cx('container')}>{children}</div>
+                <div className={cx('container')}>
+                    <Outlet />
+                </div>
             </div>
             <Footer />
         </>

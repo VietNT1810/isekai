@@ -2,13 +2,13 @@ import { Close } from '@mui/icons-material';
 import { Fab } from '@mui/material';
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import styles from './AuthLayout.module.scss';
 
 const cx = classNames.bind(styles);
 
-function AuthLayout({ children }) {
+function AuthLayout() {
     const [isLoginPage, setIsLoginPage] = useState(false);
     const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ function AuthLayout({ children }) {
             >
                 <Close className={cx('close-icon')} fontSize="large" />
             </Fab>
-            {children}
+            <Outlet />
         </div>
     );
 }
