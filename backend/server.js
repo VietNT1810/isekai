@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const productsRouter = require("./routes/product");
 const usersRouter = require("./routes/user");
 const reviewRouter = require("./routes/review");
+const cartRouter = require("./routes/cart");
 const { urlencoded } = require("express");
 
 //express app
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use("/api/products", productsRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/reviews", reviewRouter);
+app.use("/api/carts/", cartRouter);
 
 //connect to database
 mongoose
