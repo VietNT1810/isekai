@@ -1,29 +1,20 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import classNames from 'classnames/bind';
-import { useDispatch, useSelector } from 'react-redux';
 import { ShoppingCart } from '@mui/icons-material';
 import { Badge, IconButton } from '@mui/material';
+import classNames from 'classnames/bind';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 import assets from '@/assets';
-import styles from './Header.module.scss';
-import { getUserProfile } from '@/actions/userAction';
 import AvatarMenu from '@/components/AvatarMenu';
 import { logoutUser } from '@/pages/Auth/userSlice';
+import styles from './Header.module.scss';
 
 const cx = classNames.bind(styles);
 
 function Header() {
-    const { loading, userInfo, userToken, error } = useSelector((state) => state.user);
+    const { loading, userInfo } = useSelector((state) => state.user);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        if (userToken) {
-            dispatch(getUserProfile());
-        }
-    }, [userToken, dispatch]);
 
     const handleClickProfile = () => {
         console.log('click profile');
