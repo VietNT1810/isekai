@@ -97,4 +97,22 @@ const updateCart = async (req, res) => {
   }
 };
 
-module.exports = { addToCart, updateCart };
+//get cart
+const getCart = async (req, res) => {
+  const { userId } = req.body;
+  try {
+    const cart = await Cart.findOne({ userId }).populate({
+      path: "products",
+      populate: {
+        path: "productId",
+        model: "Product",
+        select: ["name", "price", "productImage"],
+      },
+    });
+    res.status(200).json({ cart });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+module.exports = { addToCart, updateCart, getCart };
