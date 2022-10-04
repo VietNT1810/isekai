@@ -1,12 +1,14 @@
 import { ShoppingCart } from '@mui/icons-material';
 import { Badge, IconButton } from '@mui/material';
 import classNames from 'classnames/bind';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 import assets from '@/assets';
 import AvatarMenu from '@/components/AvatarMenu';
 import { logoutUser } from '@/pages/Auth/userSlice';
+import { getUserProfile } from '@/actions/userAction';
 import styles from './Header.module.scss';
 
 const cx = classNames.bind(styles);

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { getUserProfile, loginUser } from '@/actions/userAction';
+import { loginUser } from '@/actions/userAction';
 import assets from '@/assets';
 import LoginForm from './components/LoginForm';
 import styles from './Login.module.scss';
@@ -23,7 +23,6 @@ function Login(props) {
             .unwrap()
             .then(() => {
                 setOpen(true);
-                dispatch(getUserProfile());
                 setTimeout(() => {
                     navigate('/');
                 }, 2000);
