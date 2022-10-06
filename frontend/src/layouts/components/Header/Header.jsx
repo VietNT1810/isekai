@@ -29,6 +29,10 @@ function Header() {
         navigate('/login');
     };
 
+    const handleCartClick = () => {
+        navigate('/cart');
+    };
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('container')}>
@@ -57,7 +61,7 @@ function Header() {
                                 onClickProfile={handleClickProfile}
                                 onClickLogout={handleClickLogout}
                             />
-                            <IconButton aria-label="cart">
+                            <IconButton aria-label="cart" onClick={handleCartClick}>
                                 <Badge badgeContent={2} color="secondary">
                                     <ShoppingCart sx={{ fontSize: '24px', color: '#1f1f26' }} />
                                 </Badge>
