@@ -15,6 +15,7 @@ import ForgotPassword from '@/pages/Auth/ForgotPassword';
 import Profile from '@/pages/Profile';
 import ChangePassword from '@/pages/ChangePassword';
 import ProductPage from '@/pages/ProductPage';
+import Cart from '@/pages/Cart';
 
 // const publicRoute = [
 //     { path: '/', component: Home, layout: HomeLayout },
@@ -58,6 +59,7 @@ function Routes(props) {
                 { path: 'user/account/profile', element: <Profile /> },
                 { path: 'user/account/change-password', element: <ChangePassword /> },
                 { path: '/product/:slug', element: <ProductPage /> },
+                { path: '/cart', element: <Cart /> },
             ],
         },
         {
@@ -83,6 +85,10 @@ function Routes(props) {
                 },
                 { path: 'register', element: <Register /> },
             ],
+        },
+        {
+            path: '*',
+            element: <p>Nothing here :(</p>,
         },
     ]);
 

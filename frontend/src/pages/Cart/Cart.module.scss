@@ -1,0 +1,99 @@
+.wrapper {
+    min-height: calc(100vh - var(--header-height));
+    margin-top: var(--header-height);
+    background-color: var(--main-mint-2);
+    background-image: url('@/assets/images/bg-shop.png');
+    background-size: contain;
+    background-position: center;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.title {
+    text-align: center;
+}
+
+.cart-content {
+    display: flex;
+    gap: 24px;
+    .left {
+        flex: 1;
+    }
+    .right {
+        flex-basis: 300px;
+        margin: 24px 0px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+}
+
+.cart-heading {
+    display: flex;
+    padding: 10px 16px;
+    background-color: var(--main-white);
+    border-radius: 5px;
+    box-shadow: 0 1px 2px var(--sub-blue);
+    margin: 24px 0px;
+    * {
+        flex: 1;
+    }
+    span:first-child {
+        flex: 2;
+    }
+    span:last-child {
+        flex: 0;
+        flex-basis: 3%;
+    }
+}
+
+.shipment-info {
+    padding: 10px 16px;
+    background-color: var(--main-white);
+    border-radius: 5px;
+    box-shadow: 0 1px 2px var(--sub-blue);
+    .shipment-title {
+        color: var(--main-grey);
+        margin-bottom: 12px;
+    }
+    .customer-info {
+        .name {
+            font-size: 1.4rem;
+        }
+        .address {
+            font-size: 1.4rem;
+            color: var(--main-grey);
+        }
+    }
+}
+
+.price-summary {
+    padding: 10px 16px;
+    background-color: var(--main-white);
+    border-radius: 5px;
+    box-shadow: 0 1px 2px var(--sub-blue);
+    .price-total {
+        display: flex;
+        justify-content: space-between;
+        .price-text {
+            font-size: 1.4rem;
+            font-weight: 300;
+        }
+        .price-content {
+            display: flex;
+            flex-direction: column;
+            text-align: right;
+            .price-value {
+                font-size: 2.2rem;
+                color: var(--sub-orange);
+            }
+            .price-noted {
+                font-size: 1.2rem;
+            }
+        }
+    }
+}
