@@ -52,10 +52,15 @@
                 }
             }
         }
-
         .cart-name {
             flex: 2;
             margin-right: 16px;
+            span {
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
         }
     }
 

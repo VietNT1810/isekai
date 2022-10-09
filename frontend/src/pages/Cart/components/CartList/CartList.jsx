@@ -11,7 +11,7 @@ const products = [
     {
         productId: {
             _id: '62fc950945d2f2bd6c5475b5',
-            name: 'product 2 asdad asdad asdad asdad asdad asdad asdad asdad asdad asdad asdad asdad asdad asdad asdad asdad',
+            name: 'Chú Thuật Hồi Chiến: Tập 1 - Bản Thường [Tặng Kèm Obi Và Thẻ Bo Góc Nhựa]',
             price: 200000,
             productImage: 'https://res.cloudinary.com/supafrankie/image/upload/v1661155551/wig/Ayaka_igj5qi.png',
         },
@@ -45,7 +45,9 @@ function CartList(props) {
                                 />
                             </div>
                         </div>
-                        <span className={cx('cart-name')}>{cart.productId.name}</span>
+                        <div className={cx('cart-name')}>
+                            <span>{cart.productId.name}</span>
+                        </div>
                     </div>
                     <span className={cx('product-price')}>{formatVND(cart.productId.price)}</span>
                     <div className={cx('cart-quantity')}>
