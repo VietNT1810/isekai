@@ -15,7 +15,7 @@ router.post("/add-to-cart", addToCart);
 router.put("/update", updateCart);
 
 //get cart info
-router.get("/get-cart", getCart);
+router.post("/get-cart", getCart);
 
 //remove cart
 router.delete("/remove", removeCart);
