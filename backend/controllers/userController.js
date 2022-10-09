@@ -19,8 +19,9 @@ const loginUser = async (req, res) => {
       process.env.ACCESS_TOKEN_SECRET,
       process.env.ACCESS_TOKEN_EXPIRE
     );
+    const userId = user._id;
 
-    res.status(200).json({ email, accessToken });
+    res.status(200).json({ email, accessToken, userId });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
