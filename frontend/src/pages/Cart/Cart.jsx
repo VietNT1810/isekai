@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames/bind';
+import { useSelector } from 'react-redux';
 
 import styles from './Cart.module.scss';
 import CartList from './components/CartList';
@@ -9,12 +10,19 @@ import Button from '@/components/Button';
 const cx = classNames.bind(styles);
 
 function Cart(props) {
+    const { carts } = useSelector((state) => state.cart);
+
+    const getTotalPrice = () => {
+        const totalPrice = carts.reduce((totalPrice, item) => totalPrice + item.productId.price * +item.quantity, 0);
+        return totalPrice;
+    };
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
                 <div className={cx('title')}>
                     <h2>Giỏ hàng của bạn</h2>
-                    <small>Hiện tại đang có 1 sản phẩm</small>
+                    <small>Hiện tại đang có {carts.length} sản phẩm</small>
                 </div>
                 <div className={cx('cart-content')}>
                     <div className={cx('left')}>
@@ -25,7 +33,7 @@ function Cart(props) {
                             <span>Thành tiền</span>
                             <span>Xóa</span>
                         </div>
-                        <CartList />
+                        <CartList carts={carts} />
                     </div>
                     <div className={cx('right')}>
                         <div className={cx('shipment-info')}>
@@ -41,7 +49,7 @@ function Cart(props) {
                             <div className={cx('price-total')}>
                                 <div className={cx('price-text')}>Tổng tiền</div>
                                 <div className={cx('price-content')}>
-                                    <span className={cx('price-value')}>{formatVND(200000)}</span>
+                                    <span className={cx('price-value')}>{formatVND(getTotalPrice())}</span>
                                     <span className={cx('price-noted')}>(Đã bao gồm VAT nếu có)</span>
                                 </div>
                             </div>
