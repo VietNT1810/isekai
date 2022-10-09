@@ -8,6 +8,7 @@ import { loginUser } from '@/actions/userAction';
 import assets from '@/assets';
 import LoginForm from './components/LoginForm';
 import styles from './Login.module.scss';
+import { getUserCart } from '@/actions/cartAction';
 
 const cx = classNames.bind(styles);
 
@@ -21,8 +22,9 @@ function Login(props) {
         data.email = data.email.toLowerCase();
         dispatch(loginUser(data))
             .unwrap()
-            .then(() => {
+            .then((res) => {
                 setOpen(true);
+                dispatch(getUserCart({ userId: res.userId }));
                 setTimeout(() => {
                     navigate('/');
                 }, 2000);
