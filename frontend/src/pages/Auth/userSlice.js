@@ -50,7 +50,6 @@ const userSlice = createSlice({
             state.userInfo = action.payload.email;
             state.userToken = action.payload.accessToken;
             state.success = true;
-            console.log('action', action);
         },
         [loginUser.rejected]: (state, { payload }) => {
             state.loading = false;
