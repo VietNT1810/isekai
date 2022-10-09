@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Routes from '@/routes';
 import DefaultLayout from '@/layouts/DefaultLayout';
 import { getUserProfile } from './actions/userAction';
+import { getUserCart } from './actions/cartAction';
 
 function App() {
     const { loading, userInfo, userToken } = useSelector((state) => state.user);
@@ -12,7 +13,15 @@ function App() {
 
     useEffect(() => {
         if (userToken) {
-            dispatch(getUserProfile());
+            dispatch(getUserProfile())
+                .unwrap()
+                .then((res) => {
+                    console.log('reload user:', res);
+                    dispatch(getUserCart({ userId: res.user._id }));
+                })
+                .catch((error) => {
+                    console.log('error', error);
+                });
         }
     }, [userToken]);
 
