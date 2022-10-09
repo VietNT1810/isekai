@@ -9,7 +9,6 @@ export const getUserCart = createAsyncThunk('cart/get', async ({ userId }) => {
         //         Authorization: `Bearer ${user.userToken}`,
         //     },
         // };
-        console.log('thunk userID', userId);
         const data = await getCarts({ userId });
         return data;
     } catch (error) {
