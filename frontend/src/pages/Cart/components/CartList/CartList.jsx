@@ -4,13 +4,10 @@ import classNames from 'classnames/bind';
 import styles from './CartList.module.scss';
 import { formatVND } from '@/helpers/number';
 import { Add, DeleteOutline, Remove } from '@mui/icons-material';
-import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 
-function CartList(props) {
-    const { carts } = useSelector((state) => state.cart);
-
+function CartList({ carts }) {
     return (
         <div className={cx('cart-list')}>
             {carts.map((cart) => (
