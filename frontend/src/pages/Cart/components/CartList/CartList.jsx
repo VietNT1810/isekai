@@ -4,35 +4,16 @@ import classNames from 'classnames/bind';
 import styles from './CartList.module.scss';
 import { formatVND } from '@/helpers/number';
 import { Add, DeleteOutline, Remove } from '@mui/icons-material';
+import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 
-const products = [
-    {
-        productId: {
-            _id: '62fc950945d2f2bd6c5475b5',
-            name: 'Chú Thuật Hồi Chiến: Tập 1 - Bản Thường [Tặng Kèm Obi Và Thẻ Bo Góc Nhựa]',
-            price: 200000,
-            productImage: 'https://res.cloudinary.com/supafrankie/image/upload/v1661155551/wig/Ayaka_igj5qi.png',
-        },
-        quantity: '5',
-    },
-    {
-        productId: {
-            _id: '62fc93e245d2f2bd6c5475ae',
-            name: 'product 1',
-            price: 100000,
-            productImage:
-                'https://res.cloudinary.com/supafrankie/image/upload/v1660890497/clothes/TSM0658YYH_1_800x_x0yizs.png',
-        },
-        quantity: '5',
-    },
-];
-
 function CartList(props) {
+    const { carts } = useSelector((state) => state.cart);
+
     return (
         <div className={cx('cart-list')}>
-            {products.map((cart) => (
+            {carts.map((cart) => (
                 <div key={cart.productId._id} className={cx('cart')}>
                     <div className={cx('product-info')}>
                         <div className={cx('cart-image-container')}>
