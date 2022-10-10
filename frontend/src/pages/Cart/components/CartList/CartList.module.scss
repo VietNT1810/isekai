@@ -76,6 +76,7 @@
         flex: 0;
         flex-basis: 3%;
         display: flex;
+        cursor: pointer;
     }
 }
 
@@ -103,5 +104,18 @@
             border-top: 1px solid var(--sub-blue);
             border-bottom: 1px solid var(--sub-blue);
         }
+    }
+}
+
+.dialog {
+    .dialog-title {
+        font-size: 1.6rem;
+    }
+    .dialog-content {
+        font-size: 1.4rem;
+    }
+    .dialog-button {
+        min-width: 0;
+        min-height: 0;
     }
 }
