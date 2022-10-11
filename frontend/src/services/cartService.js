@@ -10,3 +10,12 @@ export const getCarts = async (params) => {
         throw error;
     }
 };
+
+export const updateCart = async (params) => {
+    try {
+        const result = await request.put(`${prefix}/update`, params);
+        return result.data;
+    } catch (error) {
+        throw error;
+    }
+};

@@ -2,17 +2,21 @@ import { Add, DeleteOutline, Remove } from '@mui/icons-material';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateUserCart } from '@/actions/cartAction';
 
 import styles from './CartList.module.scss';
 import { formatVND } from '@/helpers/number';
 import Button from '@/components/Button';
+import { changeCartQuantity } from '../../cartSlice';
 
 const cx = classNames.bind(styles);
 
 function CartList({ carts }) {
+    const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
 
-    const handleClickOpen = () => {
+    const handleDeleteCart = () => {
         setOpen(true);
     };
 
@@ -24,8 +28,23 @@ function CartList({ carts }) {
         setOpen(false);
     };
 
-    const handleQuantityChange = (e) => {
-        console.log(e.target.value);
+    const handleIncreaseChange = (id, quantity) => {
+        dispatch(changeCartQuantity({ productId: id, quantity: +quantity + 1 }));
+        dispatch(updateUserCart({ productId: id }));
+    };
+
+    const handleQuantityChange = (e, id) => {
+        dispatch(changeCartQuantity({ productId: id, quantity: e.target.value }));
+        dispatch(updateUserCart({ productId: id }));
+    };
+
+    const handleDecreaseChange = (id, quantity) => {
+        if (quantity > 1) {
+            dispatch(changeCartQuantity({ productId: id, quantity: +quantity - 1 }));
+            dispatch(updateUserCart({ productId: id }));
+        } else {
+            handleDeleteCart();
+        }
     };
 
     return (
@@ -50,18 +69,22 @@ function CartList({ carts }) {
                     <span className={cx('product-price')}>{formatVND(cart.productId.price)}</span>
                     <div className={cx('cart-quantity')}>
                         <div className={cx('action')}>
-                            <button>
+                            <button onClick={() => handleDecreaseChange(cart.productId._id, cart.quantity)}>
                                 <Remove />
                             </button>
-                            <input type="text" value={cart.quantity} onChange={handleQuantityChange} />
-                            <button>
+                            <input
+                                type="tel"
+                                value={cart.quantity}
+                                onChange={(event) => handleQuantityChange(event, cart.productId._id)}
+                            />
+                            <button onClick={() => handleIncreaseChange(cart.productId._id, cart.quantity)}>
                                 <Add />
                             </button>
                         </div>
                     </div>
                     <span className={cx('final-price')}>{formatVND(cart.productId.price * cart.quantity)}</span>
                     <div className={cx('delete-btn')}>
-                        <DeleteOutline fontSize="large" onClick={handleClickOpen} />
+                        <DeleteOutline fontSize="large" onClick={handleDeleteCart} />
                     </div>
                 </div>
             ))}
