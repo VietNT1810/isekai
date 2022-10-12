@@ -2,15 +2,31 @@ import React from 'react';
 import { Add, AddShoppingCartOutlined, Remove, RemoveShoppingCartOutlined } from '@mui/icons-material';
 import { Rating } from '@mui/material';
 import classNames from 'classnames/bind';
+import { useDispatch } from 'react-redux';
 
 import styles from './ProductDetail.module.scss';
 import assets from '@/assets';
 import Button from '@/components/Button';
 import { formatVND } from '@/helpers/number';
+import { removeCart } from '@/pages/Cart/cartSlice';
+import { removeUserCart } from '@/actions/cartAction';
 
 const cx = classNames.bind(styles);
 
 function ProductDetail({ product, isInCart }) {
+    const dispatch = useDispatch();
+
+    const handleRemoveCart = () => {
+        dispatch(removeUserCart({ productId: product._id }))
+            .unwrap()
+            .then(() => {
+                dispatch(removeCart(product._id));
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
     return (
         <div className={cx('product')}>
             <div className={cx('product-image-container')}>
@@ -76,6 +92,7 @@ function ProductDetail({ product, isInCart }) {
                         <Button
                             outline
                             leftIcon={<RemoveShoppingCartOutlined color="primary" sx={{ fontSize: '24px' }} />}
+                            onClick={handleRemoveCart}
                         >
                             Xóa khỏi giỏ hàng
                         </Button>
