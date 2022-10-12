@@ -1,17 +1,11 @@
-import { Rating } from '@mui/material';
-import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
+import classNames from 'classnames/bind';
 import { useParams } from 'react-router-dom';
-import { Add, AddShoppingCartOutlined, Remove, RemoveShoppingCartOutlined } from '@mui/icons-material';
+import { useSelector } from 'react-redux';
 
-import assets from '@/assets';
-import Button from '@/components/Button';
-import { formatVND } from '@/helpers/number';
+import styles from './ProductPage.module.scss';
 import * as productsService from '@/services/productsService';
 import * as reviewsService from '@/services/reviewsService';
-import styles from './ProductPage.module.scss';
-import { formatTime } from '@/helpers/string';
-import { useSelector } from 'react-redux';
 import ProductDetail from './components/ProductDetail';
 import Review from './components/Review';
 
