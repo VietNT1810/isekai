@@ -19,3 +19,12 @@ export const updateCart = async (params) => {
         throw error;
     }
 };
+
+export const removeCart = async (params) => {
+    try {
+        const result = await request.post(`${prefix}/remove`, params);
+        return result.data;
+    } catch (error) {
+        throw error;
+    }
+};

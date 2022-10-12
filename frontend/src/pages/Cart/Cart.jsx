@@ -10,7 +10,7 @@ import Button from '@/components/Button';
 const cx = classNames.bind(styles);
 
 function Cart(props) {
-    const { carts } = useSelector((state) => state.cart);
+    const { carts, loading } = useSelector((state) => state.cart);
 
     const getTotalPrice = () => {
         const totalPrice = carts.reduce((totalPrice, item) => totalPrice + item.productId.price * +item.quantity, 0);
@@ -33,7 +33,7 @@ function Cart(props) {
                             <span>Thành tiền</span>
                             <span>Xóa</span>
                         </div>
-                        <CartList carts={carts} />
+                        <CartList carts={carts} isLoading={loading} />
                     </div>
                     <div className={cx('right')}>
                         <div className={cx('shipment-info')}>

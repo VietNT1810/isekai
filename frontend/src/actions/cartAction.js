@@ -1,4 +1,4 @@
-import { getCarts, updateCart } from '@/services/cartService';
+import { getCarts, removeCart, updateCart } from '@/services/cartService';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getUserCart = createAsyncThunk('cart/get', async ({ userId }, { rejectWithValue }) => {
@@ -25,6 +25,21 @@ export const updateUserCart = createAsyncThunk('cart/update', async ({ productId
         const { userId, carts } = getState().cart;
         const productCart = carts.find((cart) => cart.productId._id == productId);
         const data = await updateCart({ userId, productId, quantity: productCart.quantity });
+        return data;
+    } catch (error) {
+        if (error.response && error.response.data.message) {
+            return rejectWithValue(error.response.data.message);
+        } else {
+            return rejectWithValue(error.message);
+        }
+    }
+});
+
+export const removeUserCart = createAsyncThunk('cart/remove', async ({ productId }, { getState, rejectWithValue }) => {
+    try {
+        const { userId, carts } = getState().cart;
+        const productCart = carts.find((cart) => cart.productId._id == productId);
+        const data = await removeCart({ userId, productId, quantity: productCart.quantity });
         return data;
     } catch (error) {
         if (error.response && error.response.data.message) {

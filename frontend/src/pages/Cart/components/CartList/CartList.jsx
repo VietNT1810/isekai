@@ -1,27 +1,40 @@
+import { removeUserCart, updateUserCart } from '@/actions/cartAction';
 import { Add, DeleteOutline, Remove } from '@mui/icons-material';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateUserCart } from '@/actions/cartAction';
 
-import styles from './CartList.module.scss';
-import { formatVND } from '@/helpers/number';
 import Button from '@/components/Button';
-import { changeCartQuantity } from '../../cartSlice';
+import { formatVND } from '@/helpers/number';
+import { changeCartQuantity, removeCart } from '../../cartSlice';
+import styles from './CartList.module.scss';
 
 const cx = classNames.bind(styles);
 
-function CartList({ carts }) {
+function CartList({ carts, isLoading }) {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
 
-    const handleDeleteCart = () => {
+    const [dialogData, setDialogData] = useState('');
+
+    const handleDeleteCart = (id) => {
+        setDialogData(id);
         setOpen(true);
     };
 
     const handleDeleteConfirm = () => {
         setOpen(false);
+        dispatch(removeUserCart({ productId: dialogData }))
+            .unwrap()
+            .then(() => {
+                dispatch(removeCart(dialogData));
+                setDialogData('');
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        // console.log("dialogData:", dialogData);
     };
 
     const handleClose = () => {
@@ -43,7 +56,7 @@ function CartList({ carts }) {
             dispatch(changeCartQuantity({ productId: id, quantity: +quantity - 1 }));
             dispatch(updateUserCart({ productId: id }));
         } else {
-            handleDeleteCart();
+            handleDeleteCart(id);
         }
     };
 
@@ -69,22 +82,29 @@ function CartList({ carts }) {
                     <span className={cx('product-price')}>{formatVND(cart.productId.price)}</span>
                     <div className={cx('cart-quantity')}>
                         <div className={cx('action')}>
-                            <button onClick={() => handleDecreaseChange(cart.productId._id, cart.quantity)}>
+                            <button
+                                disabled={isLoading}
+                                onClick={() => handleDecreaseChange(cart.productId._id, cart.quantity)}
+                            >
                                 <Remove />
                             </button>
                             <input
                                 type="tel"
+                                disabled={isLoading}
                                 value={cart.quantity}
                                 onChange={(event) => handleQuantityChange(event, cart.productId._id)}
                             />
-                            <button onClick={() => handleIncreaseChange(cart.productId._id, cart.quantity)}>
+                            <button
+                                disabled={isLoading}
+                                onClick={() => handleIncreaseChange(cart.productId._id, cart.quantity)}
+                            >
                                 <Add />
                             </button>
                         </div>
                     </div>
                     <span className={cx('final-price')}>{formatVND(cart.productId.price * cart.quantity)}</span>
                     <div className={cx('delete-btn')}>
-                        <DeleteOutline fontSize="large" onClick={handleDeleteCart} />
+                        <DeleteOutline fontSize="large" onClick={() => handleDeleteCart(cart.productId._id)} />
                     </div>
                 </div>
             ))}

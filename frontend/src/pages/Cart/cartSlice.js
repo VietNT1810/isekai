@@ -1,4 +1,4 @@
-import { getUserCart, updateUserCart } from '@/actions/cartAction';
+import { getUserCart, removeUserCart, updateUserCart } from '@/actions/cartAction';
 import { createSlice } from '@reduxjs/toolkit';
 
 const cartSlice = createSlice({
@@ -16,6 +16,9 @@ const cartSlice = createSlice({
             if (productCart) {
                 productCart.quantity = action.payload.quantity;
             }
+        },
+        removeCart: (state, action) => {
+            state.carts = state.carts.filter((cart) => cart.productId._id != action.payload);
         },
     },
     extraReducers: {
@@ -48,8 +51,22 @@ const cartSlice = createSlice({
             state.loading = false;
             state.error = payload;
         },
+
+        //remove user cart
+        [removeUserCart.pending]: (state) => {
+            state.loading = true;
+            state.error = null;
+        },
+        [removeUserCart.fulfilled]: (state) => {
+            state.loading = false;
+            state.success = true;
+        },
+        [removeUserCart.rejected]: (state, { payload }) => {
+            state.loading = false;
+            state.error = payload;
+        },
     },
 });
 
-export const { changeCartQuantity } = cartSlice.actions;
+export const { changeCartQuantity, removeCart } = cartSlice.actions;
 export default cartSlice.reducer;
