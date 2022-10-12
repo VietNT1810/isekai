@@ -18,6 +18,6 @@ router.put("/update", updateCart);
 router.post("/get-cart", getCart);
 
 //remove cart
-router.delete("/remove", removeCart);
+router.post("/remove", removeCart);
 
 module.exports = router;
