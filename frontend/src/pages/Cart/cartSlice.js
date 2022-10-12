@@ -1,4 +1,4 @@
-import { getUserCart, removeUserCart, updateUserCart } from '@/actions/cartAction';
+import { addUserCart, getUserCart, removeUserCart, updateUserCart } from '@/actions/cartAction';
 import { createSlice } from '@reduxjs/toolkit';
 
 const cartSlice = createSlice({
@@ -34,6 +34,22 @@ const cartSlice = createSlice({
             state.success = true;
         },
         [getUserCart.rejected]: (state, { payload }) => {
+            state.loading = false;
+            state.error = payload;
+        },
+
+        //add to cart
+        [addUserCart.pending]: (state) => {
+            state.loading = true;
+            state.error = null;
+        },
+        [addUserCart.fulfilled]: (state, { payload }) => {
+            state.loading = false;
+            state.carts = payload.cart.products;
+            state.userId = payload.cart.userId;
+            state.success = true;
+        },
+        [addUserCart.rejected]: (state, { payload }) => {
             state.loading = false;
             state.error = payload;
         },

@@ -1,4 +1,4 @@
-import { getCarts, removeCart, updateCart } from '@/services/cartService';
+import { addToCart, getCarts, removeCart, updateCart } from '@/services/cartService';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getUserCart = createAsyncThunk('cart/get', async ({ userId }, { rejectWithValue }) => {
@@ -19,6 +19,22 @@ export const getUserCart = createAsyncThunk('cart/get', async ({ userId }, { rej
         }
     }
 });
+
+export const addUserCart = createAsyncThunk(
+    'cart/add',
+    async ({ userId, productId, quantity }, { rejectWithValue }) => {
+        try {
+            const data = await addToCart({ userId, productId, quantity });
+            return data;
+        } catch (error) {
+            if (error.response && error.response.data.message) {
+                return rejectWithValue(error.response.data.message);
+            } else {
+                return rejectWithValue(error.message);
+            }
+        }
+    },
+);
 
 export const updateUserCart = createAsyncThunk('cart/update', async ({ productId }, { getState, rejectWithValue }) => {
     try {

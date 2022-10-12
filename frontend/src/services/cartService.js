@@ -11,6 +11,15 @@ export const getCarts = async (params) => {
     }
 };
 
+export const addToCart = async (params) => {
+    try {
+        const result = await request.post(`${prefix}/add-to-cart`, params);
+        return result.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
 export const updateCart = async (params) => {
     try {
         const result = await request.put(`${prefix}/update`, params);
