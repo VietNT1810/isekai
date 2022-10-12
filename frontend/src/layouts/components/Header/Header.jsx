@@ -1,4 +1,4 @@
-import { ShoppingCart } from '@mui/icons-material';
+import { ShoppingCart, ShoppingCartTwoTone } from '@mui/icons-material';
 import { Badge, IconButton } from '@mui/material';
 import classNames from 'classnames/bind';
 import { useEffect } from 'react';
@@ -15,6 +15,7 @@ const cx = classNames.bind(styles);
 
 function Header() {
     const { loading, userInfo } = useSelector((state) => state.user);
+    const { carts } = useSelector((state) => state.cart);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -62,8 +63,8 @@ function Header() {
                                 onClickLogout={handleClickLogout}
                             />
                             <IconButton aria-label="cart" onClick={handleCartClick}>
-                                <Badge badgeContent={2} color="secondary">
-                                    <ShoppingCart sx={{ fontSize: '24px', color: '#1f1f26' }} />
+                                <Badge badgeContent={carts.length} color="secondary">
+                                    <ShoppingCartTwoTone sx={{ fontSize: '24px', color: '#1f1f26' }} />
                                 </Badge>
                             </IconButton>
                         </div>
