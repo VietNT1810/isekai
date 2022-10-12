@@ -19,30 +19,31 @@ function ProductPage(props) {
     const [product, setProducts] = useState({});
     const [reviews, setReviews] = useState([]);
 
+    //Call API
+    const fetchProduct = async () => {
+        await productsService
+            .getProduct(params.slug)
+            .then((res) => {
+                setProducts(res.data.content[0]);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
+    const fetchReviews = async () => {
+        await reviewsService
+            .getReviews(params.slug)
+            .then((res) => {
+                console.log('review:', res.data.content);
+                setReviews(res.data.content);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
     useEffect(() => {
-        const fetchProduct = async () => {
-            await productsService
-                .getProduct(params.slug)
-                .then((res) => {
-                    setProducts(res.data.content[0]);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        };
-
-        const fetchReviews = async () => {
-            await reviewsService
-                .getReviews(params.slug)
-                .then((res) => {
-                    console.log('review:', res.data.content);
-                    setReviews(res.data.content);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        };
-
         fetchReviews();
         fetchProduct();
     }, []);
