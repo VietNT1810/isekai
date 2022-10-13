@@ -45,8 +45,6 @@ const cartSlice = createSlice({
         },
         [addUserCart.fulfilled]: (state, { payload }) => {
             state.loading = false;
-            state.carts = payload.cart.products;
-            state.userId = payload.cart.userId;
             state.success = true;
         },
         [addUserCart.rejected]: (state, { payload }) => {

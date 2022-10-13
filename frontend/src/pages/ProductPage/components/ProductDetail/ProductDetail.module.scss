@@ -56,30 +56,39 @@
             }
             .quantity {
                 display: flex;
-                align-items: center;
-                gap: 24px;
-                .cart-quantity {
+                flex-direction: column;
+                .quantity-box {
                     display: flex;
                     align-items: center;
-                    button {
-                        width: 32px;
-                        height: 32px;
-                        background-color: transparent;
-                        border: 1px solid var(--sub-blue);
+                    gap: 24px;
+                    .cart-quantity {
                         display: flex;
                         align-items: center;
-                        justify-content: center;
-                        cursor: pointer;
+                        button {
+                            width: 32px;
+                            height: 32px;
+                            background-color: transparent;
+                            border: 1px solid var(--sub-blue);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+                        }
+                        input {
+                            width: 60px;
+                            height: 32px;
+                            text-align: center;
+                            cursor: text;
+                            border: none;
+                            border-top: 1px solid var(--sub-blue);
+                            border-bottom: 1px solid var(--sub-blue);
+                        }
                     }
-                    input {
-                        width: 50px;
-                        height: 32px;
-                        text-align: center;
-                        cursor: text;
-                        border: none;
-                        border-top: 1px solid var(--sub-blue);
-                        border-bottom: 1px solid var(--sub-blue);
-                    }
+                }
+                .quantity-error {
+                    color: #d32f2f;
+                    margin-top: 10px;
+                    font-size: 1.4rem;
                 }
             }
             .shipping {
@@ -96,10 +105,18 @@
                 }
             }
         }
+        .product-quantity {
+            align-items: flex-start;
+        }
         .product-action {
             display: flex;
             align-items: center;
             gap: 24px;
         }
     }
+}
+
+button:disabled,
+button[disabled] {
+    color: var(--main-black);
 }

@@ -1,29 +1,83 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Add, AddShoppingCartOutlined, Remove, RemoveShoppingCartOutlined } from '@mui/icons-material';
-import { Rating } from '@mui/material';
+import { Alert, Rating, Snackbar } from '@mui/material';
 import classNames from 'classnames/bind';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './ProductDetail.module.scss';
 import assets from '@/assets';
 import Button from '@/components/Button';
 import { formatVND } from '@/helpers/number';
 import { removeCart } from '@/pages/Cart/cartSlice';
-import { removeUserCart } from '@/actions/cartAction';
+import { addUserCart, getUserCart, removeUserCart } from '@/actions/cartAction';
 
 const cx = classNames.bind(styles);
 
 function ProductDetail({ product, isInCart }) {
+    const { userInfo } = useSelector((state) => state.user);
+    const { success, error } = useSelector((state) => state.cart);
     const dispatch = useDispatch();
+
+    const [quantity, setQuantity] = useState(1);
+    const [openAlert, setOpenAlert] = useState(false);
+    const [message, setMessage] = useState('');
+
+    const handleQuantityChange = (e) => {
+        const regex = /^[0-9\b]+$/;
+        if (e.target.value === '' || regex.test(e.target.value)) {
+            setQuantity(e.target.value);
+        }
+    };
+
+    const handleQuantityBlur = (e) => {
+        if (e.target.value == '') {
+            setQuantity(1);
+        }
+    };
+
+    const handleIncreaseQuantity = () => {
+        if (quantity > product.quantity) {
+            return;
+        }
+        setQuantity((prev) => +prev + 1);
+    };
+
+    const handleDecreaseQuantity = () => {
+        setQuantity((prev) => prev - 1);
+    };
+
+    const handleCloseAlert = () => {
+        setOpenAlert(false);
+    };
 
     const handleRemoveCart = () => {
         dispatch(removeUserCart({ productId: product._id }))
             .unwrap()
             .then(() => {
+                setMessage('Xóa khỏi giỏ hàng thành công');
+                setOpenAlert(true);
                 dispatch(removeCart(product._id));
             })
             .catch((err) => {
                 console.log(err);
+            });
+    };
+
+    const handleAddToCart = () => {
+        const cart = {
+            userId: userInfo._id,
+            productId: product._id,
+            quantity: +quantity,
+        };
+        dispatch(addUserCart(cart))
+            .unwrap()
+            .then(() => {
+                setMessage('Thêm vào giỏ hàng thành công');
+                setOpenAlert(true);
+                dispatch(getUserCart({ userId: userInfo._id }));
+            })
+            .catch((error) => {
+                console.log(error);
             });
     };
 
@@ -57,25 +111,31 @@ function ProductDetail({ product, isInCart }) {
                     <span className={cx('price')}>{formatVND(product.price)}</span>
                 </div>
 
-                <div className={cx('product-group')}>
+                <div className={cx('product-group', 'product-quantity')}>
                     <p className={cx('label')}>Số lượng:</p>
                     <div className={cx('quantity')}>
-                        <div className={cx('cart-quantity')}>
-                            <button>
-                                <Remove />
-                            </button>
-                            <input
-                                type="text"
-                                value="1"
-                                onChange={() => {
-                                    console.log();
-                                }}
-                            />
-                            <button>
-                                <Add />
-                            </button>
+                        <div className={cx('quantity-box')}>
+                            <div className={cx('cart-quantity')}>
+                                <button onClick={handleDecreaseQuantity} disabled={quantity == 1}>
+                                    <Remove />
+                                </button>
+                                <input
+                                    type="tel"
+                                    value={quantity}
+                                    onChange={handleQuantityChange}
+                                    onBlur={handleQuantityBlur}
+                                />
+                                <button onClick={handleIncreaseQuantity}>
+                                    <Add />
+                                </button>
+                            </div>
+                            <span>{product.quantity} sản phẩm có sẵn</span>
                         </div>
-                        <span>{product.quantity} sản phẩm có sẵn</span>
+                        {quantity > product.quantity ? (
+                            <div className={cx('quantity-error')}>
+                                <span>Số lượng bạn chọn đã đạt mức tối đa của sản phẩm này</span>
+                            </div>
+                        ) : null}
                     </div>
                 </div>
 
@@ -100,6 +160,7 @@ function ProductDetail({ product, isInCart }) {
                         <Button
                             outline
                             leftIcon={<AddShoppingCartOutlined color="primary" sx={{ fontSize: '24px' }} />}
+                            onClick={handleAddToCart}
                         >
                             Thêm vào giỏ hàng
                         </Button>
@@ -107,6 +168,20 @@ function ProductDetail({ product, isInCart }) {
                     <Button primary>Mua ngay</Button>
                 </div>
             </div>
+            <Snackbar
+                open={openAlert}
+                autoHideDuration={3000}
+                onClose={handleCloseAlert}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            >
+                <Alert
+                    variant="filled"
+                    severity={success ? 'success' : 'error'}
+                    sx={{ width: '400px', fontSize: '14px', fontFamily: 'SVN Gotham Regular', alignItems: 'center' }}
+                >
+                    {success ? message : error}
+                </Alert>
+            </Snackbar>
         </div>
     );
 }

@@ -22,7 +22,6 @@ function Home(props) {
                 limit: 3,
             };
             const result = await productService.getProducts(params);
-            console.log('result', result);
             if (type === 'clothes') {
                 setTabClothes(result.data.content);
             } else if (type === 'outfit') {
