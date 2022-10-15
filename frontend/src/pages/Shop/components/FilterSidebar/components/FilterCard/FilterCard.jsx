@@ -52,6 +52,8 @@ function FilterCard({ title, slider, ratingSlider }) {
 
     useEffect(() => {
         setSearchParams({ min: filterQuery.min, max: filterQuery.max, rating: filterQuery.rating });
+        setPriceRange([filterQuery.min, filterQuery.max]);
+        setRatingRange(filterQuery.rating);
     }, []);
 
     return (
