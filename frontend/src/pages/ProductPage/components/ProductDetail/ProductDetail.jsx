@@ -10,6 +10,7 @@ import Button from '@/components/Button';
 import { formatVND } from '@/helpers/number';
 import { removeCart } from '@/pages/Cart/cartSlice';
 import { addUserCart, getUserCart, removeUserCart } from '@/actions/cartAction';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +18,7 @@ function ProductDetail({ product, isInCart }) {
     const { userInfo } = useSelector((state) => state.user);
     const { success, error } = useSelector((state) => state.cart);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [quantity, setQuantity] = useState(1);
     const [openAlert, setOpenAlert] = useState(false);
@@ -64,6 +66,10 @@ function ProductDetail({ product, isInCart }) {
     };
 
     const handleAddToCart = () => {
+        if (!userInfo) {
+            return navigate('/login');
+        }
+
         const cart = {
             userId: userInfo._id,
             productId: product._id,
