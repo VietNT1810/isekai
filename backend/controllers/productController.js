@@ -4,25 +4,25 @@ const crypto = require("crypto");
 
 //get all product
 const getProducts = async (req, res) => {
-  let { productType, min, max, rating } = req.query;
+  let { productType, min, max, rating, sortOrder } = req.query;
   rating = Number(rating);
   max = Number(max);
   min = Number(min);
 
-  // let limit = Math.abs(req.query.limit) || 20;
-  // let page = (Math.abs(req.query.page) || 1) - 1;
-
-  //get database data
-  // const products = await Product.find(filter)
-  //   .limit(limit)
-  //   .skip(page * limit);
-  // const totalElement = await Product.find(filter).count();
-  // const numberOfElements = await Product.find(filter).limit(limit).count();
-
-  //check total page
-  // let totalPage = Math.ceil(totalElement / limit);
   const priceFilter = min && max ? { $gte: min, $lte: max } : {};
   const ratingFilter = rating ? { $gte: rating } : { $gte: rating };
+
+  //get sort order
+  const getSort = () => {
+    const sortBy = {
+      newest: { _id: -1 },
+      ASC: { price: 1 },
+      DESC: { price: -1 },
+    };
+    return sortBy[sortOrder] || "";
+  };
+
+  const sort = getSort();
 
   const matchQuery = {
     price: priceFilter,
@@ -68,6 +68,11 @@ const getProducts = async (req, res) => {
     //query
     {
       $match: matchQuery,
+    },
+
+    //sort
+    {
+      $sort: sort,
     },
   ]);
 
