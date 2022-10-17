@@ -27,31 +27,31 @@ function FilterCard({ title, slider, ratingSlider }) {
     const [ratingRange, setRatingRange] = useState(0);
     const [ratingValue, setRatingValue] = useState(0);
 
+    //price change
     const handlePriceChange = (event, newValue) => {
         setPriceRange(newValue);
     };
 
-    const handleRatingChange = (event, newValue) => {
-        setRatingRange(newValue);
-    };
-    const setVal = () => {
+    const handleSetPriceValue = () => {
         setPriceValue(priceRange);
-        setRatingValue(ratingRange);
-
-        //set search url
-        let [min, max] = priceRange;
-        searchParams.set('min', min);
-        searchParams.set('max', max);
-        searchParams.set('rating', ratingRange);
-        setSearchParams(searchParams);
 
         //dispatch action
-        dispatch(filterRating(ratingRange));
         dispatch(filterPrice(priceRange));
     };
 
+    //rating change
+    const handleRatingChange = (event, newValue) => {
+        setRatingRange(newValue);
+    };
+
+    const handleSetRatingValue = () => {
+        setRatingValue(ratingRange);
+
+        //dispatch action
+        dispatch(filterRating(ratingRange));
+    };
+
     useEffect(() => {
-        setSearchParams({ min: filterQuery.min, max: filterQuery.max, rating: filterQuery.rating });
         setPriceRange([filterQuery.min, filterQuery.max]);
         setRatingRange(filterQuery.rating);
     }, []);
@@ -69,7 +69,7 @@ function FilterCard({ title, slider, ratingSlider }) {
                         step={100000}
                         marks={PRICE_MARKS}
                         onChange={handlePriceChange}
-                        onChangeCommitted={setVal}
+                        onChangeCommitted={handleSetPriceValue}
                         valueLabelDisplay="auto"
                         getAriaValueText={valuetext}
                         valueLabelFormat={valuetext}
@@ -84,7 +84,7 @@ function FilterCard({ title, slider, ratingSlider }) {
                         max={5}
                         marks={RATING_MARKS}
                         onChange={handleRatingChange}
-                        onChangeCommitted={setVal}
+                        onChangeCommitted={handleSetRatingValue}
                         sx={{
                             '.MuiSlider-markLabel': {
                                 fontSize: '12px',
