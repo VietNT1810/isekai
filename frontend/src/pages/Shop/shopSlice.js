@@ -6,6 +6,7 @@ const initialState = {
         max: 500000,
         rating: 0,
     },
+    sortOrder: 'newest',
 };
 
 const shopSlice = createSlice({
@@ -25,8 +26,11 @@ const shopSlice = createSlice({
                 rating: action.payload,
             };
         },
+        changeSort: (state, action) => {
+            state.sortOrder = action.payload;
+        },
     },
 });
 
-export const { filterPrice, filterRating } = shopSlice.actions;
+export const { filterPrice, filterRating, changeSort } = shopSlice.actions;
 export default shopSlice.reducer;

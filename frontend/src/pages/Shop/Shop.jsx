@@ -21,7 +21,6 @@ function Shop(props) {
                 ...filterQuery,
                 sortOrder,
             };
-            console.log('params:', params);
             await productService
                 .getProducts(params)
                 .then((res) => {
