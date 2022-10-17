@@ -12,15 +12,18 @@ import { useSearchParams } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 function Shop(props) {
-    const { filterQuery } = useSelector((state) => state.shop);
+    const { filterQuery, sortOrder } = useSelector((state) => state.shop);
     const [products, setProducts] = useState([]);
-    const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
         const fetchProducts = async () => {
-            // const params = Object.fromEntries([...searchParams]);
+            const params = {
+                ...filterQuery,
+                sortOrder,
+            };
+            console.log('params:', params);
             await productService
-                .getProducts(filterQuery)
+                .getProducts(params)
                 .then((res) => {
                     setProducts(res.data.content);
                 })
@@ -29,7 +32,7 @@ function Shop(props) {
                 });
         };
         fetchProducts();
-    }, [filterQuery]);
+    }, [filterQuery, sortOrder]);
 
     return (
         <>
