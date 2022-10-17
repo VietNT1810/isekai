@@ -106,7 +106,7 @@ const getCart = async (req, res) => {
       populate: {
         path: "productId",
         model: "Product",
-        select: ["name", "price", "productImage"],
+        select: ["name", "price", "productImage", "slug"],
       },
     });
     res.status(200).json({ cart });

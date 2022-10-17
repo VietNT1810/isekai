@@ -217,10 +217,37 @@ const updateProduct = async (req, res) => {
   res.status(200).json({ message: "Update product successful" });
 };
 
+//get search product
+const getSearchProduct = async (req, res) => {
+  try {
+    const name = req.params.name;
+
+    const productDoc = await Product.find(
+      { name: { $regex: new RegExp(name), $options: "is" } },
+      { name: 1, slug: 1, productImage: 1, price: 1, _id: 0 }
+    );
+
+    if (productDoc.length < 0) {
+      return res.status(404).json({
+        message: "No product found.",
+      });
+    }
+
+    res.status(200).json({
+      products: productDoc,
+    });
+  } catch (error) {
+    res.status(400).json({
+      error: "Your request could not be processed. Please try again.",
+    });
+  }
+};
+
 module.exports = {
   createProduct,
   getProducts,
   getSingleProduct,
   deleteProduct,
   updateProduct,
+  getSearchProduct,
 };
