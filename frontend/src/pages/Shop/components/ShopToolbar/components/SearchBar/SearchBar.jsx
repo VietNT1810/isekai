@@ -1,53 +1,82 @@
+import { useEffect, useRef, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { OutlinedInput } from '@mui/material';
 import classNames from 'classnames/bind';
-import HeadlessTippy from '@tippyjs/react/headless';
 
-import styles from './SearchBar.module.scss';
 import { formatVND } from '@/helpers/number';
-import { NavLink } from 'react-router-dom';
+import useDebounce from '@/hooks/useDebounce';
+import styles from './SearchBar.module.scss';
+import * as productsService from '@/services/productsService';
 
 const cx = classNames.bind(styles);
 
-const products = [
-    {
-        productImage: 'https://res.cloudinary.com/supafrankie/image/upload/v1661155393/clothes/CC-800x800_vdoopr.png',
-        name: 'Set bộ đồ nữ chữ N , áo polo khóa kèm quần short đùi thêu form rộng unisex',
-        price: 600000,
-        slug: 'product-6-94957ca438',
-    },
-    {
-        productImage: 'https://res.cloudinary.com/supafrankie/image/upload/v1660884311/sample.jpg',
-        name: 'product 2',
-        price: 600000,
-        slug: 'product-6-94957ca438',
-    },
-    {
-        productImage: 'https://res.cloudinary.com/supafrankie/image/upload/v1661155393/clothes/CC-800x800_vdoopr.png',
-        name: 'product 3',
-        price: 600000,
-        slug: 'product-6-94957ca438',
-    },
-];
-
 function SearchBar(props) {
+    const [searchValue, setSearchValue] = useState('');
+    const [searchResult, setSearchResult] = useState([]);
+    const [showResult, setShowResult] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const inputRef = useRef();
+
+    const debouncedValue = useDebounce(searchValue, 500);
+
+    useEffect(() => {
+        if (!debouncedValue.trim()) {
+            setSearchResult([]);
+            return;
+        }
+        const fetchApi = async () => {
+            const result = await productsService.searchProduct(debouncedValue);
+            setSearchResult(result.products);
+        };
+
+        fetchApi();
+    }, [debouncedValue]);
+
+    const handleHideResult = () => {
+        setShowResult(false);
+    };
+
+    const handleSearchChange = (e) => {
+        const searchValue = e.target.value;
+        if (!searchValue.startsWith(' ')) {
+            setSearchValue(searchValue);
+        }
+    };
+
+    console.log('searchResult:', searchResult);
+
     return (
         <div className={cx('search-bar')}>
-            <OutlinedInput placeholder="Search product" sx={{ fontSize: 16, height: 40 }} />
-            <div className={cx('search-result')}>
-                {products.map((result, index) => (
-                    <NavLink key={index} className={cx('search-item')} to={`/product/${result.slug}`}>
-                        <div className={cx('result-image-container')}>
-                            <div className={cx('result-image-box')}>
-                                <img src={result.productImage} className={cx('result-image')} alt="Error image" />
+            <OutlinedInput
+                placeholder="Tìm sản phẩm"
+                sx={{ fontSize: 16, height: 40 }}
+                onChange={handleSearchChange}
+                ref={inputRef}
+                onFocus={() => {
+                    setShowResult(true);
+                }}
+                onBlur={() => {
+                    setShowResult(false);
+                }}
+            />
+            {showResult && searchResult.length > 0 ? (
+                <div className={cx('search-result')}>
+                    {searchResult.map((result, index) => (
+                        <NavLink key={index} className={cx('search-item')} to={`/product/${result.slug}`}>
+                            <div className={cx('result-image-container')}>
+                                <div className={cx('result-image-box')}>
+                                    <img src={result.productImage} className={cx('result-image')} alt="Error image" />
+                                </div>
                             </div>
-                        </div>
-                        <div className={cx('result-info')}>
-                            <div className={cx('name')}>{result.name}</div>
-                            <span className={cx('price')}>{formatVND(result.price)}</span>
-                        </div>
-                    </NavLink>
-                ))}
-            </div>
+                            <div className={cx('result-info')}>
+                                <div className={cx('name')}>{result.name}</div>
+                                <span className={cx('price')}>{formatVND(result.price)}</span>
+                            </div>
+                        </NavLink>
+                    ))}
+                </div>
+            ) : null}
         </div>
     );
 }

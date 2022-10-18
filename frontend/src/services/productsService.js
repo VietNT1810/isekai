@@ -17,3 +17,12 @@ export const getProduct = async (slug) => {
         return error;
     }
 };
+
+export const searchProduct = async (params) => {
+    try {
+        const result = await request.get(`/api/products/search/${params}`);
+        return result.data;
+    } catch (error) {
+        return error;
+    }
+};
