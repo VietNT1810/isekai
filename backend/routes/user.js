@@ -4,6 +4,7 @@ const {
   signupUser,
   getUserInfo,
   updateUserInfo,
+  loginByGoogle,
 } = require("../controllers/userController.js");
 const { requireAuth } = require("../middleware/middleware.js");
 
@@ -11,6 +12,9 @@ const router = express.Router();
 
 //login
 router.post("/login", loginUser);
+
+//sign in by google
+router.get("/google-auth", loginByGoogle);
 
 //signup
 router.post("/signup", signupUser);

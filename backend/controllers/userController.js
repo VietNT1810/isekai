@@ -1,9 +1,75 @@
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const { cloudinary } = require("../utils/cloudinary");
+const { OAuth2Client } = require("google-auth-library");
 
 const createToken = (_id, secret, expiresIn) => {
   return jwt.sign({ _id }, secret, { expiresIn: expiresIn });
+};
+
+//verify google token
+const verifyGoogleToken = async (token, client) => {
+  const ticket = await client.verifyIdToken({
+    idToken: token,
+    audience: process.env.GOOGLE_CLIENT_ID,
+    // Specify the CLIENT_ID of the app that accesses the backend
+    // Or, if multiple clients access the backend:
+    //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+  });
+  return ticket.getPayload();
+  // If request specified a G Suite domain:
+  // const domain = payload['hd'];
+};
+
+//login by google
+const loginByGoogle = async (req, res) => {
+  const token = req.query.id_token;
+  const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+  var googleProfile = await verifyGoogleToken(token, client).catch(console.log);
+  if (googleProfile.email_verified) {
+    User.find({ email: googleProfile.email })
+      .exec()
+      .then(async (result) => {
+        if (result.length < 1) {
+          const salt = await bcrypt.genSalt(10);
+          const hash = await bcrypt.hash(googleProfile.sub, salt);
+          await User.create({
+            username: googleProfile.name,
+            email: googleProfile.email,
+            password: hash,
+            avatar: googleProfile.picture,
+          });
+          const user = await User.findOne({ email: googleProfile.email });
+          const accessToken = createToken(
+            user._id,
+            process.env.ACCESS_TOKEN_SECRET,
+            process.env.ACCESS_TOKEN_EXPIRE
+          );
+          res.status(200).json({
+            email: user.email,
+            accessToken,
+            userId: user._id,
+          });
+        } else {
+          const accessToken = createToken(
+            result[0]._id,
+            process.env.ACCESS_TOKEN_SECRET,
+            process.env.ACCESS_TOKEN_EXPIRE
+          );
+          res.status(200).json({
+            email: result[0].email,
+            accessToken,
+            userId: result[0]._id,
+          });
+        }
+      })
+      .catch((err) => {
+        throw err;
+      });
+  } else {
+    res.status(401).json({ auth: false, message: "Unauthorized" });
+  }
 };
 
 //login user
@@ -90,4 +156,10 @@ const updateUserInfo = async (req, res) => {
   }
 };
 
-module.exports = { loginUser, signupUser, getUserInfo, updateUserInfo };
+module.exports = {
+  loginUser,
+  signupUser,
+  getUserInfo,
+  updateUserInfo,
+  loginByGoogle,
+};
