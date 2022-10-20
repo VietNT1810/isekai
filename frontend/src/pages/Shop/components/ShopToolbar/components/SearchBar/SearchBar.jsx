@@ -56,9 +56,7 @@ function SearchBar(props) {
                 onFocus={() => {
                     setShowResult(true);
                 }}
-                onBlur={() => {
-                    setShowResult(false);
-                }}
+                onBlur={handleHideResult}
             />
             {showResult && searchResult.length > 0 ? (
                 <div className={cx('search-result')}>
