@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import classNames from 'classnames/bind';
 import { Controller, useForm } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
@@ -8,7 +9,7 @@ import CheckboxField from '@/components/CheckboxField';
 import InputField from '@/components/InputField';
 import styles from './LoginForm.module.scss';
 import Button from '@/components/Button';
-import assets from '@/assets';
+import GoogleAuthButton from '@/components/GoogleAuthButton';
 
 const cx = classNames.bind(styles);
 const schema = yup
@@ -27,6 +28,11 @@ function LoginForm({ submitForm }) {
     } = useForm({
         resolver: yupResolver(schema),
     });
+
+    //login with google
+    const handleLoginWithGoogle = (token) => {
+        console.log('token:', token);
+    };
 
     return (
         <div className={cx('login-form')}>
@@ -82,7 +88,7 @@ function LoginForm({ submitForm }) {
                 <span></span>
             </div>
             <div className={cx('login-social')}>
-                <div className={cx('action-social')}>
+                {/* <div className={cx('action-social')}>
                     <img src={assets.icons.iconGoogle} alt="No image here" />
                 </div>
                 <div className={cx('action-social')}>
@@ -93,7 +99,8 @@ function LoginForm({ submitForm }) {
                 </div>
                 <div className={cx('action-social')}>
                     <img src={assets.icons.iconTwitter} alt="No image here" />
-                </div>
+                </div> */}
+                <GoogleAuthButton onLoginWithGoogle={handleLoginWithGoogle} />
             </div>
         </div>
     );

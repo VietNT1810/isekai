@@ -4,11 +4,11 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { getUserCart } from '@/actions/cartAction';
 import { loginUser } from '@/actions/userAction';
 import assets from '@/assets';
 import LoginForm from './components/LoginForm';
 import styles from './Login.module.scss';
-import { getUserCart } from '@/actions/cartAction';
 
 const cx = classNames.bind(styles);
 
