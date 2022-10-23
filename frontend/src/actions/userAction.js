@@ -1,4 +1,4 @@
-import { getUserInfo, login, register, updateUser } from '@/services/userService';
+import { getUserInfo, login, loginGoogle, register, updateUser } from '@/services/userService';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const registerUser = createAsyncThunk('user/register', async ({ username, email, password }) => {
@@ -62,3 +62,17 @@ export const updateUserProfile = createAsyncThunk(
         }
     },
 );
+
+export const loginByGoogle = createAsyncThunk('user/googleAuth', async ({ token }, { rejectWithValue }) => {
+    try {
+        const data = await loginGoogle({ id_token: token });
+        localStorage.setItem('access-token', data.accessToken);
+        return data;
+    } catch (error) {
+        if (error.response && error.response.data.message) {
+            return rejectWithValue(error.response.data.message);
+        } else {
+            return rejectWithValue(error.message);
+        }
+    }
+});

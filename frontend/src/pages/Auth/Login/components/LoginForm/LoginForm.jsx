@@ -19,7 +19,7 @@ const schema = yup
     })
     .required();
 
-function LoginForm({ submitForm }) {
+function LoginForm({ submitForm, googleLogin }) {
     const {
         register,
         control,
@@ -28,11 +28,6 @@ function LoginForm({ submitForm }) {
     } = useForm({
         resolver: yupResolver(schema),
     });
-
-    //login with google
-    const handleLoginWithGoogle = (token) => {
-        console.log('token:', token);
-    };
 
     return (
         <div className={cx('login-form')}>
@@ -100,7 +95,7 @@ function LoginForm({ submitForm }) {
                 <div className={cx('action-social')}>
                     <img src={assets.icons.iconTwitter} alt="No image here" />
                 </div> */}
-                <GoogleAuthButton onLoginWithGoogle={handleLoginWithGoogle} />
+                <GoogleAuthButton onLoginWithGoogle={(token) => googleLogin(token)} />
             </div>
         </div>
     );

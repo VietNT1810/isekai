@@ -1,4 +1,4 @@
-import { getUserProfile, loginUser, registerUser, updateUserProfile } from '@/actions/userAction';
+import { getUserProfile, loginByGoogle, loginUser, registerUser, updateUserProfile } from '@/actions/userAction';
 import { createSlice } from '@reduxjs/toolkit';
 
 //get user token from local storage
@@ -82,6 +82,22 @@ const userSlice = createSlice({
             state.success = true;
         },
         [updateUserProfile.rejected]: (state, { payload }) => {
+            state.loading = false;
+            state.error = payload;
+        },
+
+        //login user by Google
+        [loginByGoogle.pending]: (state) => {
+            state.loading = true;
+            state.error = null;
+        },
+        [loginByGoogle.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.userInfo = action.payload.email;
+            state.userToken = action.payload.accessToken;
+            state.success = true;
+        },
+        [loginByGoogle.rejected]: (state, { payload }) => {
             state.loading = false;
             state.error = payload;
         },

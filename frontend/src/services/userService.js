@@ -37,3 +37,12 @@ export const updateUser = async (data) => {
         throw error;
     }
 };
+
+export const loginGoogle = async (params) => {
+    try {
+        const result = await request.get(`${prefix}/google-auth`, { params });
+        return result.data;
+    } catch (error) {
+        throw error;
+    }
+};

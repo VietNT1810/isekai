@@ -26,8 +26,8 @@ const verifyGoogleToken = async (token, client) => {
 const loginByGoogle = async (req, res) => {
   const token = req.query.id_token;
   const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-  var googleProfile = await verifyGoogleToken(token, client).catch(console.log);
-  if (googleProfile.email_verified) {
+  const googleProfile = await verifyGoogleToken(token, client).catch(console.log);
+  if (googleProfile?.email_verified) {
     User.find({ email: googleProfile.email })
       .exec()
       .then(async (result) => {

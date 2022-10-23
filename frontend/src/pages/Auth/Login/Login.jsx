@@ -4,8 +4,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { getUserCart } from '@/actions/cartAction';
-import { loginUser } from '@/actions/userAction';
+import { loginByGoogle, loginUser } from '@/actions/userAction';
 import assets from '@/assets';
 import LoginForm from './components/LoginForm';
 import styles from './Login.module.scss';
@@ -24,7 +23,22 @@ function Login(props) {
             .unwrap()
             .then((res) => {
                 setOpen(true);
-                dispatch(getUserCart({ userId: res.userId }));
+                setTimeout(() => {
+                    navigate('/');
+                }, 2000);
+            })
+            .catch((error) => {-
+                console.log('error', error);
+                setOpen(true);
+            });
+    };
+
+    const handleLoginWithGoogle = (token) => {
+        console.log('token login:', token);
+        dispatch(loginByGoogle({ token }))
+            .unwrap()
+            .then((res) => {
+                setOpen(true);
                 setTimeout(() => {
                     navigate('/');
                 }, 2000);
@@ -42,7 +56,7 @@ function Login(props) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
-                <LoginForm submitForm={handleSubmit} />
+                <LoginForm submitForm={handleSubmit} googleLogin={handleLoginWithGoogle} />
                 <div className={cx('login-image')}>
                     <img src={assets.images.loginImage} alt="Something wrong" />
                 </div>
