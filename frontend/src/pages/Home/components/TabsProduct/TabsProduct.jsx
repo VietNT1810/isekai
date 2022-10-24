@@ -2,6 +2,7 @@ import { Tab, Tabs } from '@mui/material';
 import { useState } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
 
 import styles from './TabsProduct.module.scss';
 
@@ -34,9 +35,9 @@ function TabsProduct({ clothes, outfit, wig }) {
             <SwipeableViews index={index} onChangeIndex={handleChangeIndex}>
                 <div className={cx('tab-content')}>
                     {clothes.map((item) => (
-                        <div className={cx('tab-image')} key={item._id}>
+                        <Link className={cx('tab-image')} key={item._id} to={`/product/${item.slug}`}>
                             <img src={item.productImage} alt="Error image :(" />
-                        </div>
+                        </Link>
                     ))}
                 </div>
                 <div className={cx('tab-content')}>
