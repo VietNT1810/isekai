@@ -6,6 +6,7 @@ const {
   deleteProduct,
   updateProduct,
   getSearchProduct,
+  getTabsProducts,
 } = require("../controllers/productController");
 
 const router = express.Router();
@@ -13,8 +14,11 @@ const router = express.Router();
 //GET all products
 router.get("/", getProducts);
 
-//GET all products by type
+//GET all search product
 router.get("/search/:name", getSearchProduct);
+
+//GET tabs product
+router.get("/tabs", getTabsProducts);
 
 //GET a single product
 router.get("/detail/:slug", getSingleProduct);

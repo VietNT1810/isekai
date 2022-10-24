@@ -16,24 +16,24 @@ function Home(props) {
     const [tabWig, setTabWig] = useState([]);
 
     useEffect(() => {
-        // const getProducts = async (type) => {
-        //     let params = {
-        //         productType: type,
-        //         limit: 3,
-        //     };
-        //     await productService.getProducts(params).then((res) => {
-        //         if (type === 'clothes') {
-        //             setTabClothes(res.data?.content);
-        //         } else if (type === 'outfit') {
-        //             setTabOutfit(res.data?.content);
-        //         } else if (type === 'wig') {
-        //             setTabWig(res.data?.content);
-        //         }
-        //     });
-        // };
-        // getProducts('clothes');
-        // getProducts('outfit');
-        // getProducts('wig');
+        const getProducts = async (type) => {
+            let params = {
+                productType: type,
+                limit: 3,
+            };
+            await productService.getTabsProduct(params).then((res) => {
+                if (type === 'clothes') {
+                    setTabClothes(res.data?.content);
+                } else if (type === 'outfit') {
+                    setTabOutfit(res.data?.content);
+                } else if (type === 'wig') {
+                    setTabWig(res.data?.content);
+                }
+            });
+        };
+        getProducts('clothes');
+        getProducts('outfit');
+        getProducts('wig');
     }, []);
 
     return (
@@ -70,7 +70,7 @@ function Home(props) {
                         </p>
                     </div>
                     <div className={cx('tabs')}>
-                        {/* <TabsProduct clothes={tabClothes} outfit={tabOutfit} wig={tabWig} /> */}
+                        <TabsProduct clothes={tabClothes} outfit={tabOutfit} wig={tabWig} />
                     </div>
                 </div>
             </section>

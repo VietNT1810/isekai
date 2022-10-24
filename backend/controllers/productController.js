@@ -4,13 +4,17 @@ const crypto = require("crypto");
 
 //get all product
 const getProducts = async (req, res) => {
-  let { productType, min, max, rating, sortOrder } = req.query;
+  let { productType, min, max, rating, sortOrder, limit } = req.query;
+
+  //convert to number
   rating = Number(rating);
   max = Number(max);
   min = Number(min);
+  limit = Number(limit);
 
   const priceFilter = min && max ? { $gte: min, $lte: max } : {};
   const ratingFilter = rating ? { $gte: rating } : { $gte: rating };
+  const limitQuery = limit ? limit : 10;
 
   //get sort order
   const getSort = () => {
@@ -24,6 +28,7 @@ const getProducts = async (req, res) => {
 
   const sort = getSort();
 
+  //match query
   const matchQuery = {
     price: priceFilter,
     averageRating: ratingFilter,
@@ -33,8 +38,6 @@ const getProducts = async (req, res) => {
   if (!productType) {
     delete matchQuery.productType;
   }
-
-  // console.log("matchQuery:", matchQuery);
 
   const products = await Product.aggregate([
     //calculate rating by review
@@ -73,6 +76,11 @@ const getProducts = async (req, res) => {
     //sort
     {
       $sort: sort,
+    },
+
+    //limit
+    {
+      $limit: limitQuery,
     },
   ]);
 
@@ -243,6 +251,32 @@ const getSearchProduct = async (req, res) => {
   }
 };
 
+//get tabs products
+const getTabsProducts = async (req, res) => {
+  try {
+    const { productType, limit } = req.query;
+    const products = await Product.find({ productType }).limit(limit);
+
+    if (products.length < 0) {
+      return res.status(404).json({
+        message: "No product found.",
+      });
+    }
+
+    res.status(200).json({
+      status: "SUCCESS",
+      statusCode: 200,
+      message: "Get products success",
+      data: {
+        content: products,
+      },
+    });
+  } catch (error) {
+    res.status(400).json({
+      error: "Your request could not be processed. Please try again.",
+    });
+  }
+};
 module.exports = {
   createProduct,
   getProducts,
@@ -250,4 +284,5 @@ module.exports = {
   deleteProduct,
   updateProduct,
   getSearchProduct,
+  getTabsProducts,
 };
