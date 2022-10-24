@@ -16,6 +16,7 @@ import Profile from '@/pages/Profile';
 import ChangePassword from '@/pages/ChangePassword';
 import ProductPage from '@/pages/ProductPage';
 import Cart from '@/pages/Cart';
+import ProtectedRoute from '@/utils/protectedRoute';
 
 // const publicRoute = [
 //     { path: '/', component: Home, layout: HomeLayout },
@@ -56,10 +57,22 @@ function Routes(props) {
             element: <DefaultLayout />,
             children: [
                 { path: 'special', element: <Special /> },
-                { path: 'user/account/profile', element: <Profile /> },
-                { path: 'user/account/change-password', element: <ChangePassword /> },
                 { path: '/product/:slug', element: <ProductPage /> },
-                { path: '/cart', element: <Cart /> },
+            ],
+        },
+        {
+            path: '/',
+            element: <ProtectedRoute />,
+            children: [
+                {
+                    path: '/',
+                    element: <DefaultLayout />,
+                    children: [
+                        { path: 'user/account/profile', element: <Profile /> },
+                        { path: 'user/account/change-password', element: <ChangePassword /> },
+                        { path: '/cart', element: <Cart /> },
+                    ],
+                },
             ],
         },
         {
