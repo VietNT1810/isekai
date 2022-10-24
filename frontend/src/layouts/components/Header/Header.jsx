@@ -1,15 +1,14 @@
-import { ShoppingCart, ShoppingCartTwoTone } from '@mui/icons-material';
+import { ShoppingCartTwoTone } from '@mui/icons-material';
 import { Badge, IconButton } from '@mui/material';
 import classNames from 'classnames/bind';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 
+import styles from './Header.module.scss';
 import assets from '@/assets';
 import AvatarMenu from '@/components/AvatarMenu';
 import { logoutUser } from '@/pages/Auth/userSlice';
-import { getUserProfile } from '@/actions/userAction';
-import styles from './Header.module.scss';
+import { initCart } from '@/pages/Cart/cartSlice';
 
 const cx = classNames.bind(styles);
 
@@ -27,6 +26,7 @@ function Header() {
     const handleClickLogout = () => {
         console.log('click logout');
         dispatch(logoutUser());
+        dispatch(initCart());
         navigate('/login');
     };
 
@@ -57,7 +57,7 @@ function Header() {
                     <div className={cx('user-info')}>
                         <div className={cx('avatar')}>
                             <AvatarMenu
-                                username="asd asd"
+                                username={userInfo?.username}
                                 userAvatar={userInfo ? userInfo?.avatar : null}
                                 onClickProfile={handleClickProfile}
                                 onClickLogout={handleClickLogout}
