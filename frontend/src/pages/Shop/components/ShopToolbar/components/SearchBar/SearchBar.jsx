@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { OutlinedInput } from '@mui/material';
 import classNames from 'classnames/bind';
 
@@ -61,7 +61,7 @@ function SearchBar(props) {
             {showResult && searchResult.length > 0 ? (
                 <div className={cx('search-result')}>
                     {searchResult.map((result, index) => (
-                        <NavLink key={index} className={cx('search-item')} to={`/product/${result.slug}`}>
+                        <Link key={index} className={cx('search-item')} to={`/product/${result.slug}`}>
                             <div className={cx('result-image-container')}>
                                 <div className={cx('result-image-box')}>
                                     <img src={result.productImage} className={cx('result-image')} alt="Error image" />
@@ -71,7 +71,7 @@ function SearchBar(props) {
                                 <div className={cx('name')}>{result.name}</div>
                                 <span className={cx('price')}>{formatVND(result.price)}</span>
                             </div>
-                        </NavLink>
+                        </Link>
                     ))}
                 </div>
             ) : null}
