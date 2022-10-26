@@ -20,9 +20,13 @@ router.get("/google-auth", loginByGoogle);
 router.post("/signup", signupUser);
 
 //get user profile
-router.route("/profile").get(requireAuth, getUserInfo);
+// router.route("/profile").get(requireAuth, getUserInfo);
+router.get("/profile", requireAuth, getUserInfo);
 
 //update user info
-router.route("/profile/update").patch(requireAuth, updateUserInfo);
+router.patch("/profile/update", requireAuth, updateUserInfo);
+
+// //forgot password
+// router.route("/forgot-password")
 
 module.exports = router;
