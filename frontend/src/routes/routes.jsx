@@ -1,4 +1,4 @@
-import { useRoutes } from 'react-router-dom';
+import { Navigate, Outlet, useRoutes } from 'react-router-dom';
 
 import DefaultLayout from '@/layouts/DefaultLayout';
 import SpecialLayout from '@/layouts/SpecialLayout';
@@ -18,34 +18,9 @@ import ProductPage from '@/pages/ProductPage';
 import Cart from '@/pages/Cart';
 import ProtectedRoute from '@/utils/protectedRoute';
 
-// const publicRoute = [
-//     { path: '/', component: Home, layout: HomeLayout },
-//     { path: '/special', component: Special, layout: DefaultLayout },
-
-//     //Shop
-//     { path: '/shop', component: Shop, layout: ShopLayout },
-//     { path: '/weapon', component: Shop, layout: ShopLayout },
-//     { path: '/wig', component: Shop, layout: ShopLayout },
-//     { path: '/outfit', component: Shop, layout: ShopLayout },
-//     { path: '/lolita', component: Shop, layout: ShopLayout },
-//     { path: '/accessory', component: Shop, layout: ShopLayout },
-
-//     //Auth
-//     { path: '/login', component: Login, layout: AuthLayout },
-//     { path: '/login/identify', component: ForgotPassword, layout: AuthLayout },
-//     { path: '/register', component: Register, layout: AuthLayout },
-
-//     //User
-//     { path: '/user/account/profile', component: Profile, layout: DefaultLayout },
-//     { path: 'user/account/change-password', component: ChangePassword, layout: DefaultLayout },
-
-//     //Product
-//     { path: '/product/:slug', component: ProductPage, layout: DefaultLayout },
-// ];
-
-// export { publicRoute };
-
 function Routes(props) {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+
     let element = useRoutes([
         {
             path: '/',
@@ -62,7 +37,7 @@ function Routes(props) {
         },
         {
             path: '/',
-            element: <ProtectedRoute />,
+            element: isLoggedIn ? <Outlet /> : <Navigate to="/login" />,
             children: [
                 {
                     path: '/',
