@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { cloudinary } = require("../utils/cloudinary");
 const { OAuth2Client } = require("google-auth-library");
+const { sendEmailReset } = require("../helpers/sendMail");
 
 const createToken = (_id, secret, expiresIn) => {
   return jwt.sign({ _id }, secret, { expiresIn: expiresIn });
@@ -12,7 +13,7 @@ const createToken = (_id, secret, expiresIn) => {
 const verifyGoogleToken = async (token, client) => {
   const ticket = await client.verifyIdToken({
     idToken: token,
-    audience: process.env.GOOGLE_CLIENT_ID,
+    audience: process.env.G_CLIENT_ID,
     // Specify the CLIENT_ID of the app that accesses the backend
     // Or, if multiple clients access the backend:
     //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
@@ -25,8 +26,10 @@ const verifyGoogleToken = async (token, client) => {
 //login by google
 const loginByGoogle = async (req, res) => {
   const token = req.query.id_token;
-  const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-  const googleProfile = await verifyGoogleToken(token, client).catch(console.log);
+  const client = new OAuth2Client(process.env.G_CLIENT_ID);
+  const googleProfile = await verifyGoogleToken(token, client).catch(
+    console.log
+  );
   if (googleProfile?.email_verified) {
     User.find({ email: googleProfile.email })
       .exec()
@@ -156,10 +159,40 @@ const updateUserInfo = async (req, res) => {
   }
 };
 
+//Forgot  password
+const forgotPassword = async (req, res) => {
+  //get email
+  const { email } = req.body;
+
+  //check email exist
+  const user = await User.findOne({ email });
+  if (!user) {
+    return res.status(404).json({ message: "Địa chỉ email không tồn tại" });
+  }
+
+  //create access token
+  const accessToken = createToken(
+    user._id,
+    process.env.ACCESS_TOKEN_SECRET,
+    process.env.ACCESS_TOKEN_EXPIRE
+  );
+
+  //send mail
+  const url = `${process.env.ISEKAI_BASE_URL}/reset-password/${accessToken}`;
+  const name = user.username;
+  sendEmailReset(email, url, "Thay đổi mật khẩu", name);
+
+  //success
+  res.status(200).json({
+    message: "Đã gửi mail, vui lòng kiểm tra tài khoản email của bạn",
+  });
+};
+
 module.exports = {
   loginUser,
   signupUser,
   getUserInfo,
   updateUserInfo,
   loginByGoogle,
+  forgotPassword,
 };
