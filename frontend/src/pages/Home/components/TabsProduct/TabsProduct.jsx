@@ -34,21 +34,21 @@ function TabsProduct({ clothes, outfit, wig }) {
             </Tabs>
             <SwipeableViews index={index} onChangeIndex={handleChangeIndex}>
                 <div className={cx('tab-content')}>
-                    {clothes.map((item) => (
+                    {clothes?.map((item) => (
                         <Link className={cx('tab-image')} key={item._id} to={`/product/${item.slug}`}>
                             <img src={item.productImage} alt="Error image :(" />
                         </Link>
                     ))}
                 </div>
                 <div className={cx('tab-content')}>
-                    {outfit.map((item) => (
+                    {outfit?.map((item) => (
                         <div className={cx('tab-image')} key={item._id}>
                             <img src={item.productImage} alt="Error image :(" />
                         </div>
                     ))}
                 </div>
                 <div className={cx('tab-content')}>
-                    {wig.map((item) => (
+                    {wig?.map((item) => (
                         <div className={cx('tab-image')} key={item._id}>
                             <img src={item.productImage} alt="Error image :(" />
                         </div>
