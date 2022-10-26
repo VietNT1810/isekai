@@ -18,6 +18,7 @@ export const loginUser = createAsyncThunk('user/login', async ({ email, password
     try {
         const data = await login({ email, password });
         localStorage.setItem('access-token', data.accessToken);
+        localStorage.setItem('isLoggedIn', true);
         return data;
     } catch (error) {
         if (error.response && error.response.data.message) {
@@ -67,6 +68,7 @@ export const loginByGoogle = createAsyncThunk('user/googleAuth', async ({ token 
     try {
         const data = await loginGoogle({ id_token: token });
         localStorage.setItem('access-token', data.accessToken);
+        localStorage.setItem('isLoggedIn', true);
         return data;
     } catch (error) {
         if (error.response && error.response.data.message) {
