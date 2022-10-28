@@ -16,7 +16,7 @@ function AuthLayout() {
 
     useEffect(() => {
         //Check login route
-        setIsLoginPage(location.pathname === '/login');
+        setIsLoginPage(location.pathname.includes('login'));
     }, [location.pathname]);
 
     return (

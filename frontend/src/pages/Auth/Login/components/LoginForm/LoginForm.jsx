@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import classNames from 'classnames/bind';
 import { Controller, useForm } from 'react-hook-form';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
@@ -34,7 +34,7 @@ function LoginForm({ submitForm, googleLogin }) {
             <h1 className={cx('title')}>Đăng nhập</h1>
             <small>
                 Người mới?
-                <NavLink to="/register">Tạo tài khoản ở đây</NavLink>
+                <Link to="/register">Tạo tài khoản ở đây</Link>
             </small>
             <form
                 onSubmit={handleSubmit((data) => {
@@ -65,7 +65,7 @@ function LoginForm({ submitForm, googleLogin }) {
                     helperText={errors.password?.message}
                 />
                 <small>
-                    <NavLink to="/login/identify">Quên mật khẩu ?</NavLink>
+                    <Link to="/login/identify">Quên mật khẩu ?</Link>
                 </small>
                 <Controller
                     name="remember"
@@ -83,18 +83,6 @@ function LoginForm({ submitForm, googleLogin }) {
                 <span></span>
             </div>
             <div className={cx('login-social')}>
-                {/* <div className={cx('action-social')}>
-                    <img src={assets.icons.iconGoogle} alt="No image here" />
-                </div>
-                <div className={cx('action-social')}>
-                    <img src={assets.icons.iconFacebook} alt="No image here" />
-                </div>
-                <div className={cx('action-social')}>
-                    <img src={assets.icons.iconLinkedin} alt="No image here" />
-                </div>
-                <div className={cx('action-social')}>
-                    <img src={assets.icons.iconTwitter} alt="No image here" />
-                </div> */}
                 <GoogleAuthButton onLoginWithGoogle={(token) => googleLogin(token)} />
             </div>
         </div>

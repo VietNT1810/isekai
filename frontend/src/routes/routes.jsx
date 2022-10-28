@@ -66,12 +66,9 @@ function Routes(props) {
             path: '/',
             element: <AuthLayout />,
             children: [
-                {
-                    path: 'login',
-                    element: <Login />,
-                    children: [{ path: 'identify', element: <ForgotPassword /> }],
-                },
+                { path: 'login', element: <Login /> },
                 { path: 'register', element: <Register /> },
+                { path: 'login/identify', element: <ForgotPassword /> },
             ],
         },
         {

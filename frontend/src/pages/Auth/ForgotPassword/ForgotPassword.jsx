@@ -36,7 +36,7 @@ function ForgotPassword(props) {
                     <h1 className={cx('title')}>Quên mật khẩu</h1>
                     <p className={cx('description')}>
                         Bạn không may quên mất mật khẩu tài khoản của mình? Không sao! Hãy nhập email mà bạn cần lấy lại
-                        mật khẩu và chúng mình sẽ gửi mã xác nhận cho bạn.
+                        mật khẩu và chúng mình sẽ gửi xác nhận cho bạn.
                     </p>
                     <InputField
                         variant="filled"
@@ -54,7 +54,7 @@ function ForgotPassword(props) {
                     </Button>
                 </form>
                 <div className={cx('forgot-image')}>
-                    <img src={assets.images.loginImage} alt="Something wrong" />
+                    <img src={assets.images.forgotImage} alt="Something wrong" />
                 </div>
             </div>
         </div>
