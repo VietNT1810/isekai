@@ -8,7 +8,7 @@ import styles from './ResetPassword.module.scss';
 import InputField from '@/components/InputField';
 import Button from '@/components/Button';
 import assets from '@/assets';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 const schema = yup
@@ -19,6 +19,8 @@ const schema = yup
     .required();
 
 function ResetPassword(props) {
+    const { token } = useParams();
+
     const {
         register,
         formState: { errors },
@@ -29,13 +31,14 @@ function ResetPassword(props) {
 
     const submitForm = (data) => {
         console.log('reset:', data);
+        console.log('token:', token);
     };
 
     return (
         <div className={cx('wrapper')}>
-            <Link className={cx('logo')} to="/">
+            <div className={cx('logo')}>
                 <img src={assets.images.logoBlack} alt="" />
-            </Link>
+            </div>
             <form onSubmit={handleSubmit(submitForm)} className={cx('reset-form')}>
                 <InputField
                     variant="filled"
