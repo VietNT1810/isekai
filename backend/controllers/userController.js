@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const { cloudinary } = require("../utils/cloudinary");
 const { OAuth2Client } = require("google-auth-library");
 const { sendEmailReset } = require("../helpers/sendMail");
+const validator = require("validator");
 
 const createToken = (_id, secret, expiresIn) => {
   return jwt.sign({ _id }, secret, { expiresIn: expiresIn });
@@ -13,7 +14,7 @@ const createToken = (_id, secret, expiresIn) => {
 const verifyGoogleToken = async (token, client) => {
   const ticket = await client.verifyIdToken({
     idToken: token,
-    requiredAudience : process.env.G_CLIENT_ID,
+    requiredAudience: process.env.G_CLIENT_ID,
     // Specify the CLIENT_ID of the app that accesses the backend
     // Or, if multiple clients access the backend:
     //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
@@ -163,6 +164,11 @@ const updateUserInfo = async (req, res) => {
 const forgotPassword = async (req, res) => {
   //get email
   const { email } = req.body;
+
+  //email validate
+  if (!validator.isEmail(email)) {
+    return res.status(400).json({ message: "Địa chỉ email không hợp lệ" });
+  }
 
   //check email exist
   const user = await User.findOne({ email });

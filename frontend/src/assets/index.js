@@ -1,4 +1,5 @@
 import logoWhite from '@/assets/images/logo-white.png';
+import logoBlack from '@/assets/images/logo.png';
 import homeImage from '@/assets/images/statistic-img.jpg';
 import homePoster01 from '@/assets/images/poster-01.png';
 import homePoster02 from '@/assets/images/poster-02.jpg';
@@ -33,6 +34,7 @@ import iconCamera from '@/assets/icons/camera-icon.svg';
 
 const images = {
     logoWhite,
+    logoBlack,
     homeImage,
     homePoster01,
     homePoster02,

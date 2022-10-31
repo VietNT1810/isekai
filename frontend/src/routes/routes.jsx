@@ -17,6 +17,7 @@ import ChangePassword from '@/pages/ChangePassword';
 import ProductPage from '@/pages/ProductPage';
 import Cart from '@/pages/Cart';
 import ProtectedRoute from '@/utils/protectedRoute';
+import ResetPassword from '@/pages/ResetPassword';
 
 function Routes(props) {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -70,6 +71,10 @@ function Routes(props) {
                 { path: 'register', element: <Register /> },
                 { path: 'login/identify', element: <ForgotPassword /> },
             ],
+        },
+        {
+            path: 'reset-password/:token',
+            element: <ResetPassword />,
         },
         {
             path: '*',

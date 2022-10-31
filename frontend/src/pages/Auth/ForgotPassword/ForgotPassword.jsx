@@ -12,7 +12,7 @@ import assets from '@/assets';
 const cx = classNames.bind(styles);
 const schema = yup
     .object({
-        email: yup.string().email('Invalid email address').required('Email is required'),
+        email: yup.string().email('Địa chỉ email không hợp lệ').required('Nhập địa chỉ email'),
     })
     .required();
 
