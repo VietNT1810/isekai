@@ -6,6 +6,7 @@ const {
   updateUserInfo,
   loginByGoogle,
   forgotPassword,
+  resetPassword,
 } = require("../controllers/userController.js");
 const { requireAuth } = require("../middleware/middleware.js");
 
@@ -26,7 +27,10 @@ router.get("/profile", requireAuth, getUserInfo);
 //update user info
 router.patch("/profile/update", requireAuth, updateUserInfo);
 
-// //forgot password
+//forgot password
 router.post("/forgot-password", forgotPassword);
+
+//reset password
+router.post("/reset-password", requireAuth, resetPassword);
 
 module.exports = router;

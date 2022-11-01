@@ -162,36 +162,57 @@ const updateUserInfo = async (req, res) => {
 
 //Forgot  password
 const forgotPassword = async (req, res) => {
-  //get email
-  const { email } = req.body;
+  try {
+    //get email
+    const { email } = req.body;
 
-  //email validate
-  if (!validator.isEmail(email)) {
-    return res.status(400).json({ message: "Địa chỉ email không hợp lệ" });
+    //email validate
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({ message: "Địa chỉ email không hợp lệ" });
+    }
+
+    //check email exist
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "Địa chỉ email không tồn tại" });
+    }
+
+    //create access token
+    const accessToken = createToken(
+      user._id,
+      process.env.ACCESS_TOKEN_SECRET,
+      process.env.ACCESS_TOKEN_EXPIRE
+    );
+
+    //send mail
+    const url = `${process.env.ISEKAI_BASE_URL}/reset-password/${accessToken}`;
+    const name = user.username;
+    sendEmailReset(email, url, "Thay đổi mật khẩu", name);
+
+    //success
+    res.status(200).json({
+      message: "Đã gửi mail, vui lòng kiểm tra tài khoản email của bạn",
+    });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
+};
 
-  //check email exist
-  const user = await User.findOne({ email });
-  if (!user) {
-    return res.status(404).json({ message: "Địa chỉ email không tồn tại" });
+const resetPassword = async (req, res) => {
+  try {
+    const { password } = req.body;
+
+    //hash password
+    const salt = await bcrypt.genSalt();
+    const hash = await bcrypt.hash(password, salt);
+
+    //update password
+    await User.findOneAndUpdate({ _id: req.user._id }, { password: hash });
+
+    res.status(200).json({ message: "Thay đổi mật khẩu thành công" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
-
-  //create access token
-  const accessToken = createToken(
-    user._id,
-    process.env.ACCESS_TOKEN_SECRET,
-    process.env.ACCESS_TOKEN_EXPIRE
-  );
-
-  //send mail
-  const url = `${process.env.ISEKAI_BASE_URL}/reset-password/${accessToken}`;
-  const name = user.username;
-  sendEmailReset(email, url, "Thay đổi mật khẩu", name);
-
-  //success
-  res.status(200).json({
-    message: "Đã gửi mail, vui lòng kiểm tra tài khoản email của bạn",
-  });
 };
 
 module.exports = {
@@ -201,4 +222,5 @@ module.exports = {
   updateUserInfo,
   loginByGoogle,
   forgotPassword,
+  resetPassword,
 };
