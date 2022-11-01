@@ -46,3 +46,26 @@ export const loginGoogle = async (params) => {
         throw error;
     }
 };
+
+export const forgotPassword = async (params) => {
+    try {
+        const result = await request.post(`${prefix}/forgot-password`, params);
+        return result.data;
+    } catch (error) {
+        throw error.response;
+    }
+};
+
+export const resetPassword = async (params, token) => {
+    try {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const result = await request.post(`${prefix}/reset-password`, params, config);
+        return result.data;
+    } catch (error) {
+        throw error;
+    }
+};
