@@ -64,11 +64,12 @@ function AvatarMenu({ username, userAvatar, onClickProfile, onClickLogout }) {
         return color;
     };
     const stringAvatar = (name) => {
+        const arrayName = name.split(' ');
         return {
             sx: {
                 bgcolor: stringToColor(name),
             },
-            children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+            children: arrayName.length > 1 ? `${arrayName[0][0]}${arrayName[1][0]}` : `${arrayName[0][0]}`,
         };
     };
 
