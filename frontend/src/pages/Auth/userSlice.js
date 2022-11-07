@@ -32,9 +32,10 @@ const userSlice = createSlice({
             state.loading = true;
             state.error = null;
         },
-        [registerUser.fulfilled]: (state, { payload }) => {
+        [registerUser.fulfilled]: (state, action) => {
             state.loading = false;
             state.success = true; // registration successful
+            state.userToken = action.payload.accessToken;
         },
         [registerUser.rejected]: (state, { payload }) => {
             state.loading = false;
@@ -52,9 +53,9 @@ const userSlice = createSlice({
             state.userToken = action.payload.accessToken;
             state.success = true;
         },
-        [loginUser.rejected]: (state, { payload }) => {
+        [loginUser.rejected]: (state, action) => {
             state.loading = false;
-            state.error = payload;
+            state.error = action.payload;
         },
 
         //get user info
@@ -67,9 +68,9 @@ const userSlice = createSlice({
             state.userInfo = action.payload.user;
             state.success = true;
         },
-        [getUserProfile.rejected]: (state, { payload }) => {
+        [getUserProfile.rejected]: (state, action) => {
             state.loading = false;
-            state.error = payload;
+            state.error = action.payload;
         },
 
         //update user info
@@ -82,9 +83,9 @@ const userSlice = createSlice({
             state.userInfo = action.payload.user;
             state.success = true;
         },
-        [updateUserProfile.rejected]: (state, { payload }) => {
+        [updateUserProfile.rejected]: (state, action) => {
             state.loading = false;
-            state.error = payload;
+            state.error = action.payload;
         },
 
         //login user by Google
@@ -98,9 +99,9 @@ const userSlice = createSlice({
             state.userToken = action.payload.accessToken;
             state.success = true;
         },
-        [loginByGoogle.rejected]: (state, { payload }) => {
+        [loginByGoogle.rejected]: (state, action) => {
             state.loading = false;
-            state.error = payload;
+            state.error = action.payload;
         },
     },
 });
