@@ -15,14 +15,17 @@ function Register(props) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (success) navigate('/login');
-    }, [navigate, success]);
-
     const handleSubmit = (data) => {
         console.log('register', data);
         data.email = data.email.toLowerCase();
-        dispatch(registerUser(data));
+        dispatch(registerUser(data))
+            .unwrap()
+            .then((res) => {
+                navigate('/');
+            })
+            .catch((error) => {
+                console.log('error', error);
+            });
     };
 
     return (

@@ -3,14 +3,15 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const registerUser = createAsyncThunk('user/register', async ({ username, email, password }) => {
     try {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        };
-        await register({ username, email, password }, config);
+        const data = await register({ username, email, password });
+        localStorage.setItem('access-token', data.accessToken);
+        return data;
     } catch (error) {
-        console.log(error.response);
+        if (error.response && error.response.data.message) {
+            return rejectWithValue(error.response.data.message);
+        } else {
+            return rejectWithValue(error.message);
+        }
     }
 });
 
