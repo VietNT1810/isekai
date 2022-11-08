@@ -202,6 +202,11 @@ const resetPassword = async (req, res) => {
   try {
     const { password } = req.body;
 
+    //validate
+    if (!validator.isStrongPassword(password)) {
+      throw Error("Mật khẩu không đủ mạnh");
+    }
+
     //hash password
     const salt = await bcrypt.genSalt();
     const hash = await bcrypt.hash(password, salt);
