@@ -56,14 +56,14 @@ export const forgotPassword = async (params) => {
     }
 };
 
-export const resetPassword = async (params, token) => {
+export const resetPassword = async (password, token) => {
     try {
         const config = {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         };
-        const result = await request.post(`${prefix}/reset-password`, params, config);
+        const result = await request.post(`${prefix}/reset-password`, password, config);
         return result.data;
     } catch (error) {
         throw error;
