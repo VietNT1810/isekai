@@ -23,13 +23,13 @@ function Cart(props) {
             <div className={cx('container')}>
                 <div className={cx('title')}>
                     <h2>Giỏ hàng của bạn</h2>
-                    {carts.length > 1 ? (
+                    {carts.length > 0 ? (
                         <small>Hiện tại đang có {carts.length} sản phẩm</small>
                     ) : (
                         <small>Hiện tại không có sản phẩm nào</small>
                     )}
                 </div>
-                {carts.length > 1 ? (
+                {carts.length > 0 ? (
                     <div className={cx('cart-content')}>
                         <div className={cx('left')}>
                             <div className={cx('cart-heading')}>
