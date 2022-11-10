@@ -1,11 +1,10 @@
 import { removeUserCart, updateUserCart } from '@/actions/cartAction';
 import { Add, DeleteOutline, Remove } from '@mui/icons-material';
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import Button from '@/components/Button';
+import Dialog from '@/components/Dialog';
 import { formatVND } from '@/helpers/number';
 import { changeCartQuantity, removeCart } from '../../cartSlice';
 import styles from './CartList.module.scss';
@@ -14,17 +13,15 @@ const cx = classNames.bind(styles);
 
 function CartList({ carts, isLoading }) {
     const dispatch = useDispatch();
-    const [open, setOpen] = useState(false);
-
+    const [openDialog, setOpenDialog] = useState(false);
     const [dialogData, setDialogData] = useState('');
 
     const handleDeleteCart = (id) => {
         setDialogData(id);
-        setOpen(true);
+        setOpenDialog(true);
     };
 
     const handleDeleteConfirm = () => {
-        setOpen(false);
         dispatch(removeUserCart({ productId: dialogData }))
             .unwrap()
             .then(() => {
@@ -34,11 +31,10 @@ function CartList({ carts, isLoading }) {
             .catch((err) => {
                 console.log(err);
             });
-        // console.log("dialogData:", dialogData);
     };
 
     const handleClose = () => {
-        setOpen(false);
+        setOpenDialog(false);
     };
 
     const handleIncreaseChange = (id, quantity) => {
@@ -109,28 +105,12 @@ function CartList({ carts, isLoading }) {
                 </div>
             ))}
             <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-                className={cx('dialog')}
+                title="Xóa sản phẩm ?"
+                isOpen={openDialog}
+                handleClose={handleClose}
+                onConfirm={handleDeleteConfirm}
             >
-                <DialogTitle id="alert-dialog-title" className={cx('dialog-title')}>
-                    Xóa sản phẩm ?
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description" className={cx('dialog-content')}>
-                        Bạn có muốn xóa sản phẩm đang chọn?
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button outline className={cx('dialog-button')} onClick={handleDeleteConfirm}>
-                        Xác nhận
-                    </Button>
-                    <Button primary className={cx('dialog-button')} onClick={handleClose}>
-                        Hủy
-                    </Button>
-                </DialogActions>
+                Bạn có muốn xóa sản phẩm đang chọn?
             </Dialog>
         </div>
     );
