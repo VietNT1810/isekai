@@ -27,7 +27,7 @@ function Login(props) {
                     navigate('/');
                 }, 2000);
             })
-            .catch((error) => {-
+            .catch((error) => {
                 console.log('error', error);
                 setOpen(true);
             });
