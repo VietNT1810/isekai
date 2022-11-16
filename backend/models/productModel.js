@@ -12,14 +12,6 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
-    fabric: {
-      type: String,
-      required: true,
-    },
-    size: {
-      type: Array,
-      required: true,
-    },
     description: {
       type: String,
       required: true,
