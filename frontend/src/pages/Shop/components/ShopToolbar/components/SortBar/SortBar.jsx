@@ -18,18 +18,18 @@ function SortBar(props) {
 
     return (
         <div className={cx('sort-bar')}>
-            <div className={cx('title')}>Sort by</div>
+            <span className={cx('title')}>Sắp xếp</span>
             <div className={cx('select-box')}>
                 <FormControl sx={{ minWidth: 200 }}>
                     <Select value={sortOrder} onChange={handleSortChange} sx={{ fontSize: 16, height: 40 }}>
                         <MenuItem value="newest" sx={{ fontSize: 16 }}>
-                            Newest First
+                            Mới nhất
                         </MenuItem>
                         <MenuItem value="ASC" sx={{ fontSize: 16 }}>
-                            Price Low to High
+                            Giá tăng dần
                         </MenuItem>
                         <MenuItem value="DESC" sx={{ fontSize: 16 }}>
-                            Price High to Low
+                            Giá giảm dần
                         </MenuItem>
                     </Select>
                 </FormControl>

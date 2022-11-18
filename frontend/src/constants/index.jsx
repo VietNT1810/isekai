@@ -8,7 +8,7 @@ export const PRICE_MARKS = [
 ];
 
 export const RATING_MARKS = [
-    { value: 0, label: 'Any' },
+    { value: 0, label: 'Tất cả' },
     { value: 1, label: <TextIcon text="1" icon={<Star />} /> },
     { value: 2, label: <TextIcon text="2" icon={<Star />} /> },
     { value: 3, label: <TextIcon text="3" icon={<Star />} /> },

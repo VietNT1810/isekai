@@ -10,8 +10,8 @@ const cx = classNames.bind(styles);
 function FilterSidebar(props) {
     return (
         <div className={cx('filter-sidebar')}>
-            <FilterCard title="Filter by Price" slider />
-            <FilterCard title="Filter by Rating" ratingSlider />
+            <FilterCard title="Lọc theo giá" slider />
+            <FilterCard title="Lọc theo đánh giá" ratingSlider />
         </div>
     );
 }

@@ -14,7 +14,7 @@ function ProductList({ products }) {
         <div className={cx('product-list')}>
             <Grid container spacing={2}>
                 {products.map((product) => (
-                    <Grid xs={12} sm={6} lg={4} xl={3} key={product._id}>
+                    <Grid xs={12} sm={6} md={4} lg={4} xl={3} key={product._id}>
                         <NavLink to={`/product/${product.slug}`}>
                             <div className={cx('product-item')}>
                                 <div className={cx('product-image-container')}>
