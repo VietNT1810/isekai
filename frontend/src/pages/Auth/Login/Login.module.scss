@@ -25,3 +25,15 @@
         }
     }
 }
+
+@media only screen and (max-width: 400px) {
+    .container {
+        display: block !important;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        display: block !important;
+    }
+}

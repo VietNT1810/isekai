@@ -59,3 +59,10 @@
         }
     }
 }
+
+@media only screen and (max-width: 595px) {
+    .register-form {
+        flex: none;
+        padding: 0;
+    }
+}

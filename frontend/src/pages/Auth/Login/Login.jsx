@@ -1,4 +1,4 @@
-import { Alert, Snackbar } from '@mui/material';
+import { Alert, Snackbar, useMediaQuery } from '@mui/material';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +12,7 @@ import styles from './Login.module.scss';
 const cx = classNames.bind(styles);
 
 function Login(props) {
+    const matches = useMediaQuery('(max-width: 768px)');
     const [open, setOpen] = useState(false);
     const { loading, userInfo, error, success } = useSelector((state) => state.user);
     const dispatch = useDispatch();
@@ -57,9 +58,11 @@ function Login(props) {
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
                 <LoginForm submitForm={handleSubmit} googleLogin={handleLoginWithGoogle} />
-                <div className={cx('login-image')}>
-                    <img src={assets.images.loginImage} alt="Something wrong" />
-                </div>
+                {!matches && (
+                    <div className={cx('login-image')}>
+                        <img src={assets.images.loginImage} alt="Something wrong" />
+                    </div>
+                )}
             </div>
             <Snackbar
                 open={open}

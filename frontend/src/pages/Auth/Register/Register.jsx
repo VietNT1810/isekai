@@ -7,10 +7,12 @@ import RegisterForm from './components/RegisterForm';
 import assets from '@/assets';
 import { registerUser } from '@/actions/userAction';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { useMediaQuery } from '@mui/material';
 
 const cx = classNames.bind(styles);
 
 function Register(props) {
+    const matches = useMediaQuery('(max-width: 768px)');
     const { loading, userInfo, error, success } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -32,9 +34,11 @@ function Register(props) {
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
                 <RegisterForm submitForm={handleSubmit} />
-                <div className={cx('register-image')}>
-                    <img src={assets.images.registerImage} alt="Something wrong" />
-                </div>
+                {!matches && (
+                    <div className={cx('register-image')}>
+                        <img src={assets.images.registerImage} alt="Something wrong" />
+                    </div>
+                )}
             </div>
         </div>
     );
