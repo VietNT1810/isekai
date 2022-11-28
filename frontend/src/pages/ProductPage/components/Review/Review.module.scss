@@ -59,3 +59,9 @@
         }
     }
 }
+
+@media only screen and (max-width: 595px) {
+    .review-bar {
+        flex-direction: column;
+    }
+}

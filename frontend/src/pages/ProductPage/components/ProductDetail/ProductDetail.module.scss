@@ -120,3 +120,29 @@ button:disabled,
 button[disabled] {
     color: var(--main-black);
 }
+
+@media only screen and (max-width: 768px) {
+    .product {
+        flex-direction: column;
+    }
+    .product-action > * {
+        flex: 1;
+    }
+}
+
+@media only screen and (max-width: 595px) {
+    .product-group {
+        .label {
+            flex-basis: 30% !important;
+        }
+        .quantity-box {
+            flex-direction: column;
+            align-items: flex-start !important;
+            gap: 12px !important;
+        }
+    }
+    .product-action {
+        flex-direction: column;
+        align-items: stretch !important;
+    }
+}
