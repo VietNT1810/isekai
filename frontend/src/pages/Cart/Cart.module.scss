@@ -80,7 +80,8 @@
         display: flex;
         justify-content: space-between;
         .price-text {
-            font-size: 1.4rem;
+            color: var(--main-grey);
+            font-size: 1.6rem;
             font-weight: 300;
         }
         .price-content {
@@ -103,4 +104,14 @@
     flex-direction: column;
     align-items: center;
     margin-top: 50px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .cart-content {
+        flex-direction: column;
+        gap: 0;
+        .right {
+            margin: 0;
+        }
+    }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames/bind';
 import { useSelector } from 'react-redux';
+import { useMediaQuery } from '@mui/material';
 
 import styles from './Cart.module.scss';
 import CartList from './components/CartList';
@@ -11,6 +12,8 @@ import assets from '@/assets';
 const cx = classNames.bind(styles);
 
 function Cart(props) {
+    const matches = useMediaQuery('(max-width: 595px)');
+
     const { carts, loading } = useSelector((state) => state.cart);
 
     const getTotalPrice = () => {
@@ -32,13 +35,15 @@ function Cart(props) {
                 {carts.length > 0 ? (
                     <div className={cx('cart-content')}>
                         <div className={cx('left')}>
-                            <div className={cx('cart-heading')}>
-                                <span>Sản phẩm</span>
-                                <span>Đơn giá</span>
-                                <span>Số lượng</span>
-                                <span>Thành tiền</span>
-                                <span>Xóa</span>
-                            </div>
+                            {!matches && (
+                                <div className={cx('cart-heading')}>
+                                    <span>Sản phẩm</span>
+                                    <span>Đơn giá</span>
+                                    <span>Số lượng</span>
+                                    <span>Thành tiền</span>
+                                    <span>Xóa</span>
+                                </div>
+                            )}
                             <CartList carts={carts} isLoading={loading} />
                         </div>
                         <div className={cx('right')}>
