@@ -6,7 +6,7 @@ import styles from './Register.module.scss';
 import RegisterForm from './components/RegisterForm';
 import assets from '@/assets';
 import { registerUser } from '@/actions/userAction';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
 
 const cx = classNames.bind(styles);
@@ -16,14 +16,14 @@ function Register(props) {
     const { loading, userInfo, error, success } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleSubmit = (data) => {
-        console.log('register', data);
         data.email = data.email.toLowerCase();
         dispatch(registerUser(data))
             .unwrap()
             .then((res) => {
-                navigate('/');
+                location.state?.slug ? navigate(`/product/${location.state.slug}`) : navigate('/');
             })
             .catch((error) => {
                 console.log('error', error);

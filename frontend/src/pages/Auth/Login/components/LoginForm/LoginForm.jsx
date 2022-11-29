@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import classNames from 'classnames/bind';
 import { Controller, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
@@ -20,6 +20,8 @@ const schema = yup
     .required();
 
 function LoginForm({ submitForm, googleLogin }) {
+    const location = useLocation();
+
     const {
         register,
         control,
@@ -34,7 +36,9 @@ function LoginForm({ submitForm, googleLogin }) {
             <h1 className={cx('title')}>Đăng nhập</h1>
             <small>
                 Người mới?
-                <Link to="/register">Tạo tài khoản ở đây</Link>
+                <Link to="/register" state={{ slug: location.state?.slug }}>
+                    Tạo tài khoản ở đây
+                </Link>
             </small>
             <form
                 onSubmit={handleSubmit((data) => {

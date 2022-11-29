@@ -67,7 +67,7 @@ function ProductDetail({ product, isInCart }) {
 
     const handleAddToCart = () => {
         if (!userInfo) {
-            return navigate('/login');
+            return navigate('/login', { state: { slug: product.slug } });
         }
 
         const cart = {

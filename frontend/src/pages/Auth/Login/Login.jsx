@@ -2,7 +2,7 @@ import { Alert, Snackbar, useMediaQuery } from '@mui/material';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { loginByGoogle, loginUser } from '@/actions/userAction';
 import assets from '@/assets';
@@ -17,6 +17,7 @@ function Login(props) {
     const { loading, userInfo, error, success } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleSubmit = (data) => {
         data.email = data.email.toLowerCase();
@@ -25,7 +26,7 @@ function Login(props) {
             .then((res) => {
                 setOpen(true);
                 setTimeout(() => {
-                    navigate('/');
+                    location.state?.slug ? navigate(`/product/${location.state.slug}`) : navigate('/');
                 }, 2000);
             })
             .catch((error) => {
@@ -41,7 +42,7 @@ function Login(props) {
             .then((res) => {
                 setOpen(true);
                 setTimeout(() => {
-                    navigate('/');
+                    location.state?.slug ? navigate(`/product/${location.state.slug}`) : navigate('/');
                 }, 2000);
             })
             .catch((error) => {
