@@ -1,4 +1,4 @@
-import { Divider } from '@mui/material';
+import { Divider, useMediaQuery } from '@mui/material';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +15,8 @@ import styles from './Profile.module.scss';
 const cx = classNames.bind(styles);
 
 function Profile(props) {
+    const matches = useMediaQuery('(max-width: 768px)');
+
     //state
     const { loading, userInfo } = useSelector((state) => state.user);
     const [fileInputState, setFileInputState] = useState('');
@@ -23,7 +25,6 @@ function Profile(props) {
 
     const dispatch = useDispatch();
 
-    let phone = '0868402367';
     //handle file
     const handleFileInputChange = (e) => {
         const file = e.target.files[0];
@@ -38,7 +39,7 @@ function Profile(props) {
         };
     };
 
-    //handle form++
+    //handle form
     const handleFormChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
@@ -53,9 +54,6 @@ function Profile(props) {
         console.log('formData', formData);
         dispatch(updateUserProfile(formData));
     };
-
-    // console.log('userInfo:', userInfo);
-    // console.log('previewAvatar:', previewAvatar);
 
     return (
         <div className={cx('wrapper')}>
@@ -88,7 +86,7 @@ function Profile(props) {
                             <small>Định dạng: .JPEG, .PNG</small>
                         </div>
                     </div>
-                    <Divider orientation="vertical" flexItem />
+                    {!matches && <Divider orientation="vertical" flexItem />}
                     <div className={cx('user-info')}>
                         <form className={cx('form')}>
                             <div className={cx('form-group')}>
@@ -109,10 +107,10 @@ function Profile(props) {
                                     />
                                 )}
                             </div>
-                            <div className={cx('form-group')}>
+                            {/* <div className={cx('form-group')}>
                                 <label htmlFor="phone">Số điện thoại:</label>
-                                <span>{hidePhone(phone.toString())}</span>
-                            </div>
+                                <span>{hidePhone(userInfo?.phone.toString())}</span>
+                            </div> */}
                             <div className={cx('form-group')}>
                                 <label htmlFor="gender">Giới tính:</label>
                                 <div className={cx('form-checkbox')}>

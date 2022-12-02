@@ -88,3 +88,30 @@
         }
     }
 }
+
+@media only screen and (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        margin-bottom: 24px;
+    }
+}
+
+@media only screen and (max-width: 595px) {
+    .container {
+        width: 80%;
+    }
+    .form-group {
+        label {
+            flex-basis: 25% !important;
+        }
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .container {
+        width: 100%;
+    }
+    .user-info {
+        padding: 0 24px;
+    }
+}
