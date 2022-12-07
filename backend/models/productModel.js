@@ -41,6 +41,10 @@ const productSchema = new Schema(
       required: true,
       unique: true,
     },
+    specs: {
+      type: Array,
+      default: [],
+    },
   },
   { timestamps: true }
 );
