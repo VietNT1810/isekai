@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from '@/routes';
 import { getUserCart } from './actions/cartAction';
 import { getUserProfile } from './actions/userAction';
+import ScrollToTop from './helpers/ScrollToTop';
 
 function App() {
     const { loading, userInfo, userToken } = useSelector((state) => state.user);
@@ -25,9 +26,11 @@ function App() {
 
     return (
         <Router>
-            <div className="App">
-                <Routes />
-            </div>
+            <ScrollToTop>
+                <div className="App">
+                    <Routes />
+                </div>
+            </ScrollToTop>
         </Router>
     );
 }
