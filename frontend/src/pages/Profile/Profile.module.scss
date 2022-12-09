@@ -5,7 +5,6 @@
     background-size: contain;
     background-position: center;
     display: flex;
-    align-items: center;
 }
 
 .container {
@@ -31,7 +30,7 @@
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background-color: #cdcaca66;
+            background-color: rgb(238 238 238);
             cursor: pointer;
             img {
                 width: 100%;

@@ -6,6 +6,9 @@
         font-family: 'SVN Gotham Regular';
         font-size: 16px;
     }
+    & > * > * {
+        justify-content: center;
+    }
 }
 
 .tab-content {
