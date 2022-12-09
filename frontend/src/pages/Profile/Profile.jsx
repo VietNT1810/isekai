@@ -120,6 +120,7 @@ function Profile(props) {
                                         id="male"
                                         name="gender"
                                         value="male"
+                                        checked={userInfo?.gender === 'male'}
                                         onChange={handleFormChange}
                                     />
                                 </div>
@@ -130,6 +131,7 @@ function Profile(props) {
                                         id="female"
                                         name="gender"
                                         value="female"
+                                        checked={userInfo?.gender === 'female'}
                                         onChange={handleFormChange}
                                     />
                                 </div>
@@ -140,6 +142,7 @@ function Profile(props) {
                                         id="other"
                                         name="gender"
                                         value="other"
+                                        checked={userInfo?.gender === 'other'}
                                         onChange={handleFormChange}
                                     />
                                 </div>
