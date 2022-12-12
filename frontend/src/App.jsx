@@ -20,6 +20,7 @@ function App() {
                 })
                 .catch((error) => {
                     console.log('error', error);
+                    localStorage.setItem('isLoggedIn', false);
                 });
         }
     }, [userToken]);
