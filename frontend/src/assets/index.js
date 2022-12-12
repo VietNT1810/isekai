@@ -23,6 +23,7 @@ import outfitBanner from '@/assets/images/banner/outfit.png';
 import lolitaBanner from '@/assets/images/banner/lolita.png';
 import accessoryBanner from '@/assets/images/banner/accessory.png';
 import forgotImage from '@/assets/images/img-forgot.png';
+import placeholderAvatar from '@/assets/images/ava/avatar-placeholder.png';
 
 import iconFacebook from '@/assets/icons/facebook-icon.svg';
 import iconTwitter from '@/assets/icons/twitter-icon.svg';
@@ -58,6 +59,7 @@ const images = {
     lolitaBanner,
     accessoryBanner,
     forgotImage,
+    placeholderAvatar,
 };
 
 const icons = {
