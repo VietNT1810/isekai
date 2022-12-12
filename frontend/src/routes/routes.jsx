@@ -17,6 +17,7 @@ import ChangePassword from '@/pages/ChangePassword';
 import ProductPage from '@/pages/ProductPage';
 import Cart from '@/pages/Cart';
 import ResetPassword from '@/pages/ResetPassword';
+import ProfileLayout from '@/layouts/ProfileLayout';
 
 function Routes(props) {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -37,15 +38,20 @@ function Routes(props) {
         },
         {
             path: '/',
-            element: isLoggedIn ? <Outlet /> : <Navigate to="/login" />,
+            element: isLoggedIn == 'true' ? <Outlet /> : <Navigate to="/login" />,
             children: [
                 {
                     path: '/',
                     element: <DefaultLayout />,
+                    children: [{ path: 'cart', element: <Cart /> }],
+                },
+                {
+                    path: 'user/account/',
+                    element: <ProfileLayout />,
                     children: [
-                        { path: 'user/account/profile', element: <Profile /> },
-                        { path: 'user/account/change-password', element: <ChangePassword /> },
-                        { path: '/cart', element: <Cart /> },
+                        { path: '', element: <Navigate to="profile" /> },
+                        { path: 'profile', element: <Profile /> },
+                        { path: 'change-password', element: <ChangePassword /> },
                     ],
                 },
             ],
