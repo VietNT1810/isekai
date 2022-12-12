@@ -57,122 +57,117 @@ function Profile(props) {
 
     return (
         <div className={cx('wrapper')}>
-            <div className={cx('container')}>
-                <div className={cx('title')}>
-                    <h2>Hồ Sơ Của Tôi</h2>
-                    <small>Quản lý thông tin hồ sơ để bảo mật tài khoản</small>
-                </div>
-                <div className={cx('content')}>
-                    <div className={cx('avatar')}>
-                        <label htmlFor="uploadAvatar" className={cx('upload-image')}>
-                            <img
-                                src={previewAvatar || userInfo?.avatar || assets.icons.iconCamera}
-                                alt="Avatar error"
-                            />
-                        </label>
-                        <label htmlFor="uploadAvatar" className={cx('upload-btn')}>
-                            Chọn ảnh
-                        </label>
-                        <input
-                            type="file"
-                            id="uploadAvatar"
-                            accept=".jpg,.jpeg,.png"
-                            value={fileInputState}
-                            onChange={handleFileInputChange}
-                            hidden
-                        />
-                        <div className={cx('file-accept')}>
-                            <small>Dụng lượng file tối đa 1 MB</small>
-                            <small>Định dạng: .JPEG, .PNG</small>
-                        </div>
+            <div className={cx('title')}>
+                <h2>Hồ Sơ Của Tôi</h2>
+                <small>Quản lý thông tin hồ sơ để bảo mật tài khoản</small>
+            </div>
+            <div className={cx('content')}>
+                <div className={cx('avatar')}>
+                    <label htmlFor="uploadAvatar" className={cx('upload-image')}>
+                        <img src={previewAvatar || userInfo?.avatar || assets.icons.iconCamera} alt="Avatar error" />
+                    </label>
+                    <label htmlFor="uploadAvatar" className={cx('upload-btn')}>
+                        Chọn ảnh
+                    </label>
+                    <input
+                        type="file"
+                        id="uploadAvatar"
+                        accept=".jpg,.jpeg,.png"
+                        value={fileInputState}
+                        onChange={handleFileInputChange}
+                        hidden
+                    />
+                    <div className={cx('file-accept')}>
+                        <small>Dụng lượng file tối đa 1 MB</small>
+                        <small>Định dạng: .JPEG, .PNG</small>
                     </div>
-                    {!matches && <Divider orientation="vertical" flexItem />}
-                    <div className={cx('user-info')}>
-                        <form className={cx('form')}>
-                            <div className={cx('form-group')}>
-                                <label htmlFor="username">Username:</label>
-                                <span>{userInfo?.username}</span>
-                            </div>
-                            <div className={cx('form-group')}>
-                                <label htmlFor="fullName">Tên:</label>
-                                {userInfo?.fullName ? (
-                                    <span>{userInfo.fullName}</span>
-                                ) : (
-                                    <input
-                                        type="text"
-                                        id="fullName"
-                                        name="fullName"
-                                        placeholder="Nhập tên của bạn"
-                                        onChange={handleFormChange}
-                                    />
-                                )}
-                            </div>
-                            {/* <div className={cx('form-group')}>
+                </div>
+                {!matches && <Divider orientation="vertical" flexItem />}
+                <div className={cx('user-info')}>
+                    <form className={cx('form')}>
+                        <div className={cx('form-group')}>
+                            <label htmlFor="username">Username:</label>
+                            <span>{userInfo?.username}</span>
+                        </div>
+                        <div className={cx('form-group')}>
+                            <label htmlFor="fullName">Tên:</label>
+                            {userInfo?.fullName ? (
+                                <span>{userInfo.fullName}</span>
+                            ) : (
+                                <input
+                                    type="text"
+                                    id="fullName"
+                                    name="fullName"
+                                    placeholder="Nhập tên của bạn"
+                                    onChange={handleFormChange}
+                                />
+                            )}
+                        </div>
+                        {/* <div className={cx('form-group')}>
                                 <label htmlFor="phone">Số điện thoại:</label>
                                 <span>{hidePhone(userInfo?.phone.toString())}</span>
                             </div> */}
-                            <div className={cx('form-group')}>
-                                <label htmlFor="gender">Giới tính:</label>
-                                <div className={cx('form-checkbox')}>
-                                    <label htmlFor="male">Nam</label>
-                                    <input
-                                        type="radio"
-                                        id="male"
-                                        name="gender"
-                                        value="male"
-                                        checked={userInfo?.gender === 'male'}
-                                        onChange={handleFormChange}
-                                    />
-                                </div>
-                                <div className={cx('form-checkbox')}>
-                                    <label htmlFor="female">Nữ</label>
-                                    <input
-                                        type="radio"
-                                        id="female"
-                                        name="gender"
-                                        value="female"
-                                        checked={userInfo?.gender === 'female'}
-                                        onChange={handleFormChange}
-                                    />
-                                </div>
-                                <div className={cx('form-checkbox')}>
-                                    <label htmlFor="other">Khác</label>
-                                    <input
-                                        type="radio"
-                                        id="other"
-                                        name="gender"
-                                        value="other"
-                                        checked={userInfo?.gender === 'other'}
-                                        onChange={handleFormChange}
-                                    />
-                                </div>
+                        <div className={cx('form-group')}>
+                            <label htmlFor="gender">Giới tính:</label>
+                            <div className={cx('form-checkbox')}>
+                                <label htmlFor="male">Nam</label>
+                                <input
+                                    type="radio"
+                                    id="male"
+                                    name="gender"
+                                    value="male"
+                                    checked={userInfo?.gender === 'male'}
+                                    onChange={handleFormChange}
+                                />
                             </div>
-                            <div className={cx('form-group')}>
-                                <label>Email:</label>
-                                <span>{hideEmail('admin@admin.com')}</span>
+                            <div className={cx('form-checkbox')}>
+                                <label htmlFor="female">Nữ</label>
+                                <input
+                                    type="radio"
+                                    id="female"
+                                    name="gender"
+                                    value="female"
+                                    checked={userInfo?.gender === 'female'}
+                                    onChange={handleFormChange}
+                                />
                             </div>
-                            <div className={cx('form-group')}>
-                                <label htmlFor="address">Địa chỉ:</label>
-                                {userInfo?.address ? (
-                                    <span>{userInfo.address}</span>
-                                ) : (
-                                    <textarea
-                                        name="address"
-                                        id="address"
-                                        rows="3"
-                                        placeholder="Nhập địa chỉ của bạn"
-                                        onChange={handleFormChange}
-                                    />
-                                )}
+                            <div className={cx('form-checkbox')}>
+                                <label htmlFor="other">Khác</label>
+                                <input
+                                    type="radio"
+                                    id="other"
+                                    name="gender"
+                                    value="other"
+                                    checked={userInfo?.gender === 'other'}
+                                    onChange={handleFormChange}
+                                />
                             </div>
-                            <NavLink to="/user/account/change-password" className={cx('change-password')}>
-                                <small>Đổi mật khẩu?</small>
-                            </NavLink>
-                            <Button primary onClick={handleSaveProfile}>
-                                Lưu
-                            </Button>
-                        </form>
-                    </div>
+                        </div>
+                        <div className={cx('form-group')}>
+                            <label>Email:</label>
+                            <span>{hideEmail('admin@admin.com')}</span>
+                        </div>
+                        <div className={cx('form-group')}>
+                            <label htmlFor="address">Địa chỉ:</label>
+                            {userInfo?.address ? (
+                                <span>{userInfo.address}</span>
+                            ) : (
+                                <textarea
+                                    name="address"
+                                    id="address"
+                                    rows="3"
+                                    placeholder="Nhập địa chỉ của bạn"
+                                    onChange={handleFormChange}
+                                />
+                            )}
+                        </div>
+                        <NavLink to="/user/account/change-password" className={cx('change-password')}>
+                            <small>Đổi mật khẩu?</small>
+                        </NavLink>
+                        <Button primary onClick={handleSaveProfile}>
+                            Lưu
+                        </Button>
+                    </form>
                 </div>
             </div>
         </div>
