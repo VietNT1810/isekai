@@ -1,0 +1,17 @@
+.wrapper {
+    margin-top: var(--header-height);
+    background-image: url('@/assets/images/bg-shop.png');
+    background-color: var(--main-mint-2);
+    background-size: contain;
+    background-position: center;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.profile-layout {
+    display: flex;
+    margin: 24px 0;
+}
