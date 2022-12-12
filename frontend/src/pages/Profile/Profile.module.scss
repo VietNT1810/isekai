@@ -1,16 +1,14 @@
 .wrapper {
+    flex: 3;
     min-height: calc(100vh - 130px);
-    margin-top: var(--header-height);
-    background-image: url('@/assets/images/bg-shop.png');
-    background-size: contain;
-    background-position: center;
     display: flex;
+    flex-direction: column;
 }
 
-.container {
-    width: 60%;
-    margin: 0 auto;
-}
+// .container {
+//     width: 60%;
+//     margin: 0 auto;
+// }
 
 .title {
     text-align: center;
@@ -27,6 +25,7 @@
         align-items: center;
         gap: 16px;
         .upload-image {
+            border: 5px solid #94f4ff;
             width: 100px;
             height: 100px;
             border-radius: 50%;
