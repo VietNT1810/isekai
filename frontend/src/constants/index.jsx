@@ -24,6 +24,6 @@ export const RATING_MARKS = [
 export const PROFILE_NAV = [
     { to: 'profile', icon: <PersonIcon fontSize="large" color="action" />, title: 'Thông tin tài khoản' },
     { to: 'order', icon: <ChromeReaderModeIcon fontSize="large" color="action" />, title: 'Quản lý đơn hàng' },
-    { to: 'address', icon: <PlaceIcon fontSize="large" color="action" />, title: 'Thêm địa chỉ' },
+    { to: 'address', icon: <PlaceIcon fontSize="large" color="action" />, title: 'Sổ địa chỉ' },
     { to: 'change-password', icon: <KeyIcon fontSize="large" color="action" />, title: 'Thay đổi mật khẩu' },
 ];
