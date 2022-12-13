@@ -1,4 +1,5 @@
 .wrapper {
+    min-height: calc(100vh - 130px);
     margin-top: var(--header-height);
     background-image: url('@/assets/images/bg-shop.png');
     background-color: var(--main-mint-2);
@@ -14,4 +15,7 @@
 .profile-layout {
     display: flex;
     margin: 24px 0;
+    .content {
+        flex: 3;
+    }
 }

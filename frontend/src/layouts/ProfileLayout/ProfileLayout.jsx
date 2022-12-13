@@ -17,7 +17,9 @@ function ProfileLayout(props) {
                 <div className={cx('container')}>
                     <div className={cx('profile-layout')}>
                         <ProfileNavbar />
-                        <Outlet />
+                        <div className={cx('content')}>
+                            <Outlet />
+                        </div>
                     </div>
                 </div>
             </div>
