@@ -1,23 +1,20 @@
 .wrapper {
-    flex: 3;
-    min-height: calc(100vh - 130px);
     display: flex;
     flex-direction: column;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px var(--sub-blue);
+    background-color: var(--main-white);
+    padding: 16px;
 }
-
-// .container {
-//     width: 60%;
-//     margin: 0 auto;
-// }
 
 .title {
     text-align: center;
-    margin: 24px auto;
+    margin-bottom: 24px;
 }
 
 .content {
     display: flex;
-    gap: 35px;
+    gap: 24px;
     .avatar {
         flex: 1;
         display: flex;
@@ -53,7 +50,7 @@
         }
     }
     .user-info {
-        flex: 4;
+        flex: 3;
         .form {
             display: flex;
             flex-direction: column;

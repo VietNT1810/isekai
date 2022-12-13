@@ -147,7 +147,7 @@ function Profile(props) {
                             <label>Email:</label>
                             <span>{hideEmail('admin@admin.com')}</span>
                         </div>
-                        <div className={cx('form-group')}>
+                        {/* <div className={cx('form-group')}>
                             <label htmlFor="address">Địa chỉ:</label>
                             {userInfo?.address ? (
                                 <span>{userInfo.address}</span>
@@ -160,10 +160,7 @@ function Profile(props) {
                                     onChange={handleFormChange}
                                 />
                             )}
-                        </div>
-                        <NavLink to="/user/account/change-password" className={cx('change-password')}>
-                            <small>Đổi mật khẩu?</small>
-                        </NavLink>
+                        </div> */}
                         <Button primary onClick={handleSaveProfile}>
                             Lưu
                         </Button>
