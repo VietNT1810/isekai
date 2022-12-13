@@ -1,0 +1,60 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px var(--sub-blue);
+    background-color: var(--main-white);
+    padding: 16px;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.create-address {
+    margin-bottom: 16px;
+}
+
+.content {
+    .item {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        padding: 16px 0;
+        border-top: 1px solid #ccc;
+        .info {
+            .name {
+                margin-bottom: 12px;
+                & > span {
+                    margin-left: 15px;
+                    color: #2e7d32;
+                    padding: 2px 4px;
+                    border: 2px solid #2e7d32;
+                }
+            }
+            .address,
+            .phone {
+                span {
+                    color: #ccc;
+                }
+            }
+            .address {
+                margin-bottom: 5px;
+            }
+        }
+        .action {
+            .edit {
+                color: var(--sub-blue);
+                padding: 6px 12px;
+                background-color: transparent;
+                cursor: pointer;
+            }
+            .delete {
+                color: #ff424e;
+                padding: 6px 12px;
+                cursor: pointer;
+            }
+        }
+    }
+}
