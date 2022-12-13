@@ -27,7 +27,7 @@ function ChangePasswordForm({ submitForm }) {
                 type="password"
                 id="currentPassword"
                 name="currentPassword"
-                label="Current Password"
+                label="Mật khẩu hiện tại"
                 required
                 register={register}
             />
@@ -36,7 +36,7 @@ function ChangePasswordForm({ submitForm }) {
                 type="password"
                 id="newPassword"
                 name="newPassword"
-                label="New Password"
+                label="Mật khẩu mới"
                 required
                 register={register}
             />
@@ -45,7 +45,7 @@ function ChangePasswordForm({ submitForm }) {
                 type="password"
                 id="confirmPassword"
                 name="confirmPassword"
-                label="Confirm Password"
+                label="Xác nhận mặt khẩu"
                 required
                 register={register}
             />
