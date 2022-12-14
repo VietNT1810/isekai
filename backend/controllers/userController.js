@@ -150,7 +150,7 @@ const updateUserInfo = async (req, res) => {
       {
         fullName: fullName,
         address: address,
-        avatar: uploadedResponse.url,
+        avatar: uploadedResponse.secure_url,
       },
       { new: true }
     );
