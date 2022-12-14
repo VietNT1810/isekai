@@ -9,7 +9,7 @@ import { formatVND } from '@/helpers/number';
 import { changeCartQuantity, removeCart } from '../../cartSlice';
 import styles from './CartList.module.scss';
 import { useMediaQuery } from '@mui/material';
-import PopupConfirm from '../PopupConfirm';
+import PopupConfirm from '@/components/PopupConfirm';
 
 const cx = classNames.bind(styles);
 
@@ -163,7 +163,13 @@ function CartList({ carts, isLoading }) {
                     )}
                 </>
             ))}
-            <PopupConfirm openPopup={openDialog} setOpenPopup={setOpenDialog} onConfirm={handleDeleteConfirm} />
+            <PopupConfirm
+                openPopup={openDialog}
+                setOpenPopup={setOpenDialog}
+                title="Xóa sản phẩm"
+                content="Bạn có muốn xóa sản phẩm này ?"
+                onConfirm={handleDeleteConfirm}
+            />
         </div>
     );
 }
