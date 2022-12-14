@@ -5,6 +5,7 @@ export const registerUser = createAsyncThunk('user/register', async ({ username,
     try {
         const data = await register({ username, email, password });
         localStorage.setItem('access-token', data.accessToken);
+        localStorage.setItem('isLoggedIn', true);
         return data;
     } catch (error) {
         if (error.response && error.response.data.message) {
