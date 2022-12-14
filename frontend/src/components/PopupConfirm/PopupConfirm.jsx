@@ -6,8 +6,8 @@ import Popup from '@/components/Popup';
 
 const cx = classNames.bind(styles);
 
-function PopupContent() {
-    return <span className={cx('dialog-content')}>Bạn có muốn xóa sản phẩm đang chọn?</span>;
+function PopupContent({ content }) {
+    return <span className={cx('dialog-content')}>{content}</span>;
 }
 
 function PopupFooter({ setOpenPopup, onConfirm }) {
@@ -36,12 +36,12 @@ function PopupFooter({ setOpenPopup, onConfirm }) {
     );
 }
 
-function PopupConfirm({ openPopup, setOpenPopup, onConfirm }) {
+function PopupConfirm({ openPopup, setOpenPopup, title, content, onConfirm }) {
     return (
         <Popup
             openPopup={openPopup}
-            title="Xóa sản phẩm"
-            content={<PopupContent />}
+            title={title}
+            content={<PopupContent content={content} />}
             footer={<PopupFooter setOpenPopup={setOpenPopup} onConfirm={onConfirm} />}
         />
     );
