@@ -9,6 +9,7 @@ import { formatVND } from '@/helpers/number';
 import { changeCartQuantity, removeCart } from '../../cartSlice';
 import styles from './CartList.module.scss';
 import { useMediaQuery } from '@mui/material';
+import PopupConfirm from '../PopupConfirm';
 
 const cx = classNames.bind(styles);
 
@@ -36,9 +37,9 @@ function CartList({ carts, isLoading }) {
             });
     };
 
-    const handleClose = () => {
-        setOpenDialog(false);
-    };
+    // const handleClose = () => {
+    //     setOpenDialog(false);
+    // };
 
     const handleIncreaseChange = (id, quantity) => {
         dispatch(changeCartQuantity({ productId: id, quantity: +quantity + 1 }));
@@ -162,14 +163,7 @@ function CartList({ carts, isLoading }) {
                     )}
                 </>
             ))}
-            <Dialog
-                title="Xóa sản phẩm ?"
-                isOpen={openDialog}
-                handleClose={handleClose}
-                onConfirm={handleDeleteConfirm}
-            >
-                Bạn có muốn xóa sản phẩm đang chọn?
-            </Dialog>
+            <PopupConfirm openPopup={openDialog} setOpenPopup={setOpenDialog} onConfirm={handleDeleteConfirm} />
         </div>
     );
 }
