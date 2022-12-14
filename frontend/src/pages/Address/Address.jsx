@@ -1,7 +1,9 @@
-import Button from '@/components/Button';
+import { useState } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './Address.module.scss';
+import Button from '@/components/Button';
+import PopupConfirm from '@/components/PopupConfirm';
 
 const cx = classNames.bind(styles);
 
@@ -36,6 +38,12 @@ const addresses = [
 ];
 
 function Address(props) {
+    const [openPopup, setOpenPopup] = useState(false);
+
+    const handleDeleteAddress = () => {
+        console.log('Click delete address');
+    };
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('title')}>
@@ -62,11 +70,25 @@ function Address(props) {
                         </div>
                         <div className={cx('action')}>
                             <button className={cx('edit')}>Chỉnh sửa</button>
-                            <button className={cx('delete')}>Xóa</button>
+                            <button
+                                className={cx('delete')}
+                                onClick={() => {
+                                    setOpenPopup(true);
+                                }}
+                            >
+                                Xóa
+                            </button>
                         </div>
                     </div>
                 ))}
             </div>
+            <PopupConfirm
+                openPopup={openPopup}
+                setOpenPopup={setOpenPopup}
+                title="Xóa địa chỉ"
+                content="Bạn có muốn xóa địa chỉ này ?"
+                onConfirm={handleDeleteAddress}
+            />
         </div>
     );
 }
