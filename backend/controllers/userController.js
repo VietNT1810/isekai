@@ -220,95 +220,6 @@ const resetPassword = async (req, res) => {
   }
 };
 
-const addAddress = async (req, res) => {
-  try {
-    const { fullName, address, ward, district, city, phone, defaultAddress } =
-      req.body;
-    const userId = req.user._id;
-
-    // if not exist, push to addresses
-    const userDoc = await User.updateOne(
-      {
-        _id: userId,
-        "addresses.defaultAddress": { $exists: false },
-      },
-      {
-        $push: {
-          addresses: {
-            fullName,
-            address,
-            ward,
-            district,
-            city,
-            phone,
-            defaultAddress: true,
-          },
-        },
-      }
-    );
-    // Nếu đã có address
-    if (!userDoc.modifiedCount) {
-      if (defaultAddress) {
-        //thay default cũ thành false, push default = true mới vào
-        let userDoc = await User.findOneAndUpdate(
-          {
-            _id: userId,
-            "addresses.defaultAddress": { $eq: true },
-          },
-          {
-            $set: { "addresses.$.defaultAddress": false },
-          }
-        );
-        await User.updateOne(
-          {
-            _id: userId,
-          },
-          {
-            $push: {
-              addresses: {
-                fullName,
-                address,
-                ward,
-                district,
-                city,
-                phone,
-                defaultAddress,
-              },
-            },
-          }
-        );
-        return res
-          .status(200)
-          .json({ message: "Push new default = true success" });
-        return res.status(200).json({ userDoc });
-      } else {
-        await User.updateOne(
-          { _id: userId },
-          {
-            $push: {
-              addresses: {
-                fullName,
-                address,
-                ward,
-                district,
-                city,
-                phone,
-                defaultAddress,
-              },
-            },
-          }
-        );
-        return res
-          .status(200)
-          .json({ message: "Push new default = false success" });
-      }
-    }
-    res.status(200).json({ message: "NEW ADDRESS" });
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
-
 module.exports = {
   loginUser,
   signupUser,
@@ -317,5 +228,4 @@ module.exports = {
   loginByGoogle,
   forgotPassword,
   resetPassword,
-  addAddress,
 };
