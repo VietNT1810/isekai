@@ -8,6 +8,7 @@ const usersRouter = require("./routes/user");
 const reviewRouter = require("./routes/review");
 const cartRouter = require("./routes/cart");
 const orderRouter = require("./routes/order");
+const addressRouter = require("./routes/address");
 const { urlencoded } = require("express");
 
 //express app
@@ -28,6 +29,7 @@ app.use("/api/users", usersRouter);
 app.use("/api/reviews", reviewRouter);
 app.use("/api/carts/", cartRouter);
 app.use("/api/order/", orderRouter);
+app.use("/api/me/addresses", addressRouter);
 
 //connect to database
 mongoose
