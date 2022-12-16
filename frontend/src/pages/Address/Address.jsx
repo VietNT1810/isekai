@@ -15,7 +15,7 @@ const addresses = [
         district: 'Hai Ba Trung',
         city: 'Ha Noi',
         phone: '0868402367',
-        default: true,
+        defaultAddress: true,
     },
     {
         fullName: 'NGUYỄN TUẤN VIỆT',
@@ -24,7 +24,7 @@ const addresses = [
         district: 'Hai Ba Trung',
         city: 'Ha Noi',
         phone: '0868402367',
-        default: false,
+        defaultAddress: false,
     },
     {
         fullName: 'NGUYỄN TUẤN VIỆT',
@@ -33,7 +33,7 @@ const addresses = [
         district: 'Hai Ba Trung',
         city: 'Ha Noi',
         phone: '0868402367',
-        default: false,
+        defaultAddress: false,
     },
 ];
 
@@ -58,7 +58,7 @@ function Address(props) {
                         <div className={cx('info')}>
                             <div className={cx('name')}>
                                 {address.fullName.toUpperCase()}
-                                {address.default && <span>Mặc định</span>}
+                                {address.defaultAddress && <span>Mặc định</span>}
                             </div>
                             <div className={cx('address')}>
                                 <span>Địa chỉ:</span> {address.address}, Phường {address.ward}, Quận {address.district},{' '}
