@@ -34,7 +34,4 @@ router.post("/forgot-password", forgotPassword);
 //reset password
 router.post("/reset-password", requireAuth, resetPassword);
 
-//add address
-router.post("/add-address", requireAuth, addAddress);
-
 module.exports = router;
