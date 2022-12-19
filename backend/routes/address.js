@@ -3,6 +3,7 @@ const {
   addAddress,
   getUserAddress,
   updateUserAddress,
+  deleteUserAddress
 } = require("../controllers/addressController.js");
 
 const { requireAuth } = require("../middleware/middleware.js");
@@ -17,5 +18,8 @@ router.get("/address", requireAuth, getUserAddress);
 
 //update user address
 router.patch("/update/:id", requireAuth, updateUserAddress);
+
+//delete user address
+router.delete("/delete/:id", requireAuth, deleteUserAddress)
 
 module.exports = router;

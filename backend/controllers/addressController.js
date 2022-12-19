@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const Address = require("../models/addressModel");
 
 const addAddress = async (req, res) => {
@@ -59,9 +60,13 @@ const getUserAddress = async (req, res) => {
   }
 };
 
+//update
 const updateUserAddress = async (req, res) => {
   try {
     const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: "This address not exist!" });
+    }
     const address = await Address.findOneAndUpdate(
       {
         _id: id,
@@ -79,4 +84,26 @@ const updateUserAddress = async (req, res) => {
   }
 };
 
-module.exports = { addAddress, getUserAddress, updateUserAddress };
+//delete
+const deleteUserAddress = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: "This address not exist!" });
+    }
+    const address = await Address.findOneAndDelete({ _id: id });
+    if (!address) {
+      return res.status(404).json({ error: "This address not exist!" });
+    }
+    res.status(200).json({ message: "Xóa địa chỉ thành công" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+module.exports = {
+  addAddress,
+  getUserAddress,
+  updateUserAddress,
+  deleteUserAddress,
+};
