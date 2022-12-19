@@ -61,10 +61,10 @@ const getUserAddress = async (req, res) => {
 
 const updateUserAddress = async (req, res) => {
   try {
-    const userId = req.user._id;
+    const { id } = req.params;
     const address = await Address.findOneAndUpdate(
       {
-        user: userId,
+        _id: id,
       },
       {
         ...req.body,

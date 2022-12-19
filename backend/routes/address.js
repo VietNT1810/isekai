@@ -16,6 +16,6 @@ router.post("/add", requireAuth, addAddress);
 router.get("/address", requireAuth, getUserAddress);
 
 //update user address
-router.patch("/update", requireAuth, updateUserAddress);
+router.patch("/update/:id", requireAuth, updateUserAddress);
 
 module.exports = router;
