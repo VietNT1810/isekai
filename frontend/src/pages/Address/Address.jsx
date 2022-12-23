@@ -1,47 +1,48 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './Address.module.scss';
 import Button from '@/components/Button';
 import PopupConfirm from '@/components/PopupConfirm';
+import * as addressService from '@/services/addressService';
+import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 
-const addresses = [
-    {
-        fullName: 'NGUYỄN TUẤN VIỆT',
-        address: 'Số 37 ngõ 273 Nguyễn Khoái',
-        ward: 'Thanh Luong',
-        district: 'Hai Ba Trung',
-        city: 'Ha Noi',
-        phone: '0868402367',
-        defaultAddress: true,
-    },
-    {
-        fullName: 'NGUYỄN TUẤN VIỆT',
-        address: 'Số 37 ngõ 273 Nguyễn Khoái',
-        ward: 'Thanh Luong',
-        district: 'Hai Ba Trung',
-        city: 'Ha Noi',
-        phone: '0868402367',
-        defaultAddress: false,
-    },
-    {
-        fullName: 'NGUYỄN TUẤN VIỆT',
-        address: 'Số 37 ngõ 273 Nguyễn Khoái',
-        ward: 'Thanh Luong',
-        district: 'Hai Ba Trung',
-        city: 'Ha Noi',
-        phone: '0868402367',
-        defaultAddress: false,
-    },
-];
-
 function Address(props) {
+    const { userToken } = useSelector((state) => state.user);
     const [openPopup, setOpenPopup] = useState(false);
+    const [popupData, setPopupData] = useState('');
+    const [addresses, setAddresses] = useState([]);
 
-    const handleDeleteAddress = () => {
-        console.log('Click delete address');
+    const getAddresses = async () => {
+        await addressService
+            .getUserAddress(userToken)
+            .then((res) => {
+                console.log(res.content);
+                setAddresses(res.content);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
+    useEffect(async () => {
+        getAddresses();
+    }, []);
+
+    const handleDeleteAddress = async () => {
+        console.log('Click delete address:', popupData);
+        await addressService
+            .deleteUserAddress(userToken, popupData)
+            .then((res) => {
+                console.log(res);
+                getAddresses();
+                setPopupData('');
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
     return (
@@ -70,14 +71,17 @@ function Address(props) {
                         </div>
                         <div className={cx('action')}>
                             <button className={cx('edit')}>Chỉnh sửa</button>
-                            <button
-                                className={cx('delete')}
-                                onClick={() => {
-                                    setOpenPopup(true);
-                                }}
-                            >
-                                Xóa
-                            </button>
+                            {!address.defaultAddress && (
+                                <button
+                                    className={cx('delete')}
+                                    onClick={() => {
+                                        setOpenPopup(true);
+                                        setPopupData(address._id);
+                                    }}
+                                >
+                                    Xóa
+                                </button>
+                            )}
                         </div>
                     </div>
                 ))}
