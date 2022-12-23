@@ -8,6 +8,10 @@ const addressSchema = new Schema(
       ref: "User",
       default: null,
     },
+    fullName: {
+      type: String,
+      default: "",
+    },
     address: {
       type: String,
       default: "",
