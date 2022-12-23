@@ -50,11 +50,14 @@ const addAddress = async (req, res) => {
   }
 };
 
+//get user address
 const getUserAddress = async (req, res) => {
   try {
     const userId = req.user._id;
-    const addresses = await Address.find({ user: userId });
-    res.status(200).json({ addresses });
+    const addresses = await Address.find({ user: userId }).sort({
+      defaultAddress: -1,
+    });
+    res.status(200).json({ content: addresses });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
