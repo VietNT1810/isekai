@@ -1,8 +1,4 @@
-import { Star } from '@mui/icons-material';
-import PersonIcon from '@mui/icons-material/Person';
-import ChromeReaderModeIcon from '@mui/icons-material/ChromeReaderMode';
-import PlaceIcon from '@mui/icons-material/Place';
-import KeyIcon from '@mui/icons-material/Key';
+import { ChromeReaderMode, Key, Person, Place, Star } from '@mui/icons-material';
 
 import TextIcon from '@/components/TextIcon';
 import { formatVND } from '@/helpers/number';
@@ -22,8 +18,8 @@ export const RATING_MARKS = [
 ];
 
 export const PROFILE_NAV = [
-    { to: 'profile', icon: <PersonIcon fontSize="large" color="action" />, title: 'Thông tin tài khoản' },
-    { to: 'order', icon: <ChromeReaderModeIcon fontSize="large" color="action" />, title: 'Quản lý đơn hàng' },
-    { to: 'address', icon: <PlaceIcon fontSize="large" color="action" />, title: 'Sổ địa chỉ' },
-    { to: 'change-password', icon: <KeyIcon fontSize="large" color="action" />, title: 'Thay đổi mật khẩu' },
+    { to: 'profile', icon: <Person fontSize="large" color="action" />, title: 'Thông tin tài khoản' },
+    { to: 'order', icon: <ChromeReaderMode fontSize="large" color="action" />, title: 'Quản lý đơn hàng' },
+    { to: 'address', icon: <Place fontSize="large" color="action" />, title: 'Sổ địa chỉ' },
+    { to: 'change-password', icon: <Key fontSize="large" color="action" />, title: 'Thay đổi mật khẩu' },
 ];
