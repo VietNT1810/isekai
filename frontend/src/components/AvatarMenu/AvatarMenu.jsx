@@ -1,4 +1,4 @@
-import { AccountCircle, Logout, PersonAdd } from '@mui/icons-material';
+import { AccountCircle, Logout, ChromeReaderMode, Place } from '@mui/icons-material';
 import {
     Avatar as AvatarMui,
     ClickAwayListener,
@@ -10,10 +10,12 @@ import {
     Paper,
     Popper,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 
 function AvatarMenu({ username, userAvatar, onClickProfile, onClickLogout }) {
     const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
     const anchorRef = useRef(null);
 
     const handleToggle = () => {
@@ -118,6 +120,28 @@ function AvatarMenu({ username, userAvatar, onClickProfile, onClickLogout }) {
                                             <AccountCircle fontSize="large" />
                                         </ListItemIcon>
                                         Tài khoản của tôi
+                                    </MenuItem>
+                                    <MenuItem
+                                        onClick={() => {
+                                            navigate('/user/account/order');
+                                        }}
+                                        sx={{ fontSize: '16px', color: '#1f1f26', fontFamily: 'SVN Gotham Regular' }}
+                                    >
+                                        <ListItemIcon>
+                                            <ChromeReaderMode fontSize="large" />
+                                        </ListItemIcon>
+                                        Quản lý đơn hàng
+                                    </MenuItem>
+                                    <MenuItem
+                                        onClick={() => {
+                                            navigate('/user/account/address');
+                                        }}
+                                        sx={{ fontSize: '16px', color: '#1f1f26', fontFamily: 'SVN Gotham Regular' }}
+                                    >
+                                        <ListItemIcon>
+                                            <Place fontSize="large" />
+                                        </ListItemIcon>
+                                        Sổ địa chỉ
                                     </MenuItem>
                                     <MenuItem
                                         onClick={() => {
