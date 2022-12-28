@@ -6,6 +6,7 @@ import Button from '@/components/Button';
 import PopupConfirm from '@/components/PopupConfirm';
 import * as addressService from '@/services/addressService';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -14,6 +15,7 @@ function Address(props) {
     const [openPopup, setOpenPopup] = useState(false);
     const [popupData, setPopupData] = useState('');
     const [addresses, setAddresses] = useState([]);
+    const navigate = useNavigate();
 
     const getAddresses = async () => {
         await addressService
@@ -50,7 +52,13 @@ function Address(props) {
             <div className={cx('title')}>
                 <h2>Sổ địa chỉ</h2>
             </div>
-            <Button primary className={cx('create-address')}>
+            <Button
+                primary
+                className={cx('create-address')}
+                onClick={() => {
+                    navigate('create');
+                }}
+            >
                 Thêm địa chỉ mới
             </Button>
             <div className={cx('content')}>
