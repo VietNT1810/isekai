@@ -119,8 +119,33 @@ button {
 }
 
 textarea,
-input {
-    padding: 10px;
+input,
+select {
+    padding: 6px 10px;
+}
+
+input,
+select {
+    line-height: 34px;
+    max-height: 34px;
+    border: 1px solid var(--main-grey);
+    border-radius: 4px;
+    -webkit-transition: 0.15s;
+    transition: 0.15s;
+    outline: none;
+    &:focus {
+        border: 1px solid var(--primary);
+    }
+}
+
+textarea {
+    height: 100px;
+    border: 1px solid var(--main-grey);
+    border-radius: 4px;
+    outline: none;
+    &:focus {
+        border: 1px solid var(--primary);
+    }
 }
 
 ul {
