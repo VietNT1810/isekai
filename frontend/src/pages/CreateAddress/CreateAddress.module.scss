@@ -42,6 +42,7 @@ form {
                 position: absolute;
                 &:checked ~ .checkmark {
                     background-color: var(--primary);
+                    border: 1px solid var(--primary);
                 }
                 &:checked ~ .checkmark:before {
                     transform: scale(1) rotate(45deg);
@@ -53,12 +54,12 @@ form {
                 left: 0;
                 width: 21px;
                 height: 21px;
-                background-color: #ccc;
+                border: 1px solid var(--main-grey);
                 &:before {
                     content: '';
                     position: absolute;
-                    left: 7px;
-                    top: 3px;
+                    left: 6px;
+                    top: 2px;
                     width: 5px;
                     height: 10px;
                     border: solid white;
