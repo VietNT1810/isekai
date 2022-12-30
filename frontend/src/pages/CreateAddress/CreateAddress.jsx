@@ -156,6 +156,16 @@ function CreateAddress(props) {
                         </label>
                         <textarea placeholder="Nhập địa chỉ" className={cx('input')} />
                     </div>
+                    <div className={cx('form-group')}>
+                        <label htmlFor="fullName" className={cx('label')}>
+                            &nbsp;
+                        </label>
+                        <label className={cx('input', 'default-address')}>
+                            Đặt làm địa chỉ mặc định
+                            <input type="checkbox" />
+                            <span className={cx('checkmark')}></span>
+                        </label>
+                    </div>
                 </form>
             </div>
         </div>
