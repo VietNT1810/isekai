@@ -33,15 +33,15 @@ function RegisterForm({ submitForm }) {
     return (
         <div className={cx('register-form')}>
             <h1 className={cx('title')}>Đăng ký</h1>
-            <small className={cx('login')}>
-                Bạn đã có tài khoản?
-                <NavLink to="/login">Đăng nhập</NavLink>
-            </small>
             <form
                 onSubmit={handleSubmit((data) => {
                     submitForm(data);
                 })}
             >
+                <small className={cx('login')}>
+                    Bạn đã có tài khoản?
+                    <NavLink to="/login">Đăng nhập</NavLink>
+                </small>
                 <InputField
                     variant="filled"
                     id="username"

@@ -34,17 +34,17 @@ function LoginForm({ submitForm, googleLogin }) {
     return (
         <div className={cx('login-form')}>
             <h1 className={cx('title')}>Đăng nhập</h1>
-            <small>
-                Người mới?
-                <Link to="/register" state={{ slug: location.state?.slug }}>
-                    Tạo tài khoản ở đây
-                </Link>
-            </small>
             <form
                 onSubmit={handleSubmit((data) => {
                     submitForm(data);
                 })}
             >
+                <small>
+                    Người mới?
+                    <Link to="/register" state={{ slug: location.state?.slug }}>
+                        Tạo tài khoản ở đây
+                    </Link>
+                </small>
                 <InputField
                     variant="filled"
                     id="email"
