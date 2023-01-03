@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 
 import styles from './CreateAddress.module.scss';
 import * as addressServices from '@/services/addressService';
+import Button from '@/components/Button';
 
 const cx = classNames.bind(styles);
 
@@ -157,14 +158,18 @@ function CreateAddress(props) {
                         <textarea placeholder="Nhập địa chỉ" className={cx('input')} />
                     </div>
                     <div className={cx('form-group')}>
-                        <label htmlFor="fullName" className={cx('label')}>
-                            &nbsp;
-                        </label>
+                        <label className={cx('label')}>&nbsp;</label>
                         <label className={cx('input', 'default-address')}>
                             Đặt làm địa chỉ mặc định
                             <input type="checkbox" />
                             <span className={cx('checkmark')}></span>
                         </label>
+                    </div>
+                    <div className={cx('form-group')}>
+                        <label className={cx('label')}>&nbsp;</label>
+                        <div className={cx('action-btn')}>
+                            <Button primary>Cập nhật</Button>
+                        </div>
                     </div>
                 </form>
             </div>
