@@ -12,11 +12,11 @@ const addressSchema = new Schema(
       type: String,
       default: "",
     },
-    address: {
+    ward: {
       type: String,
       default: "",
     },
-    ward: {
+    ward_id: {
       type: String,
       default: "",
     },
@@ -24,15 +24,27 @@ const addressSchema = new Schema(
       type: String,
       default: "",
     },
+    district_id: {
+      type: String,
+      default: "",
+    },
     city: {
       type: String,
       default: "",
     },
-    phone: {
+    city_id: {
       type: String,
       default: "",
     },
-    defaultAddress: {
+    telephone: {
+      type: String,
+      default: "",
+    },
+    street: {
+      type: String,
+      default: "",
+    },
+    is_default: {
       type: Boolean,
       default: false,
     },

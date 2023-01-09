@@ -3,28 +3,38 @@ const Address = require("../models/addressModel");
 
 const addAddress = async (req, res) => {
   try {
-    const { fullName, address, ward, district, city, phone, defaultAddress } =
-      req.body;
+    const {
+      fullName,
+      street,
+      ward,
+      ward_id,
+      district,
+      district_id,
+      city,
+      city_id,
+      telephone,
+      is_default,
+    } = req.body;
     const userId = req.user._id;
     const addressDoc = await Address.find({
       user: userId,
-      defaultAddress: true,
+      is_default: true,
     });
     if (addressDoc) {
-      if (defaultAddress) {
+      if (is_default) {
         await Address.findOneAndUpdate(
           {
             user: userId,
-            defaultAddress: true,
+            is_default: true,
           },
           {
-            defaultAddress: false,
+            is_default: false,
           }
         );
         await Address.create({
           user: userId,
           ...req.body,
-          defaultAddress: true,
+          is_default: true,
         });
         return res
           .status(200)
@@ -42,7 +52,7 @@ const addAddress = async (req, res) => {
     await Address.create({
       user: userId,
       ...req.body,
-      defaultAddress: true,
+      is_default: true,
     });
     return res.status(200).json({ message: "Thêm địa chỉ thành công" });
   } catch (error) {
@@ -55,7 +65,7 @@ const getUserAddress = async (req, res) => {
   try {
     const userId = req.user._id;
     const addresses = await Address.find({ user: userId }).sort({
-      defaultAddress: -1,
+      is_default: -1,
     });
     res.status(200).json({ content: addresses });
   } catch (error) {
