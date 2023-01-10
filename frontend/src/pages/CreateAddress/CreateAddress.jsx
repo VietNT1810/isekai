@@ -1,6 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -31,6 +33,8 @@ function CreateAddress(props) {
     const [cities, setCities] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [wards, setWards] = useState([]);
+    const { userToken } = useSelector((state) => state.user);
+    const navigate = useNavigate();
 
     const {
         register,
@@ -109,8 +113,15 @@ function CreateAddress(props) {
         setValue('ward', selectText);
     };
 
-    const onSubmitForm = (data) => {
-        console.log('Data:', data);
+    const onSubmitForm = async (data) => {
+        await addressServices
+            .createAddress(data, userToken)
+            .then((res) => {
+                navigate('/user/account/address');
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
     return (

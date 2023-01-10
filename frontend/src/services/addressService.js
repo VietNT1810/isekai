@@ -57,3 +57,17 @@ export const getListWard = async (districtCode) => {
         throw error;
     }
 };
+
+export const createAddress = async (params, token) => {
+    try {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const result = await request.post(`${prefix}/add`, params, config);
+        return result.data;
+    } catch (error) {
+        throw error;
+    }
+};
