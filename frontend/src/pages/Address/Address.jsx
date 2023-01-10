@@ -67,19 +67,19 @@ function Address(props) {
                         <div className={cx('info')}>
                             <div className={cx('name')}>
                                 {address.fullName.toUpperCase()}
-                                {address.defaultAddress && <span>Mặc định</span>}
+                                {address.is_default && <span>Mặc định</span>}
                             </div>
                             <div className={cx('address')}>
-                                <span>Địa chỉ:</span> {address.address}, Phường {address.ward}, Quận {address.district},{' '}
+                                <span>Địa chỉ:</span> {address.street}, {address.ward}, {address.district},{' '}
                                 {address.city}
                             </div>
                             <div className={cx('phone')}>
-                                <span>Điện thoại:</span> {address.phone}
+                                <span>Điện thoại:</span> {address.telephone}
                             </div>
                         </div>
                         <div className={cx('action')}>
                             <button className={cx('edit')}>Chỉnh sửa</button>
-                            {!address.defaultAddress && (
+                            {!address.is_default && (
                                 <button
                                     className={cx('delete')}
                                     onClick={() => {
