@@ -37,8 +37,6 @@ function Header() {
         navigate('/cart');
     };
 
-    console.log('matches:', matches);
-
     return (
         <header className={cx('wrapper')}>
             <div className={cx('container')}>
