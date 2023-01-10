@@ -23,9 +23,20 @@ form {
             width: 120px;
             font-size: 13px;
         }
-        .input {
+        & > div {
             flex: 1;
-            font-size: 14px;
+            display: flex;
+            position: relative;
+            .input {
+                flex: 1;
+                font-size: 14px;
+            }
+            .error-message {
+                position: absolute;
+                bottom: -15px;
+                font-size: 11px;
+                color: var(--error);
+            }
         }
         .default-address {
             position: relative;
@@ -50,7 +61,7 @@ form {
             }
             .checkmark {
                 position: absolute;
-                top: 0;
+                top: 2px;
                 left: 0;
                 width: 21px;
                 height: 21px;
@@ -69,6 +80,12 @@ form {
                     transform: scale(0) rotate(45deg);
                     transition: transform 0.3s ease 0s;
                 }
+            }
+        }
+        &.has-error {
+            margin-bottom: 30px;
+            & .input {
+                border: 1px solid var(--error);
             }
         }
     }
