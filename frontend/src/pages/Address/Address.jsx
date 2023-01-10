@@ -34,7 +34,6 @@ function Address(props) {
     }, []);
 
     const handleDeleteAddress = async () => {
-        console.log('Click delete address:', popupData);
         await addressService
             .deleteUserAddress(userToken, popupData)
             .then((res) => {
@@ -78,7 +77,14 @@ function Address(props) {
                             </div>
                         </div>
                         <div className={cx('action')}>
-                            <button className={cx('edit')}>Chỉnh sửa</button>
+                            <button
+                                className={cx('edit')}
+                                onClick={() => {
+                                    navigate(`edit/${address._id}`);
+                                }}
+                            >
+                                Chỉnh sửa
+                            </button>
                             {!address.is_default && (
                                 <button
                                     className={cx('delete')}
