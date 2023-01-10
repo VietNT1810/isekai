@@ -3,7 +3,8 @@ const {
   addAddress,
   getUserAddress,
   updateUserAddress,
-  deleteUserAddress
+  getSingleAddress,
+  deleteUserAddress,
 } = require("../controllers/addressController.js");
 
 const { requireAuth } = require("../middleware/middleware.js");
@@ -13,13 +14,16 @@ const router = express.Router();
 //add address
 router.post("/add", requireAuth, addAddress);
 
-//get user address
+//get user addresses
 router.get("/address", requireAuth, getUserAddress);
 
-//update user address
-router.patch("/update/:id", requireAuth, updateUserAddress);
+//get user address
+router.get("/address/:id", requireAuth, getSingleAddress);
+
+//edit user address
+router.patch("/edit/:id", requireAuth, updateUserAddress);
 
 //delete user address
-router.delete("/delete/:id", requireAuth, deleteUserAddress)
+router.delete("/delete/:id", requireAuth, deleteUserAddress);
 
 module.exports = router;

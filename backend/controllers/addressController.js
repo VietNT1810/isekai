@@ -114,9 +114,27 @@ const deleteUserAddress = async (req, res) => {
   }
 };
 
+//get single address
+const getSingleAddress = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: "This address not exist!" });
+    }
+    const address = await Address.find({ _id: id });
+    if (!address) {
+      return res.status(404).json({ error: "This address not exist!" });
+    }
+    res.status(200).json({ content: address });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   addAddress,
   getUserAddress,
   updateUserAddress,
   deleteUserAddress,
+  getSingleAddress,
 };
