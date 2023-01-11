@@ -121,7 +121,7 @@ const getSingleAddress = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(404).json({ error: "This address not exist!" });
     }
-    const address = await Address.find({ _id: id });
+    const address = await Address.findOne({ _id: id });
     if (!address) {
       return res.status(404).json({ error: "This address not exist!" });
     }
