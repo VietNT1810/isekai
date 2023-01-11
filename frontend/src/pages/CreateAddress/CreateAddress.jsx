@@ -30,7 +30,6 @@ const schema = yup.object({
 });
 
 function CreateAddress({ type }) {
-    const [addressInfo, setAddressInfo] = useState({});
     const [cities, setCities] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [wards, setWards] = useState([]);
@@ -121,7 +120,6 @@ function CreateAddress({ type }) {
                     'is_default',
                 ];
                 fields.forEach((field) => setValue(field, res.content[field]));
-                setAddressInfo(res.content);
             })
             .catch((err) => {
                 console.log(err);
