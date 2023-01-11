@@ -1,8 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -15,7 +15,7 @@ const schema = yup.object({
     fullName: yup
         .string()
         .required('Vui lòng nhập họ và tên')
-        .test('fullName', 'Họ và tên phải gồm 2 từ trở lên', (value) => value.split(' ').length === 2),
+        .test('fullName', 'Họ và tên phải gồm 2 từ trở lên', (value) => value.split(' ').length >= 2),
     telephone: yup
         .string()
         .required('Vui lòng nhập số điện thoại')
@@ -26,16 +26,27 @@ const schema = yup.object({
     street: yup
         .string()
         .required('Vui lòng nhập địa chỉ')
-        .test('street', 'Địa chỉ phải gồm 2 từ trở lên', (value) => value.split(' ').length === 2),
+        .test('street', 'Địa chỉ phải gồm 2 từ trở lên', (value) => value.split(' ').length >= 2),
 });
 
-function CreateAddress(props) {
+function CreateAddress({ type }) {
+    const [addressInfo, setAddressInfo] = useState({});
     const [cities, setCities] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [wards, setWards] = useState([]);
     const { userToken } = useSelector((state) => state.user);
     const navigate = useNavigate();
+    const params = useParams();
+    const addressId = params.addressId;
 
+    //handle side effect
+    useEffect(() => {
+        if (type === 'create') return;
+        getAddressInfo();
+        getCityList();
+    }, [addressId]);
+
+    //form control react-hook-form
     const {
         register,
         formState: { errors },
@@ -56,8 +67,6 @@ function CreateAddress(props) {
         },
         resolver: yupResolver(schema),
     });
-
-    console.log('err:', errors);
 
     //fetch api
     const getCityList = async () => {
@@ -93,6 +102,54 @@ function CreateAddress(props) {
             });
     };
 
+    const getAddressInfo = async () => {
+        await addressServices
+            .getSingleAddress(addressId, userToken)
+            .then(async (res) => {
+                await getDistrictList(res.content.city_id);
+                await getWardList(res.content.district_id);
+                const fields = [
+                    'fullName',
+                    'telephone',
+                    'city_id',
+                    'city',
+                    'district_id',
+                    'district',
+                    'ward_id',
+                    'ward',
+                    'street',
+                    'is_default',
+                ];
+                fields.forEach((field) => setValue(field, res.content[field]));
+                setAddressInfo(res.content);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
+    const createAddress = async (data) => {
+        await addressServices
+            .createAddress(data, userToken)
+            .then((res) => {
+                navigate('/user/account/address');
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
+    const editAddress = async (data, id) => {
+        await addressServices
+            .editAddress(data, userToken, id)
+            .then((res) => {
+                navigate('/user/account/address');
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
     //handle event
     const handleSelectCityChange = (e) => {
         let selectText = e.target.options[e.target.selectedIndex].text;
@@ -113,21 +170,14 @@ function CreateAddress(props) {
         setValue('ward', selectText);
     };
 
-    const onSubmitForm = async (data) => {
-        await addressServices
-            .createAddress(data, userToken)
-            .then((res) => {
-                navigate('/user/account/address');
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+    const onSubmitForm = (data) => {
+        type === 'create' ? createAddress(data) : editAddress(data, addressId);
     };
 
     return (
         <div className={cx('wrapper')}>
             <div className={cx('title')}>
-                <h2>Tạo sổ địa chỉ</h2>
+                <h2>{addressId ? 'Chỉnh sửa sổ địa chỉ' : 'Tạo sổ địa chỉ'}</h2>
             </div>
             <div className={cx('content')}>
                 <form onSubmit={handleSubmit(onSubmitForm)}>

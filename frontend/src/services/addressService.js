@@ -85,3 +85,17 @@ export const createAddress = async (params, token) => {
         throw error;
     }
 };
+
+export const editAddress = async (params, token, id) => {
+    try {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const result = await request.patch(`${prefix}/edit/${id}`, params, config);
+        return result.data;
+    } catch (error) {
+        throw error;
+    }
+};
