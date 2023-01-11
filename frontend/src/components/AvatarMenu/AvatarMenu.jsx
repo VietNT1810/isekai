@@ -51,6 +51,7 @@ function AvatarMenu({ username, userAvatar, onClickProfile, onClickLogout }) {
 
     //User avatar base on username
     const stringToColor = (string) => {
+        if (!string) return;
         let hash = 0;
         let i;
         /* eslint-disable no-bitwise */
@@ -66,6 +67,7 @@ function AvatarMenu({ username, userAvatar, onClickProfile, onClickLogout }) {
         return color;
     };
     const stringAvatar = (name) => {
+        if (!name) return;
         const arrayName = name.split(' ');
         return {
             sx: {
