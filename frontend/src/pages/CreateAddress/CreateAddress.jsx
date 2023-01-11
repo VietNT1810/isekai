@@ -40,9 +40,14 @@ function CreateAddress({ type }) {
 
     //handle side effect
     useEffect(() => {
+        const controller = new AbortController();
+        const signal = controller.signal;
         if (type === 'create') return;
-        getAddressInfo();
-        getCityList();
+        getAddressInfo(signal);
+        getCityList(signal);
+
+        //cleanup function
+        return () => controller.abort();
     }, [addressId]);
 
     //form control react-hook-form
@@ -68,9 +73,9 @@ function CreateAddress({ type }) {
     });
 
     //fetch api
-    const getCityList = async () => {
+    const getCityList = async (signal) => {
         await addressServices
-            .getListCity()
+            .getListCity(signal)
             .then((res) => {
                 setCities(res);
             })
@@ -101,9 +106,9 @@ function CreateAddress({ type }) {
             });
     };
 
-    const getAddressInfo = async () => {
+    const getAddressInfo = async (signal) => {
         await addressServices
-            .getSingleAddress(addressId, userToken)
+            .getSingleAddress(addressId, userToken, signal)
             .then(async (res) => {
                 await getDistrictList(res.content.city_id);
                 await getWardList(res.content.district_id);

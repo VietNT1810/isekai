@@ -17,14 +17,14 @@ export const getUserAddress = async (token) => {
     }
 };
 
-export const getSingleAddress = async (addressId, token) => {
+export const getSingleAddress = async (addressId, token, signal) => {
     try {
         const config = {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         };
-        const result = await request.get(`${prefix}/address/${addressId}`, config);
+        const result = await request.get(`${prefix}/address/${addressId}`, { signal: signal }, config);
         return result.data;
     } catch (error) {
         throw error;
@@ -45,9 +45,9 @@ export const deleteUserAddress = async (token, addressId) => {
     }
 };
 
-export const getListCity = async () => {
+export const getListCity = async (signal) => {
     try {
-        const result = await axios.get('https://provinces.open-api.vn/api/p/');
+        const result = await axios.get('https://provinces.open-api.vn/api/p/', { signal: signal });
         return result.data;
     } catch (error) {
         throw error;
