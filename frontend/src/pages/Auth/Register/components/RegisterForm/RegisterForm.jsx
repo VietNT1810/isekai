@@ -9,6 +9,7 @@ import InputField from '@/components/InputField';
 import styles from './RegisterForm.module.scss';
 import Button from '@/components/Button';
 import assets from '@/assets';
+import GoogleAuthButton from '@/components/GoogleAuthButton';
 
 const cx = classNames.bind(styles);
 const schema = yup
@@ -20,7 +21,7 @@ const schema = yup
     })
     .required();
 
-function RegisterForm({ submitForm, loading }) {
+function RegisterForm({ submitForm, loading, googleLogin }) {
     const {
         register,
         control,
@@ -97,7 +98,7 @@ function RegisterForm({ submitForm, loading }) {
                 <span></span>
             </div>
             <div className={cx('register-social')}>
-                <div className={cx('action-social')}>
+                {/* <div className={cx('action-social')}>
                     <img src={assets.icons.iconGoogle} alt="No image here" />
                 </div>
                 <div className={cx('action-social')}>
@@ -108,7 +109,8 @@ function RegisterForm({ submitForm, loading }) {
                 </div>
                 <div className={cx('action-social')}>
                     <img src={assets.icons.iconTwitter} alt="No image here" />
-                </div>
+                </div> */}
+                <GoogleAuthButton onLoginWithGoogle={(token) => googleLogin(token)} />
             </div>
         </div>
     );

@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './Register.module.scss';
 import RegisterForm from './components/RegisterForm';
 import assets from '@/assets';
-import { registerUser } from '@/actions/userAction';
+import { loginByGoogle, registerUser } from '@/actions/userAction';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
 
@@ -34,10 +34,21 @@ function Register(props) {
             });
     };
 
+    const handleLoginWithGoogle = (token) => {
+        dispatch(loginByGoogle({ token }))
+            .unwrap()
+            .then((res) => {
+                location.state?.slug ? navigate(`/product/${location.state.slug}`) : navigate('/');
+            })
+            .catch((error) => {
+                console.log('error', error);
+            });
+    };
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
-                <RegisterForm submitForm={handleSubmit} loading={isLoading} />
+                <RegisterForm submitForm={handleSubmit} googleLogin={handleLoginWithGoogle} loading={isLoading} />
                 {!matches && (
                     <div className={cx('register-image')}>
                         <img src={assets.images.registerImage} alt="Something wrong" />
