@@ -17,6 +17,20 @@ export const getUserAddress = async (token) => {
     }
 };
 
+export const getSingleAddress = async (addressId, token) => {
+    try {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const result = await request.get(`${prefix}/address/${addressId}`, config);
+        return result.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
 export const deleteUserAddress = async (token, addressId) => {
     try {
         const config = {
