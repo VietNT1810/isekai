@@ -10,6 +10,10 @@
     cursor: pointer;
 }
 
+button:disabled {
+    cursor: not-allowed;
+}
+
 .icon + .title,
 .title + .icon {
     margin-left: 8px;
@@ -29,6 +33,9 @@
     &:hover {
         background-color: #4deafc;
     }
+    &:disabled {
+        background-color: #72ebf8;
+    }
 }
 
 .outline {
@@ -36,6 +43,9 @@
     border: 2px solid var(--primary);
     .title {
         color: var(--primary);
+    }
+    &:disabled {
+        background-color: var(--main-mint-2);
     }
 }
 
@@ -51,6 +61,12 @@
     background-color: var(--main-black);
     .title {
         color: var(--main-mint-2);
+    }
+    &:hover {
+        background-color: #15151a;
+    }
+    &:disabled {
+        background-color: #363636;
     }
 }
 

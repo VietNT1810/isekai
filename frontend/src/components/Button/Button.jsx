@@ -19,6 +19,7 @@ function Button({
     className,
     leftIcon,
     rightIcon,
+    loading,
     ...passProps
 }) {
     let Component = 'button';
@@ -45,7 +46,7 @@ function Button({
     });
 
     return (
-        <Component className={classes} {...props}>
+        <Component className={classes} {...props} disabled={loading}>
             {leftIcon && <span className={cx('icon')}>{leftIcon}</span>}
             <span className={cx('title')}>{children}</span>
             {rightIcon && <span className={cx('icon')}>{rightIcon}</span>}
