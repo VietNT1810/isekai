@@ -20,7 +20,7 @@ const schema = yup
     })
     .required();
 
-function RegisterForm({ submitForm }) {
+function RegisterForm({ submitForm, loading }) {
     const {
         register,
         control,
@@ -87,7 +87,7 @@ function RegisterForm({ submitForm }) {
                     error={Boolean(errors.confirmPassword)}
                     helperText={errors.confirmPassword?.message}
                 />
-                <Button action type="submit">
+                <Button action type="submit" loading={loading}>
                     Đăng ký
                 </Button>
             </form>

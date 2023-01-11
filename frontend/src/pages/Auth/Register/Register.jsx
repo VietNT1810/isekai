@@ -13,19 +13,23 @@ const cx = classNames.bind(styles);
 
 function Register(props) {
     const matches = useMediaQuery('(max-width: 768px)');
-    const { loading, userInfo, error, success } = useSelector((state) => state.user);
+    const [isLoading, setIsLoading] = useState(false);
+    const { userInfo, error, success } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
 
     const handleSubmit = (data) => {
         data.email = data.email.toLowerCase();
+        setIsLoading(true);
         dispatch(registerUser(data))
             .unwrap()
             .then((res) => {
+                setIsLoading(false);
                 location.state?.slug ? navigate(`/product/${location.state.slug}`) : navigate('/');
             })
             .catch((error) => {
+                setIsLoading(false);
                 console.log('error', error);
             });
     };
@@ -33,7 +37,7 @@ function Register(props) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
-                <RegisterForm submitForm={handleSubmit} />
+                <RegisterForm submitForm={handleSubmit} loading={isLoading} />
                 {!matches && (
                     <div className={cx('register-image')}>
                         <img src={assets.images.registerImage} alt="Something wrong" />

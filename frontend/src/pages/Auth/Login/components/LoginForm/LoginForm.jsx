@@ -19,7 +19,7 @@ const schema = yup
     })
     .required();
 
-function LoginForm({ submitForm, googleLogin }) {
+function LoginForm({ submitForm, googleLogin, loading }) {
     const location = useLocation();
 
     const {
@@ -77,7 +77,7 @@ function LoginForm({ submitForm, googleLogin }) {
                     rules={{ required: false }}
                     render={({ field }) => <CheckboxField label="Giữ tôi luôn đăng nhập" field={field} />}
                 />
-                <Button action type="submit">
+                <Button action type="submit" loading={loading}>
                     Đăng nhập
                 </Button>
             </form>

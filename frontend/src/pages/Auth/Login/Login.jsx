@@ -14,29 +14,32 @@ const cx = classNames.bind(styles);
 function Login(props) {
     const matches = useMediaQuery('(max-width: 768px)');
     const [open, setOpen] = useState(false);
-    const { loading, userInfo, error, success } = useSelector((state) => state.user);
+    const [isLoading, setIsLoading] = useState(false);
+    const { userInfo, error, success } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
 
     const handleSubmit = (data) => {
         data.email = data.email.toLowerCase();
+        setIsLoading(true);
         dispatch(loginUser(data))
             .unwrap()
             .then((res) => {
                 setOpen(true);
                 setTimeout(() => {
+                    setIsLoading(false);
                     location.state?.slug ? navigate(`/product/${location.state.slug}`) : navigate('/');
                 }, 2000);
             })
             .catch((error) => {
                 console.log('error', error);
                 setOpen(true);
+                setIsLoading(false);
             });
     };
 
     const handleLoginWithGoogle = (token) => {
-        console.log('token login:', token);
         dispatch(loginByGoogle({ token }))
             .unwrap()
             .then((res) => {
@@ -58,7 +61,7 @@ function Login(props) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
-                <LoginForm submitForm={handleSubmit} googleLogin={handleLoginWithGoogle} />
+                <LoginForm submitForm={handleSubmit} googleLogin={handleLoginWithGoogle} loading={isLoading} />
                 {!matches && (
                     <div className={cx('login-image')}>
                         <img src={assets.images.loginImage} alt="Something wrong" />
