@@ -20,6 +20,7 @@ import ResetPassword from '@/pages/ResetPassword';
 import ProfileLayout from '@/layouts/ProfileLayout';
 import Address from '@/pages/Address';
 import CreateAddress from '@/pages/CreateAddress';
+import Checkout from '@/pages/Checkout';
 
 function Routes(props) {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -38,6 +39,7 @@ function Routes(props) {
                 { path: '/product/:slug', element: <ProductPage /> },
             ],
         },
+        //protected route
         {
             path: '/',
             element: isLoggedIn == 'true' ? <Outlet /> : <Navigate to="/login" />,
@@ -58,6 +60,10 @@ function Routes(props) {
                         { path: 'address/create', element: <CreateAddress type="create" /> },
                         { path: 'address/edit/:addressId', element: <CreateAddress type="edit" /> },
                     ],
+                },
+                {
+                    path: 'checkout/payment',
+                    element: <Checkout />,
                 },
             ],
         },
