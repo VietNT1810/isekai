@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames/bind';
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 
 import styles from './Cart.module.scss';
 import CartList from './components/CartList';
@@ -13,8 +14,10 @@ const cx = classNames.bind(styles);
 
 function Cart(props) {
     const matches = useMediaQuery('(max-width: 595px)');
-
+    const navigate = useNavigate();
     const { carts, loading } = useSelector((state) => state.cart);
+    const { userInfo } = useSelector((state) => state.user);
+    const userAddress = userInfo?.addresses?.[0];
 
     const getTotalPrice = () => {
         const totalPrice = carts.reduce((totalPrice, item) => totalPrice + item.productId.price * +item.quantity, 0);
@@ -48,13 +51,24 @@ function Cart(props) {
                         </div>
                         <div className={cx('right')}>
                             <div className={cx('shipment-info')}>
-                                <div className={cx('shipment-title')}>Giao tới</div>
-                                <div className={cx('customer-info')}>
-                                    <div className={cx('name')}>Nguyen Tuan Viet</div>
-                                    <div className={cx('address')}>
-                                        37,ngõ 273, Nguyễn Khoái, Phường Thanh Lương, Quận Hai Bà Trưng, Hà Nội
-                                    </div>
+                                <div className={cx('shipment-header')}>
+                                    <span className={cx('shipment-header__title')}>Giao tới</span>
+                                    <Link to="/user/account/address" className={cx('shipment-header__nav')}>
+                                        Thay đổi
+                                    </Link>
                                 </div>
+                                {userAddress && (
+                                    <div className={cx('customer-info')}>
+                                        <div className={cx('name')}>
+                                            {userAddress.fullName} | {userAddress.telephone}
+                                        </div>
+                                        <div className={cx('address')}>
+                                            {/* 37,ngõ 273, Nguyễn Khoái, Phường Thanh Lương, Quận Hai Bà Trưng, Hà Nội */}
+                                            {userAddress.street}, {userAddress.ward}, {userAddress.district},{' '}
+                                            {userAddress.city}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                             <div className={cx('price-summary')}>
                                 <div className={cx('price-total')}>
@@ -65,7 +79,14 @@ function Cart(props) {
                                     </div>
                                 </div>
                             </div>
-                            <Button primary>Mua hàng</Button>
+                            <Button
+                                primary
+                                onClick={() => {
+                                    navigate('/checkout/payment');
+                                }}
+                            >
+                                Mua hàng
+                            </Button>
                         </div>
                     </div>
                 ) : (

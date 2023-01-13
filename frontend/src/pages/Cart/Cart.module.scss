@@ -56,9 +56,17 @@
     background-color: var(--main-white);
     border-radius: 5px;
     box-shadow: 0 1px 2px var(--sub-blue);
-    .shipment-title {
-        color: var(--main-grey);
+    .shipment-header {
+        display: flex;
+        justify-content: space-between;
         margin-bottom: 12px;
+        &__title {
+            color: var(--main-grey);
+        }
+        &__nav {
+            color: var(--sub-blue);
+            font-size: 1.4rem;
+        }
     }
     .customer-info {
         .name {
