@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import Routes from '@/routes';
 import { getUserCart } from './actions/cartAction';
-import { getUserProfile } from './actions/userAction';
+import { getUserAddresses, getUserProfile } from './actions/userAction';
 import ScrollToTop from './helpers/ScrollToTop';
 
 function App() {
@@ -15,8 +15,9 @@ function App() {
         if (userToken) {
             dispatch(getUserProfile())
                 .unwrap()
-                .then((res) => {
+                .then(async (res) => {
                     dispatch(getUserCart({ userId: res.user._id }));
+                    dispatch(getUserAddresses(userToken));
                 })
                 .catch((error) => {
                     console.log('error', error);
