@@ -5,6 +5,7 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState: {
         loading: false,
+        cartId: '',
         userId: '',
         carts: [],
         error: null,
@@ -34,6 +35,7 @@ const cartSlice = createSlice({
             state.loading = false;
             state.carts = payload.cart.products;
             state.userId = payload.cart.userId;
+            state.cartId = payload.cart._id;
             state.success = true;
         },
         [getUserCart.rejected]: (state, { payload }) => {
