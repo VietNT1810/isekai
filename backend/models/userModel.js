@@ -28,11 +28,6 @@ const userSchema = new Schema(
       required: false,
       default: "",
     },
-    addresses: {
-      type: Array,
-      required: false,
-      default: [],
-    },
     gender: {
       type: String,
       required: false,
