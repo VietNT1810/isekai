@@ -63,9 +63,9 @@ function CartList({ carts, isLoading }) {
     return (
         <div className={cx('cart-list')}>
             {carts.map((cart) => (
-                <>
+                <div key={cart.productId._id}>
                     {matches ? (
-                        <div key={cart.productId._id} className={cx('cart-mobile')}>
+                        <div className={cx('cart-mobile')}>
                             <div className={cx('content')}>
                                 <div className={cx('cart-image-container')}>
                                     <div className={cx('cart-image-box')}>
@@ -116,7 +116,7 @@ function CartList({ carts, isLoading }) {
                             </div>
                         </div>
                     ) : (
-                        <div key={cart.productId._id} className={cx('cart-desktop')}>
+                        <div className={cx('cart-desktop')}>
                             <div className={cx('product-info')}>
                                 <div className={cx('cart-image-container')}>
                                     <div className={cx('cart-image-box')}>
@@ -161,7 +161,7 @@ function CartList({ carts, isLoading }) {
                             </div>
                         </div>
                     )}
-                </>
+                </div>
             ))}
             <PopupConfirm
                 openPopup={openDialog}
