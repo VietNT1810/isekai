@@ -3,13 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getUserCart = createAsyncThunk('cart/get', async ({ userId }, { rejectWithValue }) => {
     try {
-        // const { user } = getState();
-        // const config = {
-        //     headers: {
-        //         Authorization: `Bearer ${user.userToken}`,
-        //     },
-        // };
-        const data = await getCarts({ userId });
+        const data = await getCarts({ userId, status: 'active' });
         return data;
     } catch (error) {
         if (error.response && error.response.data.message) {

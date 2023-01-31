@@ -25,6 +25,7 @@ const addToCart = async (req, res) => {
     const cart = await Cart.findOneAndUpdate(
       {
         userId,
+        status: "active",
       },
       {
         $push: {
@@ -99,9 +100,9 @@ const updateCart = async (req, res) => {
 
 //get cart
 const getCart = async (req, res) => {
-  const { userId } = req.body;
+  const { userId, status } = req.body;
   try {
-    const cart = await Cart.findOne({ userId }).populate({
+    const cart = await Cart.findOne({ userId, status }).populate({
       path: "products",
       populate: {
         path: "productId",

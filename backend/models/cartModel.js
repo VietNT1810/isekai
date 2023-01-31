@@ -13,6 +13,10 @@ const cartSchema = new Schema(
       required: true,
       default: [],
     },
+    status: {
+      type: String,
+      default: "active",
+    },
   },
   { timestamps: true }
 );
