@@ -4,14 +4,21 @@ const Cart = require("../models/cartModel");
 //create order
 const createOrder = async (req, res) => {
   try {
-    const { cartId, userId } = req.body;
+    const { cartId, addressId, method } = req.body;
+    const userId = req.user._id;
     const cartDoc = await Cart.findOne({ cartId });
     const order = await Order.create({
       cart: cartId,
       user: userId,
+      shipping: addressId,
+      method: method,
       products: cartDoc.products,
     });
-    res.status(200).json({ order });
+    const cartUpdate = await Cart.findOneAndUpdate(
+      { cartId },
+      { $set: { status: "complete" } }
+    );
+    res.status(200).json({ cartUpdate });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -20,14 +27,20 @@ const createOrder = async (req, res) => {
 //get all order
 const getOrder = async (req, res) => {
   try {
-    const orders = await Order.find().populate({
-      path: "cart",
-      populate: {
-        path: "products.productId",
-        model: "Product",
-        select: ["name", "price", "productImage", "slug"],
-      },
-    });
+    const orders = await Order.find()
+      .populate({
+        path: "cart",
+        populate: {
+          path: "products.productId",
+          model: "Product",
+          select: ["name", "price", "productImage", "slug"],
+        },
+      })
+      .populate({
+        path: "shipping",
+        model: "Address",
+      });
+
     res.status(200).json({
       status: "SUCCESS",
       statusCode: 200,
@@ -43,11 +56,17 @@ const getOrder = async (req, res) => {
 const myOrder = async (req, res) => {
   try {
     const userId = req.user._id;
-    const orderDoc = await Order.find({ user: userId }).populate({
-      path: "products.productId",
-      model: "Product",
-      select: ["name", "price", "productImage", "slug"],
-    });
+    const orderDoc = await Order.find({ user: userId })
+      .populate({
+        path: "products.productId",
+        model: "Product",
+        select: ["name", "price", "productImage", "slug"],
+      })
+      .populate({
+        path: "shipping",
+        model: "Address",
+        select: ["fullName", "city", "district", "ward", "telephone", "street"],
+      });
     res.status(200).json({
       status: "SUCCESS",
       statusCode: 200,

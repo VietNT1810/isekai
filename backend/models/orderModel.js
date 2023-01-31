@@ -12,17 +12,18 @@ const orderSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    shipping: {
-      type: Object,
-      default: "Đang vận chuyển",
-    },
-    // total: {
-    //   type: Number,
-    //   default: 0,
-    // },
     products: {
       type: Array,
       default: [],
+    },
+    shipping: {
+      type: Schema.Types.ObjectId,
+      ref: "Address",
+    },
+    method: {
+      type: String,
+      require: true,
+      default: "",
     },
   },
   {
