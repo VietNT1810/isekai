@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import styles from './Checkout.module.scss';
 import assets from '@/assets';
 import { formatVND } from '@/helpers/number';
+import CheckoutProducts from './components/CheckoutProducts';
+import PaymentMethod from './components/PaymentMethod';
 
 const cx = classNames.bind(styles);
 
@@ -18,6 +20,10 @@ function Checkout(props) {
     const getTotalPrice = () => {
         const totalPrice = carts.reduce((totalPrice, item) => totalPrice + item.productId.price * +item.quantity, 0);
         return totalPrice;
+    };
+
+    const handlePaymentMethod = (data) => {
+        console.log('data:', data);
     };
 
     return (
@@ -42,35 +48,16 @@ function Checkout(props) {
                                 <div className={cx('title', 'total')}>Thành tiền</div>
                             </div>
                             <div className={cx('product-info')}>
-                                {carts.map((cart) => (
-                                    <div key={cart.productId._id} className={cx('product-item')}>
-                                        <div className={cx('info')}>
-                                            <div className={cx('image-container')}>
-                                                <div className={cx('image-box')}>
-                                                    <img
-                                                        src={cart.productId.productImage}
-                                                        className={cx('image')}
-                                                        alt="Error image"
-                                                        width={30}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className={cx('name')}>
-                                                <span>{cart.productId.name}</span>
-                                            </div>
-                                        </div>
-                                        <div className={cx('block')}>{formatVND(cart.productId.price)}</div>
-                                        <div className={cx('block')}>{cart.quantity}</div>
-                                        <div className={cx('block', 'total')}>
-                                            {formatVND(cart.productId.price * cart.quantity)}
-                                        </div>
-                                    </div>
-                                ))}
+                                <CheckoutProducts carts={carts} />
                                 <p className={cx('total-price')}>
                                     Tổng số tiền:
                                     <span className={cx('price')}>{formatVND(getTotalPrice())}</span>
                                 </p>
                             </div>
+                        </div>
+                        <div className={cx('payment')}>
+                            <p className={cx('heading')}>Phương thức thanh toán</p>
+                            <PaymentMethod handleSelect={handlePaymentMethod} />
                         </div>
                     </div>
                     <div className={cx('right')}>

@@ -2,6 +2,7 @@ import { ChromeReaderMode, Key, Person, Place, Star } from '@mui/icons-material'
 
 import TextIcon from '@/components/TextIcon';
 import { formatVND } from '@/helpers/number';
+import assets from '@/assets';
 
 export const PRICE_MARKS = [
     { value: 100000, label: formatVND(100000) },
@@ -22,4 +23,12 @@ export const PROFILE_NAV = [
     { to: 'order', icon: <ChromeReaderMode fontSize="large" color="action" />, title: 'Quản lý đơn hàng' },
     { to: 'address', icon: <Place fontSize="large" color="action" />, title: 'Sổ địa chỉ' },
     { to: 'change-password', icon: <Key fontSize="large" color="action" />, title: 'Thay đổi mật khẩu' },
+];
+
+export const PAYMENT_METHOD = [
+    { value: 'cod', title: 'Thanh toán tiền mặt khi nhận hàng', icon: assets.icons.iconPaymentCod },
+    { value: 'credit', title: 'Thanh toán bằng thẻ quốc tế Visa, Master, JCB', icon: assets.icons.iconPaymentCredit },
+    { value: 'momo', title: 'Thanh toán bằng ví MoMo', icon: assets.icons.iconPaymentMomo },
+    { value: 'zalo-pay', title: 'Thanh toán tiền mặt khi nhận hàng', icon: assets.icons.iconPaymentZalo },
+    { value: 'atm', title: 'Thanh toán tiền mặt khi nhận hàng', icon: assets.icons.iconPaymentAtm },
 ];

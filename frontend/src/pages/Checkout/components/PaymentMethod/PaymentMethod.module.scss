@@ -1,0 +1,23 @@
+.payment-method {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    .method {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        input {
+            margin-right: 12px;
+        }
+        &-label {
+            display: flex;
+            align-items: center;
+            img {
+                width: 32px;
+            }
+            .title {
+                margin-left: 12px;
+            }
+        }
+    }
+}
