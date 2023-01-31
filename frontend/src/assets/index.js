@@ -32,6 +32,11 @@ import iconLinkedin from '@/assets/icons/linkedin-icon.svg';
 import iconGoogle from '@/assets/icons/google-icon.svg';
 import iconShipping from '@/assets/icons/shipping-icon.svg';
 import iconCamera from '@/assets/icons/camera-icon.svg';
+import iconPaymentCod from '@/assets/icons/icon-payment-method-cod.svg';
+import iconPaymentCredit from '@/assets/icons/icon-payment-method-credit.svg';
+import iconPaymentMomo from '@/assets/icons/icon-payment-method-momo.svg';
+import iconPaymentZalo from '@/assets/icons/icon-payment-method-zalo-pay.svg';
+import iconPaymentAtm from '@/assets/icons/icon-payment-method-atm.svg';
 
 const images = {
     logoWhite,
@@ -70,6 +75,11 @@ const icons = {
     iconGoogle,
     iconShipping,
     iconCamera,
+    iconPaymentCod,
+    iconPaymentCredit,
+    iconPaymentMomo,
+    iconPaymentZalo,
+    iconPaymentAtm,
 };
 
 export default { images, icons };
