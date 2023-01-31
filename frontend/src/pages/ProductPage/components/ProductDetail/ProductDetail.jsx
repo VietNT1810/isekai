@@ -171,7 +171,6 @@ function ProductDetail({ product, isInCart }) {
                             Thêm vào giỏ hàng
                         </Button>
                     )}
-                    <Button primary>Mua ngay</Button>
                 </div>
             </div>
             <Snackbar
