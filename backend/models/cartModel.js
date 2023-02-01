@@ -16,6 +16,7 @@ const cartSchema = new Schema(
     status: {
       type: String,
       default: "active",
+      enum: ["active", "complete"],
     },
   },
   { timestamps: true }
