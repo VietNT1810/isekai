@@ -1,23 +1,23 @@
-import Footer from '@/layouts/components/Footer';
 import classNames from 'classnames/bind';
-import React from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
-import styles from './Checkout.module.scss';
 import assets from '@/assets';
+import Button from '@/components/Button';
 import { formatVND } from '@/helpers/number';
+import Footer from '@/layouts/components/Footer';
+import styles from './Checkout.module.scss';
 import CheckoutProducts from './components/CheckoutProducts';
 import PaymentMethod from './components/PaymentMethod';
-import Button from '@/components/Button';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import * as orderServices from '@/services/orderService';
 
 const cx = classNames.bind(styles);
 
 function Checkout(props) {
     const [method, setMethod] = useState({});
-    const { userInfo } = useSelector((state) => state.user);
+    const [loading, setLoading] = useState(false);
+    const { userInfo, userToken } = useSelector((state) => state.user);
     const { carts, userId, cartId } = useSelector((state) => state.cart);
     const userAddress = userInfo?.addresses?.[0];
     const navigate = useNavigate();
@@ -36,7 +36,18 @@ function Checkout(props) {
         if (!userAddress) {
             return navigate('/user/account/address');
         }
-        console.log(orderInfo);
+        setLoading(true);
+        await orderServices
+            .createOrder(userToken, orderInfo)
+            .then((res) => {
+                console.log(res);
+                setLoading(false);
+                navigate('/user/account/order');
+            })
+            .catch((err) => {
+                console.log(err);
+                setLoading(false);
+            });
     };
 
     return (
@@ -122,7 +133,7 @@ function Checkout(props) {
                                     <span className={cx('price-noted')}>(Đã bao gồm VAT nếu có)</span>
                                 </div>
                             </div>
-                            <Button primary className={cx('btn')} onClick={handleCreateOrder}>
+                            <Button primary loading={loading} className={cx('btn')} onClick={handleCreateOrder}>
                                 Đặt hàng
                             </Button>
                         </div>
