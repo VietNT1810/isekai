@@ -1,14 +1,16 @@
-import React from 'react';
-import classNames from 'classnames/bind';
 import { Block, CreditCard, LocalShipping } from '@mui/icons-material';
+import classNames from 'classnames/bind';
+import { useNavigate } from 'react-router-dom';
 
-import styles from './OrderList.module.scss';
-import { formatVND } from '@/helpers/number';
 import Button from '@/components/Button';
+import { formatVND } from '@/helpers/number';
+import styles from './OrderList.module.scss';
 
 const cx = classNames.bind(styles);
 
-function OrderList({ orders }) {
+function OrderList({ orders, onCancelOrder }) {
+    const navigate = useNavigate();
+
     const getStatusIcon = (status) => {
         const statusIcon = {
             awaiting_payment: <CreditCard fontSize="large" />,
@@ -47,7 +49,7 @@ function OrderList({ orders }) {
                             <div className={cx('product-detail')}>
                                 <div className={cx('product-image')}>
                                     <img src={product.productId.productImage} alt={product.productId.name} />
-                                    <span className={cx('product-quantity')}>x2</span>
+                                    <span className={cx('product-quantity')}>x{product.quantity}</span>
                                 </div>
                                 <div className={cx('product-info')}>
                                     <span className={cx('product-name')}>{product.productId.name}</span>
@@ -64,12 +66,24 @@ function OrderList({ orders }) {
                             <span>{getTotalPrice(order.products)}</span>
                         </div>
                         <div className={cx('btn-group')}>
-                            {order.status == ('awaiting_payment' || 'shipping') ? (
-                                <Button outline className={cx('btn')}>
+                            {order.status == 'awaiting_payment' || order.status == 'shipping' ? (
+                                <Button
+                                    outline
+                                    className={cx('btn')}
+                                    onClick={() => {
+                                        onCancelOrder({ orderId: order._id, cartId: order.cart });
+                                    }}
+                                >
                                     Hủy đơn hàng
                                 </Button>
                             ) : (
-                                <Button outline className={cx('btn')}>
+                                <Button
+                                    outline
+                                    className={cx('btn')}
+                                    onClick={() => {
+                                        navigate('/cart');
+                                    }}
+                                >
                                     Mua lại
                                 </Button>
                             )}

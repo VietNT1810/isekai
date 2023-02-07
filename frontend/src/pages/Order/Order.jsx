@@ -10,11 +10,12 @@ import OrderList from './components/OrderList';
 const cx = classNames.bind(styles);
 
 function Order(props) {
-    const [value, setValue] = React.useState('all');
+    const [value, setValue] = useState('all');
     const [orders, setOrders] = useState([]);
     const { userToken } = useSelector((state) => state.user);
 
-    useEffect(async () => {
+    //get order api
+    const getOrders = async () => {
         await orderServices
             .getUserOrders(userToken, { status: value })
             .then((res) => {
@@ -23,11 +24,27 @@ function Order(props) {
             .catch((err) => {
                 console.log(err);
             });
+    };
+
+    useEffect(() => {
+        getOrders();
     }, [value]);
 
+    //handle order
     const handleChange = (event, newValue) => {
         setValue(newValue);
-        console.log('newValue:', newValue);
+    };
+
+    const handleCancelOrder = async (data) => {
+        console.log('Data:', data);
+        await orderServices
+            .cancelOrder(userToken, data.orderId, { cartId: data.cartId })
+            .then((res) => {
+                getOrders();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
     return (
@@ -43,7 +60,7 @@ function Order(props) {
                     </Tabs>
                 </Box>
                 <div className="tab-content">
-                    <OrderList orders={orders} />
+                    <OrderList orders={orders} onCancelOrder={handleCancelOrder} />
                 </div>
             </Box>
         </div>

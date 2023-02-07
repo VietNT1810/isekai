@@ -29,3 +29,17 @@ export const getUserOrders = async (token, params) => {
         throw error;
     }
 };
+
+export const cancelOrder = async (token, orderId, params) => {
+    try {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const result = await request.post(`${prefix}/cancel/${orderId}`, params, config);
+        return result.data;
+    } catch (error) {
+        throw error;
+    }
+};
