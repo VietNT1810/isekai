@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { Box, Tab, Tabs } from '@mui/material';
 import classNames from 'classnames/bind';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Box, Tab, Tabs, Typography } from '@mui/material';
 
-import styles from './Order.module.scss';
+import PopupConfirm from '@/components/PopupConfirm';
 import * as orderServices from '@/services/orderService';
+import styles from './Order.module.scss';
 import OrderList from './components/OrderList';
 
 const cx = classNames.bind(styles);
@@ -13,6 +14,8 @@ function Order(props) {
     const [value, setValue] = useState('all');
     const [orders, setOrders] = useState([]);
     const { userToken } = useSelector((state) => state.user);
+    const [openPopup, setOpenPopup] = useState(false);
+    const [popupData, setPopupData] = useState({});
 
     //get order api
     const getOrders = async () => {
@@ -35,12 +38,12 @@ function Order(props) {
         setValue(newValue);
     };
 
-    const handleCancelOrder = async (data) => {
-        console.log('Data:', data);
+    const handleCancelOrder = async () => {
         await orderServices
-            .cancelOrder(userToken, data.orderId, { cartId: data.cartId })
+            .cancelOrder(userToken, popupData.orderId, { cartId: popupData.cartId })
             .then((res) => {
                 getOrders();
+                setPopupData({});
             })
             .catch((err) => {
                 console.log(err);
@@ -60,9 +63,22 @@ function Order(props) {
                     </Tabs>
                 </Box>
                 <div className="tab-content">
-                    <OrderList orders={orders} onCancelOrder={handleCancelOrder} />
+                    <OrderList
+                        orders={orders}
+                        onCancelOrder={(data) => {
+                            setOpenPopup(true);
+                            setPopupData(data);
+                        }}
+                    />
                 </div>
             </Box>
+            <PopupConfirm
+                openPopup={openPopup}
+                setOpenPopup={setOpenPopup}
+                title="Hủy đơn hàng"
+                content="Bạn có muốn hủy đơn hàng này ?"
+                onConfirm={handleCancelOrder}
+            />
         </div>
     );
 }
