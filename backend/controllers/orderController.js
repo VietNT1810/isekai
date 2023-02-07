@@ -89,4 +89,24 @@ const myOrder = async (req, res) => {
   }
 };
 
-module.exports = { createOrder, getOrder, myOrder };
+//cancel order
+const cancelOrder = async (req, res) => {
+  try {
+    const { cartId } = req.body;
+    const { orderId } = req.params;
+    //update cart status
+    await Cart.findOneAndUpdate(
+      { _id: cartId },
+      { $set: { status: "active" } }
+    );
+    await Order.findOneAndUpdate(
+      { _id: orderId },
+      { $set: { status: "canceled" } }
+    );
+    res.status(200).json({ message: "Hủy đơn hàng thành công" });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+module.exports = { createOrder, getOrder, myOrder, cancelOrder };

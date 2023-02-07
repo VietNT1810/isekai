@@ -3,6 +3,7 @@ const {
   createOrder,
   getOrder,
   myOrder,
+  cancelOrder,
 } = require("../controllers/orderController");
 const { requireAuth } = require("../middleware/middleware");
 
@@ -16,5 +17,8 @@ router.get("/", requireAuth, getOrder);
 
 //get my order
 router.get("/me", requireAuth, myOrder);
+
+//cancel order
+router.post("/cancel/:orderId", requireAuth, cancelOrder);
 
 module.exports = router;
