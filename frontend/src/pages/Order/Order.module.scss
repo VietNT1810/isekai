@@ -1,0 +1,14 @@
+.wrapper {
+    .tab {
+        display: flex;
+        flex-direction: column;
+        border-radius: 5px;
+        box-shadow: 0 1px 2px var(--sub-blue);
+        background-color: var(--main-white);
+        margin-bottom: 16px;
+        .title {
+            flex: 1;
+            font-size: 14px;
+        }
+    }
+}
