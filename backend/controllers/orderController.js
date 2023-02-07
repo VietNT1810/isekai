@@ -6,9 +6,10 @@ const createOrder = async (req, res) => {
   try {
     const { cartId, addressId, method } = req.body;
     const userId = req.user._id;
-    const cartDoc = await Cart.findOne({ cartId });
+    const cartDoc = await Cart.findOne({ _id: cartId });
 
-    const order = await Order.create({
+    //create order
+    await Order.create({
       cart: cartId,
       user: userId,
       shipping: addressId,
@@ -16,8 +17,10 @@ const createOrder = async (req, res) => {
       products: cartDoc.products,
       status: method === "cod" ? "shipping" : "awaiting_payment",
     });
-    const cartUpdate = await Cart.findOneAndUpdate(
-      { cartId },
+
+    //update cart status
+    await Cart.findOneAndUpdate(
+      { _id: cartId },
       { $set: { status: "complete" } }
     );
     res.status(200).json({ message: "Tạo order thành công" });
