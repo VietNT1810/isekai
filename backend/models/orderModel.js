@@ -25,6 +25,10 @@ const orderSchema = new Schema(
       require: true,
       default: "",
     },
+    status: {
+      type: String,
+      enum: ["awaiting_payment", "shipping", "completed", "canceled"],
+    },
   },
   {
     collection: "orders",

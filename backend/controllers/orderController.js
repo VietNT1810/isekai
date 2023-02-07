@@ -7,12 +7,14 @@ const createOrder = async (req, res) => {
     const { cartId, addressId, method } = req.body;
     const userId = req.user._id;
     const cartDoc = await Cart.findOne({ cartId });
+
     const order = await Order.create({
       cart: cartId,
       user: userId,
       shipping: addressId,
       method: method,
       products: cartDoc.products,
+      status: method === "cod" ? "shipping" : "awaiting_payment",
     });
     const cartUpdate = await Cart.findOneAndUpdate(
       { cartId },
@@ -56,7 +58,13 @@ const getOrder = async (req, res) => {
 const myOrder = async (req, res) => {
   try {
     const userId = req.user._id;
-    const orderDoc = await Order.find({ user: userId })
+    const orderStatus = req.query.status;
+    const orderMatch = {
+      user: userId,
+      status: orderStatus,
+    };
+    if (orderStatus == "all") delete orderMatch.status;
+    const orderDoc = await Order.find(orderMatch)
       .populate({
         path: "products.productId",
         model: "Product",
