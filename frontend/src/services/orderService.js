@@ -15,3 +15,17 @@ export const createOrder = async (token, param) => {
         throw error;
     }
 };
+
+export const getUserOrders = async (token, params) => {
+    try {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const result = await request.get(`${prefix}/me`, { params }, config);
+        return result.data;
+    } catch (error) {
+        throw error;
+    }
+};
