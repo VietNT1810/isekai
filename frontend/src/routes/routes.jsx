@@ -21,6 +21,7 @@ import ProfileLayout from '@/layouts/ProfileLayout';
 import Address from '@/pages/Address';
 import CreateAddress from '@/pages/CreateAddress';
 import Checkout from '@/pages/Checkout';
+import Order from '@/pages/Order';
 
 function Routes(props) {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -59,6 +60,7 @@ function Routes(props) {
                         { path: 'change-password', element: <ChangePassword /> },
                         { path: 'address/create', element: <CreateAddress type="create" /> },
                         { path: 'address/edit/:addressId', element: <CreateAddress type="edit" /> },
+                        { path: 'order', element: <Order /> },
                     ],
                 },
                 {
