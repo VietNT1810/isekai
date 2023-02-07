@@ -1,16 +1,17 @@
 import classNames from 'classnames/bind';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import assets from '@/assets';
 import Button from '@/components/Button';
 import { formatVND } from '@/helpers/number';
 import Footer from '@/layouts/components/Footer';
+import * as orderServices from '@/services/orderService';
+import { initCart } from '../Cart/cartSlice';
 import styles from './Checkout.module.scss';
 import CheckoutProducts from './components/CheckoutProducts';
 import PaymentMethod from './components/PaymentMethod';
-import * as orderServices from '@/services/orderService';
 
 const cx = classNames.bind(styles);
 
@@ -21,6 +22,7 @@ function Checkout(props) {
     const { carts, userId, cartId } = useSelector((state) => state.cart);
     const userAddress = userInfo?.addresses?.[0];
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const getTotalPrice = () => {
         const totalPrice = carts.reduce((totalPrice, item) => totalPrice + item.productId.price * +item.quantity, 0);
@@ -42,6 +44,7 @@ function Checkout(props) {
             .then((res) => {
                 console.log(res);
                 setLoading(false);
+                dispatch(initCart());
                 navigate('/user/account/order');
             })
             .catch((err) => {
