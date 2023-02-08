@@ -97,7 +97,7 @@ const cancelOrder = async (req, res) => {
     //update cart status
     await Cart.findOneAndUpdate(
       { _id: cartId },
-      { $set: { status: "active" } }
+      { $set: { status: "canceled" } }
     );
     await Order.findOneAndUpdate(
       { _id: orderId },
