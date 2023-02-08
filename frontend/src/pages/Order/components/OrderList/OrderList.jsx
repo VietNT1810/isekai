@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@/components/Button';
 import { formatVND } from '@/helpers/number';
 import styles from './OrderList.module.scss';
+import assets from '@/assets';
 
 const cx = classNames.bind(styles);
 
@@ -94,6 +95,12 @@ function OrderList({ orders, onCancelOrder }) {
                     </div>
                 </div>
             ))}
+            {orders.length == 0 && (
+                <div className={cx('empty-order')}>
+                    <img src={assets.images.emptyOrder} className={cx('image')} alt="Empty order image" />
+                    <p>Chưa có đơn hàng</p>
+                </div>
+            )}
         </div>
     );
 }

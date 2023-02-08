@@ -88,4 +88,16 @@
             }
         }
     }
+    .empty-order {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 5px;
+        box-shadow: 0 1px 2px var(--sub-blue);
+        background-color: var(--main-white);
+        padding: 45px;
+        .image {
+            width: 200px;
+        }
+    }
 }

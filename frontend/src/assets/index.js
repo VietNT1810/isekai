@@ -24,6 +24,7 @@ import lolitaBanner from '@/assets/images/banner/lolita.png';
 import accessoryBanner from '@/assets/images/banner/accessory.png';
 import forgotImage from '@/assets/images/img-forgot.png';
 import placeholderAvatar from '@/assets/images/ava/avatar-placeholder.png';
+import emptyOrder from '@/assets/images/empty-order.png';
 
 import iconFacebook from '@/assets/icons/facebook-icon.svg';
 import iconTwitter from '@/assets/icons/twitter-icon.svg';
@@ -65,6 +66,7 @@ const images = {
     accessoryBanner,
     forgotImage,
     placeholderAvatar,
+    emptyOrder,
 };
 
 const icons = {
