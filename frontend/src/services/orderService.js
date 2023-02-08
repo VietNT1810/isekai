@@ -22,8 +22,9 @@ export const getUserOrders = async (token, params) => {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
+            params,
         };
-        const result = await request.get(`${prefix}/me`, { params }, config);
+        const result = await request.get(`${prefix}/me`, config);
         return result.data;
     } catch (error) {
         throw error;
