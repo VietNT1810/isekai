@@ -17,19 +17,17 @@ function Order(props) {
     const [openPopup, setOpenPopup] = useState(false);
     const [popupData, setPopupData] = useState({});
 
-    //get order api
-    const getOrders = async () => {
-        await orderServices
-            .getUserOrders(userToken, { status: value })
-            .then((res) => {
-                setOrders(res.data.content);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
-
     useEffect(() => {
+        const getOrders = async () => {
+            await orderServices
+                .getUserOrders(userToken, { status: value })
+                .then((res) => {
+                    setOrders(res.data.content);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        };
         getOrders();
     }, [value]);
 
