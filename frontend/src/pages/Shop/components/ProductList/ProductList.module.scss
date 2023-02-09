@@ -36,9 +36,11 @@
     padding: 16px;
     .product-name {
         color: var(--sub-blue);
+        margin-bottom: 12px;
     }
     .product-description {
-        min-height: 50px;
+        font-size: 12px;
+        min-height: 36px;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
