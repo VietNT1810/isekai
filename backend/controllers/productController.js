@@ -14,7 +14,7 @@ const getProducts = async (req, res) => {
 
   const priceFilter = min && max ? { $gte: min, $lte: max } : {};
   const ratingFilter = rating ? { $gte: rating } : { $gte: rating };
-  const limitQuery = limit ? limit : 10;
+  const limitQuery = limit ? limit : 12;
 
   //get sort order
   const getSort = () => {
@@ -79,9 +79,9 @@ const getProducts = async (req, res) => {
     },
 
     //limit
-    {
-      $limit: limitQuery,
-    },
+    // {
+    //   $limit: limitQuery,
+    // },
   ]);
 
   //response
@@ -166,7 +166,7 @@ const createProduct = async (req, res) => {
     description,
     detail,
     price,
-    discount,
+    specs,
     quantity,
     productType,
   } = req.body;
@@ -182,7 +182,7 @@ const createProduct = async (req, res) => {
       description,
       detail,
       price,
-      discount,
+      specs,
       quantity,
       productType,
       slug: name.split(" ").concat(slugUniqueId).join("-"),

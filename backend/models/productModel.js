@@ -24,10 +24,6 @@ const productSchema = new Schema(
       type: Number,
       required: true,
     },
-    discount: {
-      type: Number,
-      required: false,
-    },
     quantity: {
       type: Number,
       required: true,
