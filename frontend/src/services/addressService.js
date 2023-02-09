@@ -1,4 +1,4 @@
-import request from '@/utils/request';
+import { request, provinceRequest } from '@/utils/request';
 import axios from 'axios';
 
 const prefix = '/api/me/addresses';
@@ -47,7 +47,7 @@ export const deleteUserAddress = async (token, addressId) => {
 
 export const getListCity = async (signal) => {
     try {
-        const result = await axios.get('https://provinces.open-api.vn/api/p/', { signal: signal });
+        const result = await provinceRequest.get('/p/', { signal: signal });
         return result.data;
     } catch (error) {
         throw error;
@@ -56,7 +56,7 @@ export const getListCity = async (signal) => {
 
 export const getListDistrict = async (cityCode) => {
     try {
-        const result = await axios.get(`https://provinces.open-api.vn/api/p/${cityCode}/?depth=2`);
+        const result = await provinceRequest.get(`/p/${cityCode}/?depth=2`);
         return result.data;
     } catch (error) {
         throw error;
@@ -65,7 +65,7 @@ export const getListDistrict = async (cityCode) => {
 
 export const getListWard = async (districtCode) => {
     try {
-        const result = await axios.get(`https://provinces.open-api.vn/api/d/${districtCode}/?depth=2`);
+        const result = await provinceRequest.get(`/d/${districtCode}/?depth=2`);
         return result.data;
     } catch (error) {
         throw error;
