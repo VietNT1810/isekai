@@ -17,12 +17,18 @@ const requireAuth = async (req, res, next) => {
       req.user = await User.findById(decoded._id).select("-password"); //.select("--password"): get all field except password field
       next();
     } catch (error) {
-      res.status(401).json({ message: "Not authorized, invalid token" });
+      res.status(401).json({
+        message: "Not authorized, invalid token",
+        code: "ERR_EXPIRED_TOKEN",
+      });
     }
   }
 
   if (!token) {
-    res.status(401).json({ message: "Not authorized, no token found" });
+    res.status(401).json({
+      message: "Not authorized, no token found",
+      code: "ERR_REQUIRE_TOKEN",
+    });
   }
 };
 

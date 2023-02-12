@@ -8,24 +8,6 @@ import { getUserAddresses, getUserProfile } from './actions/userAction';
 import ScrollToTop from './helpers/ScrollToTop';
 
 function App() {
-    const { loading, userInfo, userToken } = useSelector((state) => state.user);
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        if (userToken) {
-            dispatch(getUserProfile())
-                .unwrap()
-                .then(async (res) => {
-                    dispatch(getUserCart({ userId: res.user._id }));
-                    dispatch(getUserAddresses(userToken));
-                })
-                .catch((error) => {
-                    console.log('error', error);
-                    localStorage.setItem('isLoggedIn', false);
-                });
-        }
-    }, [userToken]);
-
     return (
         <Router>
             <ScrollToTop>
