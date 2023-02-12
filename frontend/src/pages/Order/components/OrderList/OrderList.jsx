@@ -1,15 +1,19 @@
-import { Block, CreditCard, LocalShipping } from '@mui/icons-material';
+import { useState } from 'react';
+import { Block, CreditCard, LocalShipping, Star } from '@mui/icons-material';
 import classNames from 'classnames/bind';
 import { useNavigate } from 'react-router-dom';
 
+import assets from '@/assets';
 import Button from '@/components/Button';
 import { formatVND } from '@/helpers/number';
+import PopupCreateReview from '../PopupCreateReview/PopupCreateReview';
 import styles from './OrderList.module.scss';
-import assets from '@/assets';
+import { Rating } from '@mui/material';
 
 const cx = classNames.bind(styles);
 
 function OrderList({ orders, onCancelOrder }) {
+    const [openPopup, setOpenPopup] = useState(false);
     const navigate = useNavigate();
 
     const getStatusIcon = (status) => {
@@ -35,6 +39,11 @@ function OrderList({ orders, onCancelOrder }) {
     const getTotalPrice = (orders) => {
         const totalPrice = orders.reduce((totalPrice, item) => totalPrice + item.productId.price * +item.quantity, 0);
         return formatVND(totalPrice);
+    };
+
+    //create review
+    const handleCreateReview = () => {
+        console.log('create review');
     };
 
     return (
@@ -88,6 +97,17 @@ function OrderList({ orders, onCancelOrder }) {
                                     Mua lại
                                 </Button>
                             )}
+                            {order.status == 'completed' && (
+                                <Button
+                                    outline
+                                    className={cx('btn')}
+                                    onClick={() => {
+                                        setOpenPopup(true);
+                                    }}
+                                >
+                                    Viết nhận xét
+                                </Button>
+                            )}
                             <Button outline className={cx('btn')}>
                                 Xem chi tiết
                             </Button>
@@ -101,6 +121,30 @@ function OrderList({ orders, onCancelOrder }) {
                     <p>Chưa có đơn hàng</p>
                 </div>
             )}
+            <PopupCreateReview
+                openPopup={openPopup}
+                setOpenPopup={setOpenPopup}
+                title="Viết nhận xét"
+                onConfirm={handleCreateReview}
+            >
+                <div className={cx('review-form')}>
+                    <div className={cx('rating')}>
+                        <span className={cx('title')}>Vui lòng đánh giá</span>
+                        <Rating
+                            className={cx('star')}
+                            onChange={(event, newValue) => {
+                                console.log(newValue);
+                            }}
+                            size="large"
+                        />
+                    </div>
+                    <textarea
+                        cols={150}
+                        className={cx('review-field')}
+                        placeholder="Hãy chia sẻ cảm nhận, đánh giá của bạn về sản phẩm này nhé."
+                    ></textarea>
+                </div>
+            </PopupCreateReview>
         </div>
     );
 }
