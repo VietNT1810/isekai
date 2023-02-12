@@ -10,7 +10,7 @@ const cx = classNames.bind(styles);
 function Review({ product, reviews }) {
     return (
         <div className={cx('review')}>
-            <div className={cx('title')}>NHẬN XÉT TỪ KHÁCH HÀNG</div>
+            <div className={cx('title')}>Nhận Xét Từ Khách Hàng</div>
             <div className={cx('rating-summary')}>
                 <span className={cx('rating-point')}>{product.averageRating}</span>
                 <div className={cx('rating-star')}>
