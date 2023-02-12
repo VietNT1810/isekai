@@ -22,9 +22,9 @@ function ProductPage(props) {
     });
 
     //Call API
-    const fetchProduct = async () => {
+    const fetchProduct = async (signal) => {
         await productsService
-            .getProduct(params.slug)
+            .getProduct(params.slug, signal)
             .then((res) => {
                 setProducts(res.data.content[0]);
             })
@@ -33,9 +33,9 @@ function ProductPage(props) {
             });
     };
 
-    const fetchReviews = async () => {
+    const fetchReviews = async (signal) => {
         await reviewsService
-            .getReviews(params.slug)
+            .getReviews(params.slug, signal)
             .then((res) => {
                 setReviews(res.data.content);
             })
@@ -45,8 +45,13 @@ function ProductPage(props) {
     };
 
     useEffect(() => {
-        fetchReviews();
-        fetchProduct();
+        const controller = new AbortController();
+        const signal = controller.signal;
+        fetchReviews(signal);
+        fetchProduct(signal);
+
+        //cleanup function
+        return () => controller.abort();
     }, []);
 
     return (

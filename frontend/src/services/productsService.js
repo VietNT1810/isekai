@@ -11,9 +11,9 @@ export const getProducts = async (params) => {
     }
 };
 
-export const getProduct = async (slug) => {
+export const getProduct = async (slug, signal) => {
     try {
-        const result = await request.get(`${prefix}/detail/${slug}`);
+        const result = await request.get(`${prefix}/detail/${slug}`, { signal: signal });
         return result.data;
     } catch (error) {
         return error;
