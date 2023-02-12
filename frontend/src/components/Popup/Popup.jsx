@@ -5,12 +5,13 @@ import styles from './Popup.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Popup({ title, content, footer, openPopup }) {
+function Popup({ title, content, footer, openPopup, children }) {
     return (
         <Dialog open={openPopup} className={cx('popup')}>
             <DialogTitle className={cx('popup-title')}>{title}</DialogTitle>
             <DialogContent>
                 <DialogContentText className={cx('popup-content')}>{content}</DialogContentText>
+                {children}
             </DialogContent>
             <DialogActions>{footer}</DialogActions>
         </Dialog>
