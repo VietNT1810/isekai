@@ -209,23 +209,6 @@ function ProductDetail({ product, isInCart }) {
                     {success ? message : error}
                 </Alert>
             </Snackbar>
-            <textarea
-                name=""
-                id=""
-                cols="30"
-                rows="10"
-                onChange={(e) => {
-                    setText(e.target.value);
-                }}
-            ></textarea>
-            <button
-                onClick={() => {
-                    const form = { text };
-                    console.log(form);
-                }}
-            >
-                submit
-            </button>
         </div>
     );
 }
