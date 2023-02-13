@@ -57,6 +57,35 @@ const getOrder = async (req, res) => {
   }
 };
 
+//get single order
+const getSingleOrder = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const order = await Order.findOne({ _id: orderId })
+      .populate({
+        path: "cart",
+        populate: {
+          path: "products.productId",
+          model: "Product",
+          select: ["name", "price", "productImage", "slug"],
+        },
+      })
+      .populate({
+        path: "shipping",
+        model: "Address",
+      });
+
+    res.status(200).json({
+      status: "SUCCESS",
+      statusCode: 200,
+      message: "Get order success",
+      data: { content: order },
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 //get my order
 const myOrder = async (req, res) => {
   try {
@@ -109,4 +138,10 @@ const cancelOrder = async (req, res) => {
   }
 };
 
-module.exports = { createOrder, getOrder, myOrder, cancelOrder };
+module.exports = {
+  createOrder,
+  getOrder,
+  myOrder,
+  cancelOrder,
+  getSingleOrder,
+};

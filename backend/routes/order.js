@@ -4,6 +4,7 @@ const {
   getOrder,
   myOrder,
   cancelOrder,
+  getSingleOrder
 } = require("../controllers/orderController");
 const { requireAuth } = require("../middleware/middleware");
 
@@ -17,6 +18,9 @@ router.get("/", requireAuth, getOrder);
 
 //get my order
 router.get("/me", requireAuth, myOrder);
+
+//get single order
+router.get("/detail/:orderId", requireAuth, getSingleOrder);
 
 //cancel order
 router.post("/cancel/:orderId", requireAuth, cancelOrder);
