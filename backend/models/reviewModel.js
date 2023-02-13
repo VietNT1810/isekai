@@ -16,10 +16,13 @@ const reviewSchema = new Schema(
     review: {
       type: String,
       required: true,
+      max: 256,
     },
     rating: {
       type: Number,
       required: true,
+      min: 1,
+      max: 5,
     },
   },
   {
