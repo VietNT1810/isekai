@@ -23,8 +23,9 @@ export const getSingleAddress = async (addressId, token, signal) => {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
+            signal,
         };
-        const result = await request.get(`${prefix}/address/${addressId}`, { signal: signal }, config);
+        const result = await request.get(`${prefix}/address/${addressId}`, config);
         return result.data;
     } catch (error) {
         throw error;

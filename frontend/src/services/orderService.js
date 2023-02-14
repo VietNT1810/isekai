@@ -31,6 +31,21 @@ export const getUserOrders = async (token, params) => {
     }
 };
 
+export const getOrderDetail = async (token, orderId, signal) => {
+    try {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            signal,
+        };
+        const result = await request.get(`${prefix}/detail/${orderId}`, config);
+        return result.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
 export const cancelOrder = async (token, orderId, params) => {
     try {
         const config = {
