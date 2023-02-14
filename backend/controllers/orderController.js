@@ -62,14 +62,6 @@ const getSingleOrder = async (req, res) => {
   try {
     const { orderId } = req.params;
     const order = await Order.findOne({ _id: orderId })
-      // .populate({
-      //   path: "cart",
-      //   populate: {
-      //     path: "products.productId",
-      //     model: "Product",
-      //     select: ["name", "price", "productImage", "slug"],
-      //   },
-      // })
       .populate({
         path: "products.productId",
         model: "Product",
