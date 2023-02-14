@@ -11,7 +11,7 @@ export const getReviews = async (slug, signal) => {
 
 export const createReview = async (params) => {
     try {
-        const result = await request.get(`/api/reviews/add`, params);
+        const result = await request.post(`/api/reviews/add`, params);
         return result.data;
     } catch (error) {
         throw error;
