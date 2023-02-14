@@ -22,6 +22,7 @@ import Address from '@/pages/Address';
 import CreateAddress from '@/pages/CreateAddress';
 import Checkout from '@/pages/Checkout';
 import Order from '@/pages/Order';
+import OrderDetail from '@/pages/OrderDetail/OrderDetail';
 
 function Routes(props) {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -61,6 +62,7 @@ function Routes(props) {
                         { path: 'address/create', element: <CreateAddress type="create" /> },
                         { path: 'address/edit/:addressId', element: <CreateAddress type="edit" /> },
                         { path: 'order', element: <Order /> },
+                        { path: 'order/detail/:orderId', element: <OrderDetail /> },
                     ],
                 },
                 {
