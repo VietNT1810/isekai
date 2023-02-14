@@ -1,0 +1,10 @@
+.popup {
+    .review-form {
+        display: flex;
+        flex-direction: column;
+        .rating {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
