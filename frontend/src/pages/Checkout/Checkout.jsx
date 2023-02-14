@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -12,6 +12,8 @@ import { initCart } from '../Cart/cartSlice';
 import styles from './Checkout.module.scss';
 import CheckoutProducts from './components/CheckoutProducts';
 import PaymentMethod from './components/PaymentMethod';
+import { getUserCart } from '@/actions/cartAction';
+import { getUserAddresses, getUserProfile } from '@/actions/userAction';
 
 const cx = classNames.bind(styles);
 
@@ -28,6 +30,20 @@ function Checkout(props) {
         const totalPrice = carts.reduce((totalPrice, item) => totalPrice + item.productId.price * +item.quantity, 0);
         return totalPrice;
     };
+
+    useEffect(() => {
+        if (userToken) {
+            dispatch(getUserProfile())
+                .unwrap()
+                .then((res) => {
+                    dispatch(getUserCart({ userId: res.user._id }));
+                    dispatch(getUserAddresses(userToken));
+                })
+                .catch((error) => {
+                    localStorage.setItem('isLoggedIn', false);
+                });
+        }
+    }, [userToken]);
 
     const handlePaymentMethod = (data) => {
         setMethod(data);
