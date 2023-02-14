@@ -26,6 +26,7 @@
             justify-content: space-between;
             padding: 12px 0px;
             border-bottom: 1px solid var(--sub-grey);
+            cursor: pointer;
             .product-detail {
                 display: flex;
                 gap: 12px;
@@ -98,41 +99,6 @@
         padding: 45px;
         .image {
             width: 200px;
-        }
-    }
-}
-
-.review-form {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    .rating {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        .title {
-            font-size: 14px;
-            color: var(--main-grey);
-        }
-        .star {
-            font-size: 40px;
-            color: var(--primary);
-        }
-    }
-    .review-field {
-        max-width: 500px;
-        height: 150px;
-        padding: 6px 10px;
-        border: 1px solid var(--main-grey);
-        border-radius: 4px;
-        outline: none;
-        &:focus {
-            border: 1px solid var(--primary);
-            color: var(--primary);
-        }
-        &::placeholder {
-            font-size: 14px;
         }
     }
 }
