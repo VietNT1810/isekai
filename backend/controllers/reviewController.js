@@ -7,14 +7,14 @@ const createReview = async (req, res) => {
   const userId = req.user._id;
 
   try {
-    const reviewDoc = await Review.create({
+    await Review.create({
       product,
       user: userId,
       review,
       rating,
     });
 
-    res.status(200).json(reviewDoc);
+    res.status(200).json({ message: "Thêm nhận xét thành công" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
