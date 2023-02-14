@@ -10,6 +10,16 @@ export const hideEmail = (email) => {
 };
 
 export const formatTime = (createdAt) => {
-    const thisMoment = moment(createdAt).format('DD-MM-YYYY HH:mm');
+    const thisMoment = moment(createdAt).format('DD/MM/YYYY HH:mm');
     return thisMoment;
+};
+
+export const getOrderStatusTitle = (status) => {
+    const statusTitle = {
+        awaiting_payment: 'Chờ thanh toán',
+        shipping: 'Đang vận chuyển',
+        completed: 'Đã giao',
+        canceled: 'Đã hủy',
+    };
+    return statusTitle[status] || '';
 };
