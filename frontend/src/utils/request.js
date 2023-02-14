@@ -20,7 +20,6 @@ request.interceptors.response.use(
         return response;
     },
     function (error) {
-        console.log('interceptor err:', error);
         if (error.response.status == 401 && error.response.data.code == 'ERR_EXPIRED_TOKEN') {
             window.location.href = '/login';
         }
