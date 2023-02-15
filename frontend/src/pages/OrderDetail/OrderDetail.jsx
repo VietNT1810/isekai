@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Button from '@/components/Button/Button';
 import { formatVND } from '@/helpers/number';
@@ -20,7 +20,7 @@ function OrderDetail(props) {
     const [openPopup, setOpenPopup] = useState(false);
     const [popupData, setPopupData] = useState('');
     const { userToken } = useSelector((state) => state.user);
-    const { carts, userId, cartId } = useSelector((state) => state.cart);
+    const navigate = useNavigate();
     const params = useParams();
     const orderId = params.orderId;
 
@@ -82,7 +82,7 @@ function OrderDetail(props) {
                                 Địa chỉ: {orderDetail.shipping?.street}, {orderDetail.shipping?.ward},{' '}
                                 {orderDetail.shipping?.district}, {orderDetail.shipping?.city}
                             </span>
-                            <span className={cx('telephone')}>Điện thoại: 0868402367</span>
+                            <span className={cx('telephone')}>Điện thoại: {orderDetail.shipping?.telephone}</span>
                         </div>
                     </div>
                     <div className={cx('info-group')}>
@@ -120,7 +120,12 @@ function OrderDetail(props) {
                                                 />
                                             </div>
                                         </div>
-                                        <div className={cx('name')}>
+                                        <div
+                                            className={cx('name')}
+                                            onClick={() => {
+                                                navigate(`/product/${order.productId.slug}`);
+                                            }}
+                                        >
                                             <span>{order.productId.name}</span>
                                         </div>
                                     </div>
@@ -143,7 +148,13 @@ function OrderDetail(props) {
                                             Viết nhận xét
                                         </Button>
                                     )}
-                                    <Button outline className={cx('btn')}>
+                                    <Button
+                                        outline
+                                        className={cx('btn')}
+                                        onClick={() => {
+                                            navigate(`/product/${order.productId.slug}`);
+                                        }}
+                                    >
                                         Mua lại
                                     </Button>
                                 </div>
