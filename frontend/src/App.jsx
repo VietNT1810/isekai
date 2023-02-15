@@ -6,6 +6,7 @@ import Routes from '@/routes';
 import { getUserCart } from './actions/cartAction';
 import { getUserAddresses, getUserProfile } from './actions/userAction';
 import ScrollToTop from './helpers/ScrollToTop';
+import Alert from './components/Alert/Alert';
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
             <ScrollToTop>
                 <div className="App">
                     <Routes />
+                    <Alert />
                 </div>
             </ScrollToTop>
         </Router>

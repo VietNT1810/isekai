@@ -8,6 +8,7 @@ import { loginByGoogle, loginUser } from '@/actions/userAction';
 import assets from '@/assets';
 import LoginForm from './components/LoginForm';
 import styles from './Login.module.scss';
+import { openAlert } from '@/reducers/alertSlice';
 
 const cx = classNames.bind(styles);
 
@@ -26,15 +27,14 @@ function Login(props) {
         dispatch(loginUser(data))
             .unwrap()
             .then((res) => {
-                setOpen(true);
+                dispatch(openAlert({ message: 'Đăng nhập thành công', severity: 'success' }));
                 setTimeout(() => {
                     setIsLoading(false);
                     location.state?.slug ? navigate(`/product/${location.state.slug}`) : navigate('/');
                 }, 2000);
             })
             .catch((error) => {
-                console.log('error', error);
-                setOpen(true);
+                dispatch(openAlert({ message: 'Đăng nhập thất bại', severity: 'error' }));
                 setIsLoading(false);
             });
     };
@@ -43,14 +43,14 @@ function Login(props) {
         dispatch(loginByGoogle({ token }))
             .unwrap()
             .then((res) => {
-                setOpen(true);
+                dispatch(openAlert({ message: 'Đăng nhập thành công', severity: 'success' }));
                 setTimeout(() => {
                     location.state?.slug ? navigate(`/product/${location.state.slug}`) : navigate('/');
                 }, 2000);
             })
             .catch((error) => {
                 console.log('error', error);
-                setOpen(true);
+                dispatch(openAlert({ message: 'Đăng nhập thất bại', severity: 'error' }));
             });
     };
 
@@ -68,20 +68,6 @@ function Login(props) {
                     </div>
                 )}
             </div>
-            <Snackbar
-                open={open}
-                autoHideDuration={10000}
-                onClose={handleClose}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-            >
-                <Alert
-                    variant="filled"
-                    severity={success ? 'success' : 'error'}
-                    sx={{ width: '400px', fontSize: '14px', fontFamily: 'SVN Gotham Regular', alignItems: 'center' }}
-                >
-                    {success ? 'Đăng nhập thành công! Đang về trang chủ...' : error}
-                </Alert>
-            </Snackbar>
         </div>
     );
 }
