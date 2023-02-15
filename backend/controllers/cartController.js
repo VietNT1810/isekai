@@ -121,11 +121,11 @@ const getCart = async (req, res) => {
 
 //remove cart
 const removeCart = async (req, res) => {
-  const { userId, productId, quantity } = req.body;
+  const { cartId, productId, quantity } = req.body;
 
   try {
     await Cart.findOneAndUpdate(
-      { userId },
+      { _id: cartId },
       {
         $pull: {
           products: {

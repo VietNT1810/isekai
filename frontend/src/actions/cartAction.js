@@ -47,9 +47,9 @@ export const updateUserCart = createAsyncThunk('cart/update', async ({ productId
 
 export const removeUserCart = createAsyncThunk('cart/remove', async ({ productId }, { getState, rejectWithValue }) => {
     try {
-        const { userId, carts } = getState().cart;
+        const { cartId, carts } = getState().cart;
         const productCart = carts.find((cart) => cart.productId._id == productId);
-        const data = await removeCart({ userId, productId, quantity: productCart.quantity });
+        const data = await removeCart({ cartId, productId, quantity: productCart.quantity });
         return data;
     } catch (error) {
         if (error.response && error.response.data.message) {
