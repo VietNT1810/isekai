@@ -1,0 +1,26 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
+    background-color: var(--main-mint-2);
+    background-image: url(/src/assets/images/bg-shop.png);
+    background-size: contain;
+    height: 100vh;
+    padding-top: 100px;
+    .top {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        p {
+            width: 80%;
+            text-align: center;
+        }
+    }
+    span {
+        font-size: 150px;
+        color: var(--primary);
+        text-shadow: 4px 4px var(--main-grey);
+    }
+}

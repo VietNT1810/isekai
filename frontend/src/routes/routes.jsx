@@ -23,6 +23,7 @@ import CreateAddress from '@/pages/CreateAddress';
 import Checkout from '@/pages/Checkout';
 import Order from '@/pages/Order';
 import OrderDetail from '@/pages/OrderDetail/OrderDetail';
+import NotFound from '@/pages/NotFound/NotFound';
 
 function Routes(props) {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -98,7 +99,7 @@ function Routes(props) {
         },
         {
             path: '*',
-            element: <p>Nothing here :(</p>,
+            element: <NotFound />,
         },
     ]);
 
