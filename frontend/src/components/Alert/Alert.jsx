@@ -13,7 +13,7 @@ function Alert(props) {
     return (
         <Snackbar
             open={isOpen}
-            autoHideDuration={5000}
+            autoHideDuration={3000}
             onClose={handleClose}
             anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         >
