@@ -5,7 +5,7 @@ const alertSlice = createSlice({
     initialState: {
         isOpen: false,
         message: '',
-        severity: '',
+        severity: 'success',
     },
     reducers: {
         openAlert: (state, action) => {
