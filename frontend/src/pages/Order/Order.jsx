@@ -1,33 +1,40 @@
 import { Box, Tab, Tabs } from '@mui/material';
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import PopupConfirm from '@/components/PopupConfirm';
 import * as orderServices from '@/services/orderService';
 import styles from './Order.module.scss';
-import OrderList from './components/OrderList';
+// import OrderList from './components/OrderList';
+import OrderSkeleton from '@/components/OrderSkeleton/OrderSkeleton';
 
 const cx = classNames.bind(styles);
+const OrderList = React.lazy(() => import('./components/OrderList'));
 
 function Order(props) {
     const [value, setValue] = useState('all');
     const [orders, setOrders] = useState([]);
+    const [loading, setLoading] = useState(false);
     const { userToken } = useSelector((state) => state.user);
     const [openPopup, setOpenPopup] = useState(false);
     const [popupData, setPopupData] = useState({});
 
+    const getOrders = async () => {
+        setLoading(true);
+        await orderServices
+            .getUserOrders(userToken, { status: value })
+            .then((res) => {
+                setOrders(res.data.content);
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.log(err);
+                setLoading(false);
+            });
+    };
+
     useEffect(() => {
-        const getOrders = async () => {
-            await orderServices
-                .getUserOrders(userToken, { status: value })
-                .then((res) => {
-                    setOrders(res.data.content);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        };
         getOrders();
     }, [value]);
 
@@ -61,13 +68,19 @@ function Order(props) {
                     </Tabs>
                 </Box>
                 <div className="tab-content">
-                    <OrderList
-                        orders={orders}
-                        onCancelOrder={(data) => {
-                            setOpenPopup(true);
-                            setPopupData(data);
-                        }}
-                    />
+                    <Suspense fallback={<OrderSkeleton />}>
+                        {loading ? (
+                            <OrderSkeleton />
+                        ) : (
+                            <OrderList
+                                orders={orders}
+                                onCancelOrder={(data) => {
+                                    setOpenPopup(true);
+                                    setPopupData(data);
+                                }}
+                            />
+                        )}
+                    </Suspense>
                 </div>
             </Box>
             <PopupConfirm

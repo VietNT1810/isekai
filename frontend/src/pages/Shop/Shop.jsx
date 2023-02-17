@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import classNames from 'classnames/bind';
 import { useSelector } from 'react-redux';
 
 import styles from './Shop.module.scss';
 import FilterSidebar from './components/FilterSidebar';
 import ShopToolbar from './components/ShopToolbar';
-import ProductList from './components/ProductList';
 import * as productService from '@/services/productsService';
-import { useSearchParams } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
 
 const cx = classNames.bind(styles);
+const ProductList = React.lazy(() => import('./components/ProductList'));
 
 function Shop(props) {
     const { filterQuery, sortOrder } = useSelector((state) => state.shop);
@@ -38,7 +38,9 @@ function Shop(props) {
             <FilterSidebar />
             <div className={cx('content')}>
                 <ShopToolbar />
-                <ProductList products={products} />
+                <Suspense fallback={<CircularProgress sx={{ alignSelf: 'center', marginTop: '24px' }} />}>
+                    <ProductList products={products} />
+                </Suspense>
             </div>
         </>
     );
