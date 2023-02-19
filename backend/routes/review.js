@@ -11,6 +11,6 @@ const router = express.Router();
 router.post("/add", requireAuth, createReview);
 
 //get review
-router.get("/:slug", requireAuth, getReview);
+router.get("/:slug", getReview);
 
 module.exports = router;
