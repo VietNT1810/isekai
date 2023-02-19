@@ -15,6 +15,7 @@ import CheckoutProducts from './components/CheckoutProducts';
 import PaymentMethod from './components/PaymentMethod';
 import { getUserCart } from '@/actions/cartAction';
 import { getUserAddresses, getUserProfile } from '@/actions/userAction';
+import { openAlert } from '@/reducers/alertSlice';
 
 const cx = classNames.bind(styles);
 
@@ -60,9 +61,9 @@ function Checkout(props) {
         await orderServices
             .createOrder(userToken, orderInfo)
             .then((res) => {
-                console.log(res);
                 setLoading(false);
                 dispatch(initCart());
+                dispatch(openAlert({ message: res.message }));
                 navigate('/user/account/order');
             })
             .catch((err) => {

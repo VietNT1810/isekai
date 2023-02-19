@@ -1,29 +1,26 @@
-import React, { useState } from 'react';
 import { Add, AddShoppingCartOutlined, Remove, RemoveShoppingCartOutlined } from '@mui/icons-material';
-import { Alert, Rating, Snackbar } from '@mui/material';
+import { Rating } from '@mui/material';
 import classNames from 'classnames/bind';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-import styles from './ProductDetail.module.scss';
+import { addUserCart, getUserCart, removeUserCart } from '@/actions/cartAction';
 import assets from '@/assets';
 import Button from '@/components/Button';
 import { formatVND } from '@/helpers/number';
 import { removeCart } from '@/pages/Cart/cartSlice';
-import { addUserCart, getUserCart, removeUserCart } from '@/actions/cartAction';
-import { useNavigate } from 'react-router-dom';
+import { openAlert } from '@/reducers/alertSlice';
+import styles from './ProductDetail.module.scss';
 
 const cx = classNames.bind(styles);
 
 function ProductDetail({ product, isInCart }) {
     const { userInfo } = useSelector((state) => state.user);
-    const { success, error } = useSelector((state) => state.cart);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const [quantity, setQuantity] = useState(1);
-    const [openAlert, setOpenAlert] = useState(false);
-    const [message, setMessage] = useState('');
-    const [text, setText] = useState('');
 
     const handleQuantityChange = (e) => {
         const regex = /^[0-9\b]+$/;
@@ -49,20 +46,15 @@ function ProductDetail({ product, isInCart }) {
         setQuantity((prev) => prev - 1);
     };
 
-    const handleCloseAlert = () => {
-        setOpenAlert(false);
-    };
-
     const handleRemoveCart = () => {
         dispatch(removeUserCart({ productId: product._id }))
             .unwrap()
             .then(() => {
-                setMessage('Xóa khỏi giỏ hàng thành công');
-                setOpenAlert(true);
+                dispatch(openAlert({ message: 'Xóa khỏi giỏ hàng thành công' }));
                 dispatch(removeCart(product._id));
             })
             .catch((err) => {
-                console.log(err);
+                dispatch(openAlert({ message: err.message, severity: 'error' }));
             });
     };
 
@@ -78,13 +70,12 @@ function ProductDetail({ product, isInCart }) {
         };
         dispatch(addUserCart(cart))
             .unwrap()
-            .then(() => {
-                setMessage('Thêm vào giỏ hàng thành công');
-                setOpenAlert(true);
+            .then((res) => {
+                dispatch(openAlert({ message: 'Thêm vào giỏ hàng thành công' }));
                 dispatch(getUserCart({ userId: userInfo._id }));
             })
             .catch((error) => {
-                console.log(error);
+                dispatch(openAlert({ message: error.message, severity: 'error' }));
             });
     };
 
@@ -195,20 +186,6 @@ function ProductDetail({ product, isInCart }) {
                     <p className={cx('description')}>{product.description}</p>
                 </div>
             </div>
-            <Snackbar
-                open={openAlert}
-                autoHideDuration={3000}
-                onClose={handleCloseAlert}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-            >
-                <Alert
-                    variant="filled"
-                    severity={success ? 'success' : 'error'}
-                    sx={{ width: '400px', fontSize: '14px', fontFamily: 'SVN Gotham Regular', alignItems: 'center' }}
-                >
-                    {success ? message : error}
-                </Alert>
-            </Snackbar>
         </div>
     );
 }

@@ -11,12 +11,12 @@ const alertSlice = createSlice({
         openAlert: (state, action) => {
             state.isOpen = true;
             state.message = action.payload.message;
-            state.severity = action.payload.severity;
+            state.severity = action.payload.severity ? action.payload.severity : 'success';
         },
         closeAlert: (state) => {
             state.isOpen = false;
             state.message = '';
-            state.severity = '';
+            state.severity = 'success';
         },
     },
 });

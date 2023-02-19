@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Rating, useMediaQuery } from '@mui/material';
 
@@ -11,6 +11,7 @@ import * as orderServices from '@/services/orderService';
 import * as reviewServices from '@/services/reviewsService';
 import styles from './OrderDetail.module.scss';
 import PopupCreateReview from './components/PopupCreateReview/PopupCreateReview';
+import { openAlert } from '@/reducers/alertSlice';
 
 const cx = classNames.bind(styles);
 
@@ -21,6 +22,7 @@ function OrderDetail(props) {
     const [popupData, setPopupData] = useState('');
     const { userToken } = useSelector((state) => state.user);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const params = useParams();
     const orderId = params.orderId;
     const mobile = useMediaQuery('(max-width: 768px)');
@@ -67,10 +69,10 @@ function OrderDetail(props) {
         await reviewServices
             .createReview({ ...reviewForm, product: popupData })
             .then((result) => {
-                console.log('result:', result);
+                dispatch(openAlert({ message: result.message }));
             })
             .catch((err) => {
-                console.log(err);
+                dispatch(openAlert({ message: err.message, severity: 'error' }));
             });
     };
 
@@ -78,7 +80,6 @@ function OrderDetail(props) {
         <div>
             <div className={cx('wrapper')}>
                 <div className={cx('heading')}>
-                    <div className={cx('')}></div>
                     <h3>Chi tiết đơn hàng</h3>
                     <div className={cx('status')}>
                         <span className={cx('shipping')}>Trạng thái: {getOrderStatusTitle(orderDetail.status)}</span>

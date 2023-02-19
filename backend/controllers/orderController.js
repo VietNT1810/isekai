@@ -23,7 +23,7 @@ const createOrder = async (req, res) => {
       { _id: cartId },
       { $set: { status: "complete" } }
     );
-    res.status(200).json({ message: "Tạo order thành công" });
+    res.status(200).json({ message: "Tạo đơn hàng thành công" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
