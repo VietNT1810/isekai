@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { useMediaQuery } from '@mui/material';
 
 import assets from '@/assets';
 import Button from '@/components/Button';
@@ -25,6 +26,7 @@ function Checkout(props) {
     const userAddress = userInfo?.addresses?.[0];
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const mobile = useMediaQuery('(max-width: 595px)');
 
     const getTotalPrice = () => {
         const totalPrice = carts.reduce((totalPrice, item) => totalPrice + item.productId.price * +item.quantity, 0);
@@ -88,9 +90,13 @@ function Checkout(props) {
                         <div className={cx('product')}>
                             <div className={cx('product-header')}>
                                 <p className={cx('title', 'heading')}>Sản phẩm</p>
-                                <div className={cx('title')}>Đơn giá</div>
-                                <div className={cx('title')}>Số lượng</div>
-                                <div className={cx('title', 'total')}>Thành tiền</div>
+                                {!mobile && (
+                                    <>
+                                        <div className={cx('title')}>Đơn giá</div>
+                                        <div className={cx('title')}>Số lượng</div>
+                                        <div className={cx('title', 'total')}>Thành tiền</div>
+                                    </>
+                                )}
                             </div>
                             <div className={cx('product-info')}>
                                 <CheckoutProducts carts={carts} />

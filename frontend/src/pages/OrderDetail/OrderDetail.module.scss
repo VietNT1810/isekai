@@ -62,7 +62,7 @@
             text-align: left;
             font-size: 20px;
         }
-        .total {
+        .product-total {
             text-align: right;
         }
     }
@@ -180,6 +180,42 @@
         }
         &::placeholder {
             font-size: 14px;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .order-info {
+        flex-direction: column !important;
+    }
+}
+
+@media only screen and (max-width: 595px) {
+    .heading {
+        .status {
+            flex-direction: column;
+        }
+    }
+
+    .product {
+        .product-detail {
+            .info {
+                .name {
+                    align-self: initial;
+                    & > span {
+                        font-size: 13px;
+                        margin-bottom: 16px;
+                    }
+                }
+            }
+        }
+    }
+
+    .product-review {
+        margin: 0 !important;
+        margin-top: 24px !important;
+        .btn {
+            flex: 1;
         }
     }
 }

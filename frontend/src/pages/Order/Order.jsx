@@ -59,7 +59,7 @@ function Order(props) {
         <div className={cx('wrapper')}>
             <Box sx={{ width: '100%' }}>
                 <Box>
-                    <Tabs value={value} onChange={handleChange} className={cx('tab')}>
+                    <Tabs variant="scrollable" value={value} onChange={handleChange} className={cx('tab')}>
                         <Tab className={cx('title')} label="Tất cả đơn" value="all" />
                         <Tab className={cx('title')} label="Chờ thanh toán" value="awaiting_payment" />
                         <Tab className={cx('title')} label="Đang vận chuyển" value="shipping" />

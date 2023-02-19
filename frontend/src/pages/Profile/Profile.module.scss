@@ -58,19 +58,20 @@
             .form-group {
                 display: flex;
                 gap: 24px;
-                label {
+                .label {
                     flex-basis: 20%;
+                    color: var(--main-grey);
                 }
                 .form-checkbox {
                     display: flex;
                     gap: 10px;
                     align-items: center;
                 }
-                input,
-                textarea {
+                input {
                     flex: 1;
                     border: 2px solid var(--sub-blue);
                     border-radius: 5px;
+                    width: 100%;
                 }
             }
             .change-password {
@@ -96,7 +97,7 @@
         width: 80%;
     }
     .form-group {
-        label {
+        .label {
             flex-basis: 25% !important;
         }
     }
@@ -106,7 +107,14 @@
     .container {
         width: 100%;
     }
-    .user-info {
-        padding: 0 24px;
+    .form {
+        width: 100%;
+        gap: 16px !important;
+        .form-group {
+            gap: 10px !important;
+            .label {
+                font-size: 14px !important;
+            }
+        }
     }
 }

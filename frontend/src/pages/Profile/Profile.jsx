@@ -86,11 +86,15 @@ function Profile(props) {
                 <div className={cx('user-info')}>
                     <form className={cx('form')}>
                         <div className={cx('form-group')}>
-                            <label htmlFor="username">Username:</label>
+                            <label className={cx('label')} htmlFor="username">
+                                Username:
+                            </label>
                             <span>{userInfo?.username}</span>
                         </div>
                         <div className={cx('form-group')}>
-                            <label htmlFor="fullName">Tên:</label>
+                            <label className={cx('label')} htmlFor="fullName">
+                                Tên:
+                            </label>
                             {userInfo?.fullName ? (
                                 <span>{userInfo.fullName}</span>
                             ) : (
@@ -108,7 +112,9 @@ function Profile(props) {
                                 <span>{hidePhone(userInfo?.phone.toString())}</span>
                             </div> */}
                         <div className={cx('form-group')}>
-                            <label htmlFor="gender">Giới tính:</label>
+                            <label className={cx('label')} htmlFor="gender">
+                                Giới tính:
+                            </label>
                             <div className={cx('form-checkbox')}>
                                 <label htmlFor="male">Nam</label>
                                 <input
@@ -144,23 +150,9 @@ function Profile(props) {
                             </div>
                         </div>
                         <div className={cx('form-group')}>
-                            <label>Email:</label>
-                            <span>{hideEmail('admin@admin.com')}</span>
+                            <label className={cx('label')}>Email:</label>
+                            <span>{hideEmail(userInfo?.email)}</span>
                         </div>
-                        {/* <div className={cx('form-group')}>
-                            <label htmlFor="address">Địa chỉ:</label>
-                            {userInfo?.address ? (
-                                <span>{userInfo.address}</span>
-                            ) : (
-                                <textarea
-                                    name="address"
-                                    id="address"
-                                    rows="3"
-                                    placeholder="Nhập địa chỉ của bạn"
-                                    onChange={handleFormChange}
-                                />
-                            )}
-                        </div> */}
                         <Button primary onClick={handleSaveProfile}>
                             Lưu
                         </Button>

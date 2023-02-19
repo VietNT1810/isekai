@@ -15,8 +15,8 @@ function OrderSkeleton(props) {
                     <Skeleton variant="rounded" width={80} height={80} />
                 </div>
                 <div className={cx('right')}>
-                    <Skeleton variant="rounded" sx={{ fontSize: '2rem' }} />
-                    <Skeleton variant="rounded" sx={{ fontSize: '2rem' }} width={300} />
+                    <Skeleton variant="rounded" sx={{ fontSize: '2rem', maxWidth: '300px' }} />
+                    <Skeleton variant="rounded" sx={{ fontSize: '2rem', maxWidth: '300px' }} />
                 </div>
             </div>
             <div className={cx('bottom')}>

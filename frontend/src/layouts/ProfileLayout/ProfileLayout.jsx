@@ -1,20 +1,22 @@
-import React, { useEffect } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { useMediaQuery } from '@mui/material';
 import classNames from 'classnames/bind';
+import { useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import styles from './ProfileLayout.module.scss';
+import { getUserCart } from '@/actions/cartAction';
+import { getUserAddresses, getUserProfile } from '@/actions/userAction';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import ProfileNavbar from '../components/ProfileNavbar';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUserAddresses, getUserProfile } from '@/actions/userAction';
-import { getUserCart } from '@/actions/cartAction';
+import styles from './ProfileLayout.module.scss';
 
 const cx = classNames.bind(styles);
 
 function ProfileLayout(props) {
     const { loading, userInfo, userToken } = useSelector((state) => state.user);
     const dispatch = useDispatch();
+    const matches = useMediaQuery('(max-width: 768px)');
 
     useEffect(() => {
         if (userToken) {
@@ -35,7 +37,7 @@ function ProfileLayout(props) {
             <div className={cx('wrapper')}>
                 <div className={cx('container')}>
                     <div className={cx('profile-layout')}>
-                        <ProfileNavbar />
+                        {!matches && <ProfileNavbar />}
                         <div className={cx('content')}>
                             <Outlet />
                         </div>

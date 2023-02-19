@@ -18,3 +18,9 @@
         flex: 3;
     }
 }
+
+@media only screen and (max-width: 595px) {
+    .profile-layout {
+        display: block;
+    }
+}

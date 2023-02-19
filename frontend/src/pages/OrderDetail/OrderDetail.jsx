@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Rating, useMediaQuery } from '@mui/material';
 
 import Button from '@/components/Button/Button';
 import { formatVND } from '@/helpers/number';
@@ -10,7 +11,6 @@ import * as orderServices from '@/services/orderService';
 import * as reviewServices from '@/services/reviewsService';
 import styles from './OrderDetail.module.scss';
 import PopupCreateReview from './components/PopupCreateReview/PopupCreateReview';
-import { Rating } from '@mui/material';
 
 const cx = classNames.bind(styles);
 
@@ -23,6 +23,7 @@ function OrderDetail(props) {
     const navigate = useNavigate();
     const params = useParams();
     const orderId = params.orderId;
+    const mobile = useMediaQuery('(max-width: 768px)');
 
     const getTotalPrice = (orders) => {
         const totalPrice = orders?.reduce((totalPrice, item) => totalPrice + item.productId.price * +item.quantity, 0);
@@ -112,9 +113,13 @@ function OrderDetail(props) {
                 <div className={cx('product')}>
                     <div className={cx('product-header')}>
                         <p className={cx('product-title', 'product-heading')}>Sản phẩm</p>
-                        <div className={cx('product-title')}>Đơn giá</div>
-                        <div className={cx('product-title')}>Số lượng</div>
-                        <div className={cx('product-title', 'product-total')}>Thành tiền</div>
+                        {!mobile && (
+                            <>
+                                <div className={cx('product-title')}>Đơn giá</div>
+                                <div className={cx('product-title')}>Số lượng</div>
+                                <div className={cx('product-title', 'product-total')}>Thành tiền</div>
+                            </>
+                        )}
                     </div>
                     <div className={cx('product-info')}>
                         {orderDetail.products?.map((order) => (
@@ -138,13 +143,24 @@ function OrderDetail(props) {
                                             }}
                                         >
                                             <span>{order.productId.name}</span>
+                                            {mobile && (
+                                                <div className={cx('mobile-price')}>
+                                                    <span>
+                                                        {formatVND(order.productId.price)} x {order.quantity}
+                                                    </span>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
-                                    <div className={cx('block')}>{formatVND(order.productId.price)}</div>
-                                    <div className={cx('block')}>{order.quantity}</div>
-                                    <div className={cx('block', 'total')}>
-                                        {formatVND(order.productId.price * order.quantity)}
-                                    </div>
+                                    {!mobile && (
+                                        <>
+                                            <div className={cx('block')}>{formatVND(order.productId.price)}</div>
+                                            <div className={cx('block')}>{order.quantity}</div>
+                                            <div className={cx('block', 'total')}>
+                                                {formatVND(order.productId.price * order.quantity)}
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
                                 <div className={cx('product-review')}>
                                     {orderDetail.status == 'completed' && (
