@@ -44,8 +44,6 @@ function SearchBar(props) {
         }
     };
 
-    console.log('searchResult:', searchResult);
-
     return (
         <div className={cx('search-bar')}>
             <OutlinedInput
