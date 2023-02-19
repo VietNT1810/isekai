@@ -201,6 +201,9 @@ header {
             flex-direction: column;
         }
     }
+    .right {
+        margin-bottom: 16px !important;
+    }
 }
 
 @media only screen and (max-width: 595px) {
@@ -214,8 +217,5 @@ header {
                 }
             }
         }
-    }
-    .right {
-        margin-bottom: 16px;
     }
 }
