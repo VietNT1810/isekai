@@ -29,6 +29,17 @@ function OrderDetail(props) {
         return totalPrice;
     };
 
+    const getPaymentMethodTitle = (method) => {
+        const methodTitle = {
+            cod: 'khi nhận hàng',
+            credit: 'bằng thẻ ghi nợ',
+            momo: 'bằng ví Momo',
+            'zalo-pay': 'bằng ví ZaloPay',
+            atm: 'bằng thẻ ATM nội địa',
+        };
+        return `Thanh toán ${methodTitle[method] || ''}`;
+    };
+
     useEffect(() => {
         const controller = new AbortController();
         const signal = controller.signal;
@@ -94,7 +105,7 @@ function OrderDetail(props) {
                     <div className={cx('info-group')}>
                         <div className={cx('title')}>Hình thức thanh toán</div>
                         <div className={cx('content')}>
-                            <span className={cx('payment-method')}>Thanh toán bằng ví ZaloPay</span>
+                            <span className={cx('payment-method')}>{getPaymentMethodTitle(orderDetail.method)}</span>
                         </div>
                     </div>
                 </div>
@@ -148,15 +159,18 @@ function OrderDetail(props) {
                                             Viết nhận xét
                                         </Button>
                                     )}
-                                    <Button
-                                        outline
-                                        className={cx('btn')}
-                                        onClick={() => {
-                                            navigate(`/product/${order.productId.slug}`);
-                                        }}
-                                    >
-                                        Mua lại
-                                    </Button>
+                                    {orderDetail.status == 'awaiting_payment' ||
+                                    orderDetail.status == 'shipping' ? null : (
+                                        <Button
+                                            outline
+                                            className={cx('btn')}
+                                            onClick={() => {
+                                                navigate(`/product/${order.productId.slug}`);
+                                            }}
+                                        >
+                                            Mua lại
+                                        </Button>
+                                    )}
                                 </div>
                             </div>
                         ))}

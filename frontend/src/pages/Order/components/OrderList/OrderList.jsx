@@ -74,18 +74,14 @@ function OrderList({ orders, onCancelOrder }) {
                                 >
                                     Hủy đơn hàng
                                 </Button>
-                            ) : (
-                                <Button
-                                    outline
-                                    className={cx('btn')}
-                                    onClick={() => {
-                                        navigate('/cart');
-                                    }}
-                                >
-                                    Mua lại
-                                </Button>
-                            )}
-                            <Button outline className={cx('btn')}>
+                            ) : null}
+                            <Button
+                                outline
+                                className={cx('btn')}
+                                onClick={() => {
+                                    navigate(`detail/${order._id}`);
+                                }}
+                            >
                                 Xem chi tiết
                             </Button>
                         </div>

@@ -29,6 +29,6 @@ export const PAYMENT_METHOD = [
     { value: 'cod', title: 'Thanh toán tiền mặt khi nhận hàng', icon: assets.icons.iconPaymentCod },
     { value: 'credit', title: 'Thanh toán bằng thẻ quốc tế Visa, Master, JCB', icon: assets.icons.iconPaymentCredit },
     { value: 'momo', title: 'Thanh toán bằng ví MoMo', icon: assets.icons.iconPaymentMomo },
-    { value: 'zalo-pay', title: 'Thanh toán tiền mặt khi nhận hàng', icon: assets.icons.iconPaymentZalo },
-    { value: 'atm', title: 'Thanh toán tiền mặt khi nhận hàng', icon: assets.icons.iconPaymentAtm },
+    { value: 'zalo-pay', title: 'Thanh toán bằng ví ZaloPay', icon: assets.icons.iconPaymentZalo },
+    { value: 'atm', title: 'Thẻ ATM nội địa/Internet Banking (Hỗ trợ Internet Banking)', icon: assets.icons.iconPaymentAtm },
 ];
