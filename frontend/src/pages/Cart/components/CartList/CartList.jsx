@@ -4,12 +4,11 @@ import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import Dialog from '@/components/Dialog';
+import PopupConfirm from '@/components/PopupConfirm';
 import { formatVND } from '@/helpers/number';
+import { useMediaQuery } from '@mui/material';
 import { changeCartQuantity, removeCart } from '../../cartSlice';
 import styles from './CartList.module.scss';
-import { useMediaQuery } from '@mui/material';
-import PopupConfirm from '@/components/PopupConfirm';
 
 const cx = classNames.bind(styles);
 
@@ -36,10 +35,6 @@ function CartList({ carts, isLoading }) {
                 console.log(err);
             });
     };
-
-    // const handleClose = () => {
-    //     setOpenDialog(false);
-    // };
 
     const handleIncreaseChange = (id, quantity) => {
         dispatch(changeCartQuantity({ productId: id, quantity: +quantity + 1 }));
