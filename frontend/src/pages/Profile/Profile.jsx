@@ -1,15 +1,14 @@
 import { Divider, useMediaQuery } from '@mui/material';
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 
 import Button from '@/components/Button';
-import { hidePhone } from '@/helpers/number';
 import { hideEmail } from '@/helpers/string';
 
 import { updateUserProfile } from '@/actions/userAction';
 import assets from '@/assets';
+import { openAlert } from '@/reducers/alertSlice';
 import styles from './Profile.module.scss';
 
 const cx = classNames.bind(styles);
@@ -24,6 +23,10 @@ function Profile(props) {
     const [form, setForm] = useState({});
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        setForm({ ...form, gender: userInfo?.gender });
+    }, [userInfo]);
 
     //handle file
     const handleFileInputChange = (e) => {
@@ -41,18 +44,21 @@ function Profile(props) {
 
     //handle form
     const handleFormChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        setForm({ ...form, gender: e.target.value });
     };
 
     const handleSaveProfile = async (e) => {
         e.preventDefault();
-        console.log(form);
         let formData = {
             ...form,
             fileString: previewAvatar,
         };
-        console.log('formData', formData);
-        dispatch(updateUserProfile(formData));
+        if (!previewAvatar) delete formData.fileString;
+        dispatch(updateUserProfile(formData))
+            .unwrap()
+            .then(() => {
+                dispatch(openAlert({ message: 'Chỉnh sửa thông tin thành công' }));
+            });
     };
 
     return (
@@ -122,7 +128,7 @@ function Profile(props) {
                                     id="male"
                                     name="gender"
                                     value="male"
-                                    checked={userInfo?.gender === 'male'}
+                                    checked={form.gender === 'male'}
                                     onChange={handleFormChange}
                                 />
                             </div>
@@ -133,7 +139,7 @@ function Profile(props) {
                                     id="female"
                                     name="gender"
                                     value="female"
-                                    checked={userInfo?.gender === 'female'}
+                                    checked={form.gender === 'female'}
                                     onChange={handleFormChange}
                                 />
                             </div>
@@ -144,7 +150,7 @@ function Profile(props) {
                                     id="other"
                                     name="gender"
                                     value="other"
-                                    checked={userInfo?.gender === 'other'}
+                                    checked={form.gender === 'other'}
                                     onChange={handleFormChange}
                                 />
                             </div>
