@@ -29,9 +29,9 @@ export const getUserInfo = async (config) => {
     }
 };
 
-export const updateUser = async (data) => {
+export const updateUser = async (data, config) => {
     try {
-        const result = await request.patch(`${prefix}/profile/update`, data);
+        const result = await request.patch(`${prefix}/profile/update`, data, config);
         return result.data;
     } catch (error) {
         throw error;

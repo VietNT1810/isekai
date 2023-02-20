@@ -53,9 +53,15 @@ export const getUserProfile = createAsyncThunk('user/profile', async (arg, { get
 
 export const updateUserProfile = createAsyncThunk(
     'user/profile/update',
-    async ({ fullName, address, fileString, gender }, { rejectWithValue }) => {
+    async ({ fullName, fileString, gender }, { getState, rejectWithValue }) => {
         try {
-            const data = await updateUser({ fullName, address, fileString, gender });
+            const { user } = getState();
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${user.userToken}`,
+                },
+            };
+            const data = await updateUser({ fullName, fileString, gender }, config);
             return data;
         } catch (error) {
             if (error.response && error.response.data.message) {

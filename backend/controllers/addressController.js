@@ -77,21 +77,47 @@ const getUserAddress = async (req, res) => {
 const updateUserAddress = async (req, res) => {
   try {
     const { id } = req.params;
+    const { is_default } = req.body;
+    const userId = req.user._id;
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({ error: "This address not exist!" });
-    }
-    const address = await Address.findOneAndUpdate(
-      {
-        _id: id,
-      },
-      {
-        ...req.body,
-      }
-    );
-    if (!address) {
       return res.status(404).json({ message: "Địa chỉ không tồn tại" });
     }
-    res.status(200).json({ message: "Chỉnh sửa địa chỉ thành công" });
+    if (is_default) {
+      await Address.findOneAndUpdate(
+        {
+          user: userId,
+          is_default: true,
+        },
+        {
+          is_default: false,
+        }
+      );
+      const address = await Address.findOneAndUpdate(
+        {
+          _id: id,
+        },
+        {
+          ...req.body,
+        }
+      );
+      if (!address) {
+        return res.status(404).json({ message: "Địa chỉ không tồn tại" });
+      }
+      return res.status(200).json({ message: "Chỉnh sửa địa chỉ thành công" });
+    } else {
+      const address = await Address.findOneAndUpdate(
+        {
+          _id: id,
+        },
+        {
+          ...req.body,
+        }
+      );
+      if (!address) {
+        return res.status(404).json({ message: "Địa chỉ không tồn tại" });
+      }
+      return res.status(200).json({ message: "Chỉnh sửa địa chỉ thành công" });
+    }
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
