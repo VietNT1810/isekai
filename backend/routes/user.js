@@ -7,7 +7,6 @@ const {
   loginByGoogle,
   forgotPassword,
   resetPassword,
-  addAddress,
 } = require("../controllers/userController.js");
 const { requireAuth } = require("../middleware/middleware.js");
 

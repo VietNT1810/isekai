@@ -136,24 +136,29 @@ const getUserInfo = async (req, res) => {
 
 //Update user info
 const updateUserInfo = async (req, res) => {
-  const { fullName, address, fileString } = req.body;
+  const { fullName, gender, fileString } = req.body;
 
   try {
+    var updateData = {
+      fullName,
+      gender,
+      avatar: "",
+    };
+
     // upload avatar to cloud
-    const uploadedResponse = await cloudinary.uploader.upload(fileString, {
-      upload_preset: "isekai_avatar",
-    });
+    if (fileString) {
+      const uploadedResponse = await cloudinary.uploader.upload(fileString, {
+        upload_preset: "isekai_avatar",
+      });
+      updateData = { ...updateData, avatar: uploadedResponse.secure_url };
+    } else {
+      delete updateData.avatar;
+    }
 
     //update profile to db
-    const user = await User.findOneAndUpdate(
-      req.user._id,
-      {
-        fullName: fullName,
-        address: address,
-        avatar: uploadedResponse.secure_url,
-      },
-      { new: true }
-    );
+    const user = await User.findOneAndUpdate(req.user._id, updateData, {
+      new: true,
+    });
     res.status(200).json({ user });
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -198,6 +203,7 @@ const forgotPassword = async (req, res) => {
   }
 };
 
+//reset password
 const resetPassword = async (req, res) => {
   try {
     const { password } = req.body;
