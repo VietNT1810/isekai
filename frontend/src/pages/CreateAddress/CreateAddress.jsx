@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import classNames from 'classnames/bind';
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -9,6 +9,7 @@ import * as yup from 'yup';
 import Button from '@/components/Button';
 import * as addressServices from '@/services/addressService';
 import styles from './CreateAddress.module.scss';
+import { openAlert } from '@/reducers/alertSlice';
 
 const cx = classNames.bind(styles);
 const schema = yup.object({
@@ -35,6 +36,7 @@ function CreateAddress({ type }) {
     const [wards, setWards] = useState([]);
     const { userToken } = useSelector((state) => state.user);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const params = useParams();
     const addressId = params.addressId;
 
@@ -135,6 +137,7 @@ function CreateAddress({ type }) {
         await addressServices
             .createAddress(data, userToken)
             .then((res) => {
+                dispatch(openAlert({ message: res.message }));
                 navigate('/user/account/address');
             })
             .catch((err) => {
@@ -146,6 +149,7 @@ function CreateAddress({ type }) {
         await addressServices
             .editAddress(data, userToken, id)
             .then((res) => {
+                dispatch(openAlert({ message: res.message }));
                 navigate('/user/account/address');
             })
             .catch((err) => {
