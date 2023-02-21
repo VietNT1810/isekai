@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useMediaQuery } from '@mui/material';
 import classNames from 'classnames/bind';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 
+import { loginByGoogle, registerUser } from '@/actions/userAction';
+import assets from '@/assets';
+import { openAlert } from '@/reducers/alertSlice';
 import styles from './Register.module.scss';
 import RegisterForm from './components/RegisterForm';
-import assets from '@/assets';
-import { loginByGoogle, registerUser } from '@/actions/userAction';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { useMediaQuery } from '@mui/material';
 
 const cx = classNames.bind(styles);
 
@@ -26,11 +27,12 @@ function Register(props) {
             .unwrap()
             .then((res) => {
                 setIsLoading(false);
+                dispatch(openAlert({ message: 'Tạo tài khoản thành công' }));
                 location.state?.slug ? navigate(`/product/${location.state.slug}`) : navigate('/');
             })
             .catch((error) => {
                 setIsLoading(false);
-                console.log('error', error);
+                dispatch(openAlert({ message: error, severity: 'error' }));
             });
     };
 

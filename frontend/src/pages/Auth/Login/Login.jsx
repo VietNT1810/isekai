@@ -34,7 +34,7 @@ function Login(props) {
                 }, 2000);
             })
             .catch((error) => {
-                dispatch(openAlert({ message: 'Đăng nhập thất bại', severity: 'error' }));
+                dispatch(openAlert({ message: error, severity: 'error' }));
                 setIsLoading(false);
             });
     };
