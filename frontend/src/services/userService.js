@@ -69,3 +69,17 @@ export const resetPassword = async (password, token) => {
         throw error;
     }
 };
+
+export const changePassword = async (params, token) => {
+    try {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const result = await request.post(`${prefix}/change-password`, params, config);
+        return result.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};
