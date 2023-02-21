@@ -1,4 +1,4 @@
-import { AccountCircle, Logout, ChromeReaderMode, Place } from '@mui/icons-material';
+import { AccountCircle, Logout, ChromeReaderMode, Place, Key } from '@mui/icons-material';
 import {
     Avatar as AvatarMui,
     ClickAwayListener,
@@ -144,6 +144,17 @@ function AvatarMenu({ username, userAvatar, onClickProfile, onClickLogout }) {
                                             <Place fontSize="large" />
                                         </ListItemIcon>
                                         Sổ địa chỉ
+                                    </MenuItem>
+                                    <MenuItem
+                                        onClick={() => {
+                                            navigate('/user/account/change-password');
+                                        }}
+                                        sx={{ fontSize: '16px', color: '#1f1f26', fontFamily: 'SVN Gotham Regular' }}
+                                    >
+                                        <ListItemIcon>
+                                            <Key fontSize="large" />
+                                        </ListItemIcon>
+                                        Thay đổi mật khẩu
                                     </MenuItem>
                                     <MenuItem
                                         onClick={() => {
