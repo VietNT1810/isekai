@@ -226,6 +226,31 @@ const resetPassword = async (req, res) => {
   }
 };
 
+//change password
+const changePassword = async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    const userId = req.user._id;
+    const user = await User.findOne({ _id: userId });
+    if (!user) {
+      return res.status(404).json({ message: "Tài khoản không tồn tại" });
+    }
+    const match = await bcrypt.compare(currentPassword, user.password);
+    if (!match) {
+      return res.status(404).json({ message: "Mật khẩu không chính xác" });
+    }
+
+    //hash password
+    const salt = await bcrypt.genSalt();
+    const hash = await bcrypt.hash(newPassword, salt);
+
+    await User.findOneAndUpdate({ _id: userId }, { password: hash });
+    res.status(200).json({ message: "Thay đổi mật khẩu thành công" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   loginUser,
   signupUser,
@@ -234,4 +259,5 @@ module.exports = {
   loginByGoogle,
   forgotPassword,
   resetPassword,
+  changePassword,
 };

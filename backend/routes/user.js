@@ -7,6 +7,7 @@ const {
   loginByGoogle,
   forgotPassword,
   resetPassword,
+  changePassword,
 } = require("../controllers/userController.js");
 const { requireAuth } = require("../middleware/middleware.js");
 
@@ -32,5 +33,8 @@ router.post("/forgot-password", forgotPassword);
 
 //reset password
 router.post("/reset-password", requireAuth, resetPassword);
+
+//change password
+router.post("/change-password", requireAuth, changePassword);
 
 module.exports = router;
