@@ -56,11 +56,11 @@ userSchema.statics.signup = async function (username, email, password) {
   }
 
   if (!validator.isStrongPassword(password)) {
-    throw Error("Password not strong enough");
+    throw Error("Mật khẩu không đủ mạnh");
   }
 
   if (exists) {
-    throw Error("Email already in use");
+    throw Error("Email đã được sử dụng");
   }
 
   //hash password
@@ -78,11 +78,11 @@ userSchema.statics.login = async function (email, password) {
     throw Error("All field is required");
   }
   if (!user) {
-    throw Error("Invalid email address");
+    throw Error("Tài khoản không tồn tại");
   }
   const match = await bcrypt.compare(password, user.password);
   if (!match) {
-    throw Error("Invalid password");
+    throw Error("Mật khẩu không đúng");
   }
   return user;
 };
