@@ -24,12 +24,10 @@ function Address(props) {
         await addressService
             .getUserAddress(userToken)
             .then((res) => {
-                console.log(res.content);
                 setAddresses(res.content);
                 setLoading(false);
             })
             .catch((err) => {
-                console.log(err);
                 setLoading(false);
             });
     };
@@ -42,7 +40,6 @@ function Address(props) {
         await addressService
             .deleteUserAddress(userToken, popupData)
             .then((res) => {
-                console.log(res);
                 getAddresses();
                 setPopupData('');
             })

@@ -67,7 +67,6 @@ function Checkout(props) {
                 navigate('/user/account/order');
             })
             .catch((err) => {
-                console.log(err);
                 setLoading(false);
             });
     };

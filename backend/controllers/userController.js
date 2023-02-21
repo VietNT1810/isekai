@@ -28,9 +28,7 @@ const verifyGoogleToken = async (token, client) => {
 const loginByGoogle = async (req, res) => {
   const token = req.query.id_token;
   const client = new OAuth2Client(process.env.G_CLIENT_ID);
-  const googleProfile = await verifyGoogleToken(token, client).catch(
-    console.log
-  );
+  const googleProfile = await verifyGoogleToken(token, client);
   if (googleProfile?.email_verified) {
     User.find({ email: googleProfile.email })
       .exec()
@@ -237,7 +235,7 @@ const changePassword = async (req, res) => {
     }
     const match = await bcrypt.compare(currentPassword, user.password);
     if (!match) {
-      return res.status(404).json({ message: "Mật khẩu không chính xác" });
+      return res.status(400).json({ message: "Mật khẩu không chính xác" });
     }
 
     //hash password

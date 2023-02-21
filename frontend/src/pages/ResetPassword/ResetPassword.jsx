@@ -4,12 +4,14 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import styles from './ResetPassword.module.scss';
 import InputField from '@/components/InputField';
 import Button from '@/components/Button';
 import assets from '@/assets';
 import * as userService from '@/services/userService';
+import { openAlert } from '@/reducers/alertSlice';
 
 const cx = classNames.bind(styles);
 const schema = yup
@@ -27,6 +29,7 @@ const schema = yup
 
 function ResetPassword(props) {
     const { token } = useParams();
+    const dispatch = useDispatch();
 
     const {
         register,
@@ -40,7 +43,7 @@ function ResetPassword(props) {
         await userService
             .resetPassword({ password: data.newPassword }, token)
             .then((res) => {
-                console.log('res:', res.message);
+                dispatch(openAlert({ message: res.message }));
             })
             .catch((err) => {
                 console.log(err);

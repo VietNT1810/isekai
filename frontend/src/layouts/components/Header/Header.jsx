@@ -22,12 +22,10 @@ function Header() {
     const dispatch = useDispatch();
 
     const handleClickProfile = () => {
-        console.log('click profile');
         navigate('/user/account/profile');
     };
 
     const handleClickLogout = () => {
-        console.log('click logout');
         dispatch(logoutUser());
         dispatch(initCart());
         navigate('/login');

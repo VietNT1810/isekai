@@ -49,7 +49,6 @@ function Login(props) {
                 }, 2000);
             })
             .catch((error) => {
-                console.log('error', error);
                 dispatch(openAlert({ message: 'Đăng nhập thất bại', severity: 'error' }));
             });
     };
