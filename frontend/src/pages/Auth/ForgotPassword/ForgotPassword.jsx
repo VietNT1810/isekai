@@ -68,7 +68,7 @@ function ForgotPassword(props) {
                         helperText={errors.email?.message}
                         disabled={isSuccess}
                     />
-                    <Button action type="submit" disabled={isSuccess}>
+                    <Button action type="submit" loading={isSuccess}>
                         Gửi mã
                     </Button>
                 </form>
