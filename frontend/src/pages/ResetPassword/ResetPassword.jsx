@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import styles from './ResetPassword.module.scss';
@@ -30,6 +30,7 @@ const schema = yup
 function ResetPassword(props) {
     const { token } = useParams();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const {
         register,
@@ -44,6 +45,7 @@ function ResetPassword(props) {
             .resetPassword({ password: data.newPassword }, token)
             .then((res) => {
                 dispatch(openAlert({ message: res.message }));
+                navigate('/login');
             })
             .catch((err) => {
                 console.log(err);
