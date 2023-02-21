@@ -2,20 +2,23 @@ import { getUserAddress } from '@/services/addressService';
 import { getUserInfo, login, loginGoogle, register, updateUser } from '@/services/userService';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-export const registerUser = createAsyncThunk('user/register', async ({ username, email, password }) => {
-    try {
-        const data = await register({ username, email, password });
-        localStorage.setItem('access-token', data.accessToken);
-        localStorage.setItem('isLoggedIn', true);
-        return data;
-    } catch (error) {
-        if (error.response && error.response.data.message) {
-            return rejectWithValue(error.response.data.message);
-        } else {
-            return rejectWithValue(error.message);
+export const registerUser = createAsyncThunk(
+    'user/register',
+    async ({ username, email, password }, { rejectWithValue }) => {
+        try {
+            const data = await register({ username, email, password });
+            localStorage.setItem('access-token', data.accessToken);
+            localStorage.setItem('isLoggedIn', true);
+            return data;
+        } catch (error) {
+            if (error.response && error.response.data.message) {
+                return rejectWithValue(error.response.data.message);
+            } else {
+                return rejectWithValue(error.message);
+            }
         }
-    }
-});
+    },
+);
 
 export const loginUser = createAsyncThunk('user/login', async ({ email, password }, { rejectWithValue }) => {
     try {
