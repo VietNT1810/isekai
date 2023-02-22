@@ -17,7 +17,7 @@ const getProducts = async (req, res) => {
   const limitQuery = limit ? limit : 12;
 
   //get sort order
-  const getSort = () => {
+  const getSort = (sortOrder) => {
     const sortBy = {
       newest: { _id: -1 },
       ASC: { price: 1 },
@@ -25,8 +25,7 @@ const getProducts = async (req, res) => {
     };
     return sortBy[sortOrder] || "";
   };
-
-  const sort = getSort();
+  const sort = getSort(sortOrder);
 
   //match query
   const matchQuery = {
@@ -74,9 +73,9 @@ const getProducts = async (req, res) => {
     },
 
     //sort
-    // {
-    //   $sort: sort,
-    // },
+    {
+      $sort: sort,
+    },
 
     //limit
     // {
