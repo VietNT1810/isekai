@@ -74,9 +74,9 @@ const getProducts = async (req, res) => {
     },
 
     //sort
-    {
-      $sort: sort,
-    },
+    // {
+    //   $sort: sort,
+    // },
 
     //limit
     // {
