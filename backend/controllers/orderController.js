@@ -1,5 +1,6 @@
 const Order = require("../models/orderModel");
 const Cart = require("../models/cartModel");
+const Address = require("../models/addressModel");
 
 //create order
 const createOrder = async (req, res) => {
@@ -7,18 +8,23 @@ const createOrder = async (req, res) => {
     const { cartId, addressId, method } = req.body;
     const userId = req.user._id;
     const cartDoc = await Cart.findOne({ _id: cartId });
+    const addressDoc = await Address.findOne({ _id: addressId }).select([
+      "-_id",
+      "-user",
+      "-is_default",
+    ]);
 
-    //create order
+    // create order
     await Order.create({
       cart: cartId,
       user: userId,
-      shipping: addressId,
+      shipping: addressDoc,
       method: method,
       products: cartDoc.products,
       status: method === "cod" ? "shipping" : "awaiting_payment",
     });
 
-    //update cart status
+    // update cart status
     await Cart.findOneAndUpdate(
       { _id: cartId },
       { $set: { status: "complete" } }
@@ -32,19 +38,14 @@ const createOrder = async (req, res) => {
 //get all order
 const getOrder = async (req, res) => {
   try {
-    const orders = await Order.find()
-      .populate({
-        path: "cart",
-        populate: {
-          path: "products.productId",
-          model: "Product",
-          select: ["name", "price", "productImage", "slug"],
-        },
-      })
-      .populate({
-        path: "shipping",
-        model: "Address",
-      });
+    const orders = await Order.find().populate({
+      path: "cart",
+      populate: {
+        path: "products.productId",
+        model: "Product",
+        select: ["name", "price", "productImage", "slug"],
+      },
+    });
 
     res.status(200).json({
       status: "SUCCESS",
@@ -61,16 +62,11 @@ const getOrder = async (req, res) => {
 const getSingleOrder = async (req, res) => {
   try {
     const { orderId } = req.params;
-    const order = await Order.findOne({ _id: orderId })
-      .populate({
-        path: "products.productId",
-        model: "Product",
-        select: ["name", "price", "productImage", "slug"],
-      })
-      .populate({
-        path: "shipping",
-        model: "Address",
-      });
+    const order = await Order.findOne({ _id: orderId }).populate({
+      path: "products.productId",
+      model: "Product",
+      select: ["name", "price", "productImage", "slug"],
+    });
 
     res.status(200).json({
       status: "SUCCESS",
@@ -93,17 +89,11 @@ const myOrder = async (req, res) => {
       status: orderStatus,
     };
     if (orderStatus == "all") delete orderMatch.status;
-    const orderDoc = await Order.find(orderMatch)
-      .populate({
-        path: "products.productId",
-        model: "Product",
-        select: ["name", "price", "productImage", "slug"],
-      })
-      .populate({
-        path: "shipping",
-        model: "Address",
-        select: ["fullName", "city", "district", "ward", "telephone", "street"],
-      });
+    const orderDoc = await Order.find(orderMatch).populate({
+      path: "products.productId",
+      model: "Product",
+      select: ["name", "price", "productImage", "slug"],
+    });
     res.status(200).json({
       status: "SUCCESS",
       statusCode: 200,
