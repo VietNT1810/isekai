@@ -7,6 +7,7 @@ import FilterSidebar from './components/FilterSidebar';
 import ShopToolbar from './components/ShopToolbar';
 import * as productService from '@/services/productsService';
 import { CircularProgress } from '@mui/material';
+import ProductSkeleton from '@/components/ProductSkeleton/ProductSkeleton';
 
 const cx = classNames.bind(styles);
 const ProductList = React.lazy(() => import('./components/ProductList'));
@@ -14,9 +15,11 @@ const ProductList = React.lazy(() => import('./components/ProductList'));
 function Shop(props) {
     const { filterQuery, sortOrder } = useSelector((state) => state.shop);
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchProducts = async () => {
+            setLoading(true);
             const params = {
                 ...filterQuery,
                 sortOrder,
@@ -25,9 +28,11 @@ function Shop(props) {
                 .getProducts(params)
                 .then((res) => {
                     setProducts(res.data.content);
+                    setLoading(false);
                 })
                 .catch((err) => {
                     console.log(err);
+                    setLoading(false);
                 });
         };
         fetchProducts();
@@ -39,7 +44,7 @@ function Shop(props) {
             <div className={cx('content')}>
                 <ShopToolbar />
                 <Suspense fallback={<CircularProgress sx={{ alignSelf: 'center', marginTop: '24px' }} />}>
-                    <ProductList products={products} />
+                    {loading ? <ProductSkeleton /> : <ProductList products={products} />}
                 </Suspense>
             </div>
         </>
