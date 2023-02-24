@@ -21,6 +21,7 @@ function DefaultLayout({ children }) {
                 })
                 .catch((error) => {
                     localStorage.setItem('isLoggedIn', false);
+                    localStorage.removeItem('access-token');
                 });
         }
     }, [userToken]);
