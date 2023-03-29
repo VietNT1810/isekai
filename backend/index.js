@@ -46,3 +46,5 @@ mongoose
   .catch((e) => {
     console.log(e);
   });
+
+export default app;
