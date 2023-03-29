@@ -24,6 +24,7 @@ app.use(cors());
 
 //middleware
 app.use(express.json());
+app.use(express.static("public"));
 
 //routes
 app.use("/api/products", productsRouter);
