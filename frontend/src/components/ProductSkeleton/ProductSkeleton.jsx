@@ -12,7 +12,7 @@ function ProductSkeleton(props) {
             <Grid container spacing={2} sx={{ marginLeft: '-8px' }}>
                 {[...Array(8)].map((skeleton) => (
                     <Grid item xs={12} sm={6} md={4} lg={4} xl={3} key={skeleton} sx={{ padding: '8px !important' }}>
-                        <Skeleton variant="rounded" sx={{ fontSize: '2rem' }} height={300} />
+                        <Skeleton variant="rounded" sx={{ fontSize: '2rem' }} height={400} />
                     </Grid>
                 ))}
             </Grid>
