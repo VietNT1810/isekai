@@ -9,6 +9,7 @@ import * as reviewsService from '@/services/reviewsService';
 import ProductDetail from './components/ProductDetail';
 import Review from './components/Review';
 import ProductDetailSkeleton from '@/components/ProductDetailSkeleton/ProductDetailSkeleton';
+import ProductReviewSkeleton from '@/components/ProductReviewSkeleton/ProductReviewSkeleton';
 
 const cx = classNames.bind(styles);
 
@@ -66,7 +67,7 @@ function ProductPage(props) {
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
                 {loading ? <ProductDetailSkeleton /> : <ProductDetail product={product} isInCart={isInCart} />}
-                <Review product={product} reviews={reviews} />
+                {loading ? <ProductReviewSkeleton /> : <Review product={product} reviews={reviews} />}
             </div>
         </div>
     );
