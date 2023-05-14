@@ -6,6 +6,7 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import App from './App';
 import GlobalStyles from '@/components/GlobalStyles';
 import store from '@/redux/store';
+import { blue } from '@mui/material/colors';
 
 const THEME = createTheme({
     typography: {
@@ -25,6 +26,15 @@ const THEME = createTheme({
             main: 'white',
             dark: '#ba000d',
             contrastText: '#000',
+        },
+    },
+    components: {
+        MuiSkeleton: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: '#c3f9ff',
+                },
+            },
         },
     },
 });
