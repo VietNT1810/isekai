@@ -25,12 +25,17 @@ function ProductDetailSkeleton(props) {
                 </div>
             </div>
             <div className={cx('description')}>
-                <Skeleton variant="rounded" sx={{ fontSize: '3rem', maxWidth: '200px', margin: '12px 0' }} />
-                <div className={cx('table')}>
-                    <Skeleton variant="rounded" sx={{ fontSize: '3rem' }} />
-                    <Skeleton variant="rounded" sx={{ fontSize: '3rem' }} />
-                    <Skeleton variant="rounded" sx={{ fontSize: '3rem' }} />
-                </div>
+                <div className={cx('title')}>Thông tin sản phẩm</div>
+                {[...Array(3)].map((e, index) => (
+                    <div key={index} className={cx('table')}>
+                        <div className={cx('col-left')}>
+                            <Skeleton variant="rounded" sx={{ fontSize: '3rem' }} />
+                        </div>
+                        <div className={cx('col-right')}>
+                            <Skeleton variant="rounded" sx={{ fontSize: '3rem' }} />
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     );
