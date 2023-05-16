@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
+import { ErrorOutline } from '@mui/icons-material';
 
 import assets from '@/assets';
 import Button from '@/components/Button';
@@ -53,11 +54,17 @@ function Checkout(props) {
     };
 
     const handleCreateOrder = async () => {
-        const orderInfo = { method, cartId, addressId: userAddress?._id };
+        //alert when checkout without cart
+        if (!carts.length > 0) {
+            return dispatch(openAlert({ message: 'Giỏ hàng không có sản phẩm.', severity: 'error' }));
+        }
+        //navigate to user address page to create address
         if (!userAddress) {
             return navigate('/user/account/address');
         }
+        //create order
         setLoading(true);
+        const orderInfo = { method, cartId, addressId: userAddress?._id };
         await orderServices
             .createOrder(userToken, orderInfo)
             .then((res) => {
@@ -87,6 +94,16 @@ function Checkout(props) {
             <main className={cx('checkout-content')}>
                 <div className={cx('container')}>
                     <div className={cx('left')}>
+                        {carts <= 0 && (
+                            <div className={cx('empty-alert')}>
+                                <div className={cx('alert-info')}>
+                                    <ErrorOutline color="error" fontSize="large" />
+                                    <span className={cx('alert-content')}>
+                                        Giỏ hàng không có sản phẩm. Vui lòng thực hiện lại.
+                                    </span>
+                                </div>
+                            </div>
+                        )}
                         <div className={cx('product')}>
                             <div className={cx('product-header')}>
                                 <p className={cx('title', 'heading')}>Sản phẩm</p>

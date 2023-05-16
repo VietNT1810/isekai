@@ -65,6 +65,22 @@ header {
     }
 }
 
+.empty-alert {
+    display: flex;
+    padding: 12px 16px;
+    border: 1px solid var(--error);
+    border-radius: 5px;
+    background-color: #fff0f1;
+    .alert-info {
+        display: flex;
+        gap: 5px;
+        .alert-content {
+            font-size: 14px;
+            color: var(--error);
+        }
+    }
+}
+
 .product {
     padding: 10px 16px;
     background-color: var(--main-white);
