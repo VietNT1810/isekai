@@ -24,7 +24,7 @@ function AuthLayout() {
             <Fab
                 className={cx('close', { login: isLoginPage })}
                 onClick={() => {
-                    navigate('/');
+                    navigate(-1);
                 }}
             >
                 <Close className={cx('close-icon')} fontSize="large" />
