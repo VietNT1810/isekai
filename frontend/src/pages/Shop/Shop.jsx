@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import classNames from 'classnames/bind';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import styles from './Shop.module.scss';
 import FilterSidebar from './components/FilterSidebar';
@@ -16,6 +17,7 @@ function Shop(props) {
     const { filterQuery, sortOrder } = useSelector((state) => state.shop);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
+    const { productType } = useParams();
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -23,6 +25,7 @@ function Shop(props) {
             const params = {
                 ...filterQuery,
                 sortOrder,
+                productType,
             };
             await productService
                 .getProducts(params)
@@ -36,7 +39,7 @@ function Shop(props) {
                 });
         };
         fetchProducts();
-    }, [filterQuery, sortOrder]);
+    }, [filterQuery, sortOrder, productType]);
 
     return (
         <>
