@@ -77,11 +77,7 @@ function Routes(props) {
             element: <ShopLayout />,
             children: [
                 { path: 'shop', element: <Shop /> },
-                { path: 'weapon', element: <Shop /> },
-                { path: 'wig', element: <Shop /> },
-                { path: 'outfit', element: <Shop /> },
-                { path: 'lolita', element: <Shop /> },
-                { path: 'accessory', element: <Shop /> },
+                { path: 'special/:productType', element: <Shop /> },
             ],
         },
         {
