@@ -36,10 +36,10 @@ function ShopLayout({ children }) {
         const bannerByRoute = {
             '/shop': assets.images.shopBanner,
             '/weapon': assets.images.weaponBanner,
-            '/wig': assets.images.wigBanner,
-            '/outfit': assets.images.outfitBanner,
-            '/lolita': assets.images.lolitaBanner,
-            '/accessory': assets.images.accessoryBanner,
+            '/special/wig': assets.images.wigBanner,
+            '/special/outfit': assets.images.outfitBanner,
+            '/special/lolita': assets.images.lolitaBanner,
+            '/special/accessory': assets.images.accessoryBanner,
         };
         return bannerByRoute[currentPath] || '';
     };
