@@ -34,7 +34,14 @@ function SearchBar(props) {
     }, [debouncedValue]);
 
     const handleHideResult = () => {
-        setShowResult(false);
+        setTimeout(() => {
+            if (
+                document.activeElement !== document.getElementById('results') &&
+                !document.getElementById('results').contains(document.activeElement)
+            ) {
+                setShowResult(false);
+            }
+        }, 0);
     };
 
     const handleSearchChange = (e) => {
@@ -57,7 +64,7 @@ function SearchBar(props) {
                 onBlur={handleHideResult}
             />
             {showResult && searchResult.length > 0 ? (
-                <div className={cx('search-result')}>
+                <div className={cx('search-result')} id="results">
                     {searchResult.map((result, index) => (
                         <Link key={index} className={cx('search-item')} to={`/product/${result.slug}`}>
                             <div className={cx('result-image-container')}>
